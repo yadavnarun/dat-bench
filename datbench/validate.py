@@ -87,7 +87,19 @@ def _dictionary() -> _Dictionary | None:
     capitalised: set[str] = set()
     for entry in entries:
         folded = entry.lower()
-        (lower if entry == folded else capitalised).add(folded)
+        if entry == folded:
+            lower.add(folded)
+        elif entry.isupper() and len(entry) > 1:
+            # An ALL-CAPS entry is an initialism ('TV', 'DNA'), not evidence of a
+            # name -- the same rule the WordNet branch of _is_proper_noun already
+            # applies. Without this the two sources disagree, and which one you
+            # get depends on the host: macOS web2 lists lowercase 'tv' and 'dna'
+            # so the bug stayed hidden, while Linux word lists carry only 'TV'
+            # and 'DNA' and flagged both as proper nouns.
+            # Treated as a lowercase attestation so it also vetoes propernames.
+            lower.add(folded)
+        else:
+            capitalised.add(folded)
     return _Dictionary(
         lower=frozenset(lower),
         # Subtract the lowercase set: web2 lists both 'China' and 'china', and only

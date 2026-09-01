@@ -283,3 +283,53 @@ def test_fully_degraded_flags_nothing_it_cannot_check(monkeypatch):
 def test_dataclass_is_frozen():
     with pytest.raises(Exception):
         only("cat").valid = False
+
+
+# --------------------------------------------------- initialisms, both hosts ----
+# The proper-noun rule is "attested only capitalised". An ALL-CAPS word list entry
+# breaks that: 'TV' and 'DNA' are initialisms for common nouns, not names. The
+# WordNet branch always excluded all-caps lemmas; the dictionary branch did not,
+# so behaviour depended on the host word list -- macOS web2 happens to list
+# lowercase 'tv'/'dna' and hid it, Linux lists only the caps forms and flagged
+# both as proper nouns. Found by CI on Ubuntu.
+
+def _dict_from(entries, propernames=()):
+    """Build a _Dictionary from a synthetic word list, host files bypassed."""
+    import datbench.validate as v
+    real_read = v._read_first
+
+    def fake(paths):
+        return list(entries) if paths is v._DICT_PATHS else list(propernames)
+
+    v._read_first = fake
+    v._reset_caches()
+    try:
+        return v._dictionary()
+    finally:
+        v._read_first = real_read
+        v._reset_caches()
+
+
+def test_all_caps_dictionary_entry_is_not_proper_noun_evidence():
+    d = _dict_from(["TV", "DNA", "Tokyo", "china", "China", "table"])
+    assert "tv" not in d.cap_only, "an initialism is not a name"
+    assert "dna" not in d.cap_only
+    assert "tokyo" in d.cap_only, "a title-case-only entry still signals a name"
+    assert "china" not in d.cap_only, "listed lowercase too, so not a name"
+
+
+@pytest.mark.parametrize("word", ["tv", "dna"])
+def test_initialism_survives_a_caps_only_word_list(word, monkeypatch):
+    """Reproduces the Linux list exactly: caps-only, no lowercase form present."""
+    import datbench.validate as v
+    d = _dict_from(["TV", "DNA", "Tokyo"])
+    assert word not in d.cap_only
+    assert not v._is_proper_noun([word], None, d), f"{word!r} flagged from a caps-only entry"
+    # ...while a real name in the same list still is caught.
+    assert v._is_proper_noun(["tokyo"], None, d)
+
+
+def test_single_letter_caps_entry_still_counts_as_a_name():
+    """'A' is one character; the initialism carve-out requires len > 1."""
+    d = _dict_from(["A", "apple"])
+    assert "a" in d.cap_only
