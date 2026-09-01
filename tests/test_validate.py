@@ -27,8 +27,34 @@ def only(word: str, **kw) -> WordCheck:
 
 # --------------------------------------------------------------- environment
 
-def test_capabilities_all_present_on_this_machine():
-    assert capabilities() == {"dictionary": True, "wordnet": True, "wordfreq": True}
+def test_capabilities_reports_what_is_actually_available():
+    """capabilities() must agree with ground truth, not with a fixed machine.
+
+    The previous version asserted all three are True, which encoded a macOS
+    developer box: /usr/share/dict/words is a BSD/macOS file and Linux CI images
+    do not ship it, so the suite failed on a correct report. The contract worth
+    testing is that capabilities() never claims a check it cannot perform.
+    """
+    caps = capabilities()
+    assert set(caps) == {"dictionary", "wordnet", "wordfreq"}
+    assert all(isinstance(v, bool) for v in caps.values())
+
+    assert caps["dictionary"] is bool(validate._dictionary())
+
+    try:
+        import wordfreq  # noqa: F401
+        wf = True
+    except Exception:
+        wf = False
+    assert caps["wordfreq"] is wf
+
+    try:
+        from nltk.corpus import wordnet as wn
+        wn.synsets("cat")
+        has_wn = True
+    except Exception:
+        has_wn = False
+    assert caps["wordnet"] is has_wn
 
 
 def test_flags_constant_matches_contract():
@@ -194,10 +220,12 @@ def test_missing_wordnet_skips_noun_checks_and_says_so(monkeypatch):
 
     caps = capabilities()
     assert caps["wordnet"] is False
-    assert caps["dictionary"] is True
     check = only("quickly")
     assert "not_noun" not in check.flags   # skipped, not fabricated
-    assert "not_in_dict" not in check.flags  # web2 still answers the English check
+    if caps["dictionary"]:
+        # Where a system word list exists it still answers the English check;
+        # without one that check is skipped too, which capabilities() reports.
+        assert "not_in_dict" not in check.flags
 
 
 def test_broken_wordnet_corpus_is_reported_not_raised(monkeypatch):
