@@ -27,6 +27,12 @@ report = ["jinja2>=3.1"]
 
 dev = ["pytest>=8.0"]
 
+# The repo root holds data/ and prompts/ beside the package, so setuptools cannot
+# guess which directory is the distribution -- be explicit rather than let an
+# installer fail on "Multiple top-level packages discovered in a flat-layout".
+[tool.setuptools]
+packages = ["datbench"]
+
 [tool.uv]
 package = false
 
