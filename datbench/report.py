@@ -99,6 +99,15 @@ summary = {
   # cannot: list[{"a","b","rho","n_models"}]  |  {("a","b"): rho}  |  {"a|b": rho}.
   "rank_correlation": [{"a": "emb-a", "b": "emb-b", "rho": 0.91, "n_models": 6}],
 
+  # ---- how much of the grid each scorer puts above its OWN chance band ---
+  # Optional. Present with >1 entry, the headline section renders it as a table
+  # so the primary scorer's count cannot be read as scorer-independent.
+  "chance_coverage": {
+    "emb-a": {"chance_mean": 0.373, "chance_p95": 0.411,
+              "cells_total": 180, "cells_above_mean": 172, "cells_above_p95": 72,
+              "models_total": 21, "models_above_p95": 6, "max_z": 3.87},
+  },
+
   # ---- optional extras --------------------------------------------------
   "flag_counts": {"rare": 12, "proper_noun": 3, "not_noun": 8},   # dict[str, int]
   "warnings": ["only 2 of 4 embedders reachable"],                # list[str]
@@ -492,15 +501,30 @@ def _verdict(pairs: Sequence[tuple[str, str, Any, Any]]) -> str:
             "ranking only together with the embedder it came from"
         )
     else:
-        head = "the ranking is **not** robust"
+        head = "the ranking is NOT robust"
         tail = (
             "embedders disagree about the ordering, which means this leaderboard is "
             "largely an artifact of the embedder chosen"
         )
-    return (
+    out = (
         f"**Robustness to embedder choice: {head}** (worst pairwise Spearman "
         f"\u03c1 = {_num(worst, 2)} over {len(rhos)} pair(s)) \u2014 {tail}."
     )
+    if worst < 0.7:
+        # Rank disagreement is inflated by ranking unlike things together. Measured
+        # on this dataset: over all 19 OpenAI models the generation trend looked
+        # embedder-dependent, but restricted to the 11 base models (no nano/mini/
+        # search variants) all four scorers agreed, pooled rho +0.74. Without this
+        # note the section reads as "nothing here is comparable", which is stronger
+        # than the data supports.
+        out += (
+            " Before concluding the scorers disagree about capability, check whether"
+            " the roster mixes unlike things \u2014 size tiers, specialised variants,"
+            " local and hosted models. Ranking those together inflates disagreement,"
+            " and an aggregate trend across a like-for-like subset can be stable even"
+            " when individual placings are not."
+        )
+    return out
 
 
 def _git_commit() -> str | None:
@@ -681,6 +705,33 @@ def _headline_section(summary: Mapping[str, Any]) -> dict | None:
         f"**{len(abovemean)}** beat the chance *mean* and "
         f"**{len(above95)}** beat chance *p95*. Best cell: **{_num(best)}**.",
     ]
+    cov = summary.get("chance_coverage")
+    if isinstance(cov, Mapping) and len(cov) > 1:
+        rows = []
+        for emb_id, c in sorted(cov.items(), key=lambda kv: kv[1].get("cells_above_p95") or 0):
+            rows.append([
+                f"`{emb_id.replace('text-embedding-', '')}`" + (" \u2605" if emb_id == emb else ""),
+                _num(c.get("chance_p95")),
+                f"{_int(c.get('cells_above_p95'))} / {_int(c.get('cells_total'))}",
+                f"{_int(c.get('models_above_p95'))} / {_int(c.get('models_total'))}",
+            ])
+        counts = [c.get("cells_above_p95") or 0 for c in cov.values()]
+        noroom = [e for e, c in cov.items() if not (c.get("models_above_p95") or 0)]
+        note = (
+            f"\u2605 is the scorer the leaderboard uses. The count spans "
+            f"{min(counts)}\u2013{max(counts)} depending on who scores, so quoting one "
+            f"of them alone overstates or understates the result."
+        )
+        if noroom:
+            note += (
+                f" {len(noroom)} scorer(s) place NO model above their own p95 \u2014 they "
+                f"have almost no headroom above chance, so a strong-looking correlation "
+                f"there describes models climbing up to chance, not past it."
+            )
+        extra = [_table(["scorer", "chance p95", "cells above", "models above"], rows, note=note)]
+    else:
+        extra = []
+
     if not above95:
         lines.append(
             "**No cell cleared the 95th percentile of chance.** On this scoring, no "
@@ -703,7 +754,7 @@ def _headline_section(summary: Mapping[str, Any]) -> dict | None:
             f"is discriminating here — model differences are worth reading, "
             f"subject to the CI caveats below."
         )
-    return _section("Headline: how do these compare to chance?", [_bullets(lines)])
+    return _section("Headline: how do these compare to chance?", [_bullets(lines), *extra])
 
 
 def _baseline_section(summary: Mapping[str, Any]) -> dict:

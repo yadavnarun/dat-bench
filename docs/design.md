@@ -146,7 +146,35 @@ Two consequences that shape how results must be read:
 
 Reproduce with `scripts/premise_check.py`.
 
-## 7. Known limitations
+## 7. Outcome (2026-09-01, 21 models / 1800 runs)
+
+The design above was written before any data existed. What it produced:
+
+- **The cross-embedder check was the load-bearing one.** Individual model ranks swing up
+  to 20 places out of 21 across the four scorers, and only 5 of 21 hold within 3 places.
+  Had the project shipped a single-scorer leaderboard, it would have published an ordering
+  that is mostly noise.
+- **But the aggregate trend survives, and the first framing of this was wrong.** An initial
+  analysis concluded generational progress was an embedder artifact. Adversarial
+  verification refuted it and recomputation confirmed the refutation: much of the rank
+  churn comes from ranking unlike things together (size tiers, specialised variants). On
+  the 11 base OpenAI models all four scorers agree that newer scores higher — ρ +0.817 /
+  +0.596 / +0.220 / +0.642, pooled +0.743 (permutation p=0.011). The real
+  scorer-dependent contradiction is *size*, not generation: ρ(nano→mini→base) is −0.73
+  under one scorer and +0.78 under another.
+- **The random-noun baseline earned its place.** "Beats chance" is itself
+  scorer-dependent: 12/180 to 72/180 cells clear p95 depending on who scores, only 2/180
+  under all four, and two scorers place no model at all above their own p95 — they have
+  almost no headroom, so a strong correlation there describes models climbing *up to*
+  chance rather than past it.
+- **Range compression (§6) mattered as predicted.** The compressed far end is why cell
+  differences between strong models sit inside the noise at n=10.
+- **A finding the score cannot see at all:** 1800 runs used only 797 distinct words, with
+  `chair` and `pillow` appearing in all 21 models. Vocabulary breadth ranges 4× across
+  models and correlates with score at ρ ≤ 0.37 (all p ≥ 0.099) — so the score is blind to
+  the single most striking property of the answers.
+
+## 8. Known limitations
 
 - Arbitrary scale; no comparability to published human norms (§2).
 - The `rare` flag is a **weak** proxy for "specialised vocabulary": Zipf rates `thimble`

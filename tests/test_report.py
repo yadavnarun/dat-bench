@@ -355,7 +355,7 @@ def test_weak_agreement_gets_a_blunt_verdict(summary, meta):
     summary["rank_correlation"][0]["rho"] = 0.11
     summary["rank_correlation"][0]["n_models"] = 8
     md = report.build_markdown(summary, meta)
-    assert "**not** robust" in md
+    assert "NOT robust" in md
     assert "artifact of the embedder" in md
 
 
@@ -669,3 +669,84 @@ def test_headline_is_omitted_when_baselines_are_missing(summary, meta):
     md = report.build_markdown(s, meta)
     assert "## Headline" not in md          # no empty heading
     assert "## Leaderboard" in md           # rest of the report still renders
+
+
+# ------------------------------------------------ per-scorer chance coverage ----
+# The headline used to quote only the primary scorer's "cells above p95". On the
+# real 21-model run that count ranged 12/180 to 72/180 across the four scorers,
+# and the primary was the most generous -- so the single number read as a
+# scorer-independent verdict when it was the best case.
+
+COVERAGE = {
+    "emb-low":  {"chance_p95": 0.550, "cells_total": 180, "cells_above_p95": 12,
+                 "models_total": 21, "models_above_p95": 0},
+    "emb-high": {"chance_p95": 0.411, "cells_total": 180, "cells_above_p95": 72,
+                 "models_total": 21, "models_above_p95": 6},
+}
+
+
+def _with_coverage(summary):
+    s = dict(summary)
+    s["primary_embedder"] = "emb-high"
+    s["chance_coverage"] = COVERAGE
+    # _headline_section needs a baseline for the primary embedder to render at all.
+    s["baselines"] = {"emb-high": {"random": {"mean": 0.373, "sd": 0.023, "n": 1000,
+                                             "k": 7, "p05": 0.34, "p50": 0.374,
+                                             "p95": 0.411, "seed": 0}}}
+    return s
+
+
+def test_headline_shows_every_scorers_chance_coverage(summary, meta):
+    s = _with_coverage(summary)
+    md = report.build_markdown(s, meta)
+    sec = md[md.index("## Headline"):]
+    assert "12 / 180" in sec and "72 / 180" in sec
+    assert "spans 12–72" in sec
+    assert "★" in sec                       # marks which one the leaderboard uses
+
+
+def test_headline_flags_a_scorer_with_no_headroom(summary, meta):
+    """A scorer that puts no model above its own p95 cannot support a ranking."""
+    sec = report.build_markdown(_with_coverage(summary), meta)
+    assert "place NO model above their own p95" in sec
+    assert "climbing up to chance" in sec
+
+
+def test_single_scorer_run_gets_no_coverage_table(summary, meta):
+    """With one scorer there is nothing to compare, so no table is added."""
+    s = _with_coverage(summary)
+    s["chance_coverage"] = {"only": COVERAGE["emb-high"]}
+    md = report.build_markdown(s, meta)
+    assert "chance p95 | cells above" not in md.replace("*", "")
+
+
+def test_robustness_verdict_warns_about_mixed_rosters(summary, meta):
+    """Low agreement can come from ranking unlike things, not scorer noise.
+
+    Measured: across 19 OpenAI models the generation trend looked embedder-
+    dependent; restricted to the 11 base models all four scorers agreed.
+    """
+    s = dict(summary)
+    s["rank_correlation"] = [{"a": "a", "b": "b", "rho": 0.04, "n_models": 21}]
+    sec = report.build_markdown(s, meta)
+    sec = sec[sec.index("## Cross-embedder"):]
+    assert "NOT robust" in sec
+    assert "mixes unlike things" in sec
+    assert "like-for-like" in sec
+
+
+def test_high_agreement_does_not_get_the_mixed_roster_warning(summary, meta):
+    s = dict(summary)
+    s["rank_correlation"] = [{"a": "a", "b": "b", "rho": 0.95, "n_models": 21}]
+    sec = report.build_markdown(s, meta)
+    sec = sec[sec.index("## Cross-embedder"):]
+    assert "mixes unlike things" not in sec
+
+
+def test_robustness_line_is_not_nested_bold(summary, meta):
+    """`the ranking is **not** robust` inside **...** produced broken markdown."""
+    s = dict(summary)
+    s["rank_correlation"] = [{"a": "a", "b": "b", "rho": 0.04, "n_models": 21}]
+    md = report.build_markdown(s, meta)
+    line = next(l for l in md.splitlines() if "Robustness to embedder" in l)
+    assert line.count("**") == 2, f"nested bold markers: {line[:120]}"

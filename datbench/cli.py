@@ -1013,6 +1013,44 @@ def cmd_analyze(args: argparse.Namespace, deps: Deps) -> int:
         "refused": sum(1 for v in primary.values() if not v.get("scored")),
     }
 
+    # How much of the grid each scorer places above its OWN chance band. Reporting
+    # only the primary embedder's count invites quoting the most generous of the
+    # four as though it were the result: measured here they span 12/180 to 72/180,
+    # and two scorers place no model at all above their p95 -- i.e. they have
+    # almost no headroom, so a strong correlation on them describes models
+    # climbing up to chance rather than past it.
+    chance_coverage = {}
+    for emb in embedders:
+        base = baseline_of.get(emb)
+        if not base:
+            continue
+        cell_means, model_means = [], defaultdict(list)
+        # `cells` is the internal shape carrying run_ids; models_detail["grid"] is
+        # the already-serialised output and has no run_ids to score from.
+        for mid, cellmap in cells.items():
+            for _key, cell in cellmap.items():
+                stats, _n, _ref = cell_numbers(cell, emb, primary_policy)
+                mu = stats.get("mean")
+                if mu is None or (isinstance(mu, float) and math.isnan(mu)):
+                    continue
+                cell_means.append(mu)
+                model_means[mid].append(mu)
+        if not cell_means:
+            continue
+        p95 = base.p95
+        cmean = base.mean
+        per_model = {m: sum(v) / len(v) for m, v in model_means.items()}
+        chance_coverage[emb] = {
+            "chance_mean": _round(cmean),
+            "chance_p95": _round(p95),
+            "cells_total": len(cell_means),
+            "cells_above_mean": sum(1 for v in cell_means if v > cmean),
+            "cells_above_p95": sum(1 for v in cell_means if v > p95),
+            "models_total": len(per_model),
+            "models_above_p95": sum(1 for v in per_model.values() if v > p95),
+            "max_z": _round(base.z_of(max(cell_means))),
+        }
+
     summary = {
         "schema_version": SCHEMA_VERSION,
         "primary_embedder": primary_embedder,
@@ -1030,6 +1068,7 @@ def cmd_analyze(args: argparse.Namespace, deps: Deps) -> int:
         "leaderboard": leaderboard,
         "models": models_detail,
         "rank_correlation": rank_correlation,
+        "chance_coverage": chance_coverage,
         "flag_counts": dict(flag_counts.most_common()),
         "warnings": list(dict.fromkeys(warnings)),
     }

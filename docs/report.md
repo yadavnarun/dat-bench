@@ -1,6 +1,6 @@
 # dat-bench: Divergent Association Task over N runs
 
-*21 model(s) · 4 embedder(s) · n=10 replicates per cell · generated 2026-09-01T08:39:23Z*
+*21 model(s) · 4 embedder(s) · n=10 replicates per cell · generated 2026-09-01T08:45:28Z*
 
 > ⚠️ **Read this first: these are NOT DAT scores**
 >
@@ -28,6 +28,15 @@
 
 - Scored by `text-embedding-qwen3-embedding-4b`, seven random common nouns average **0.373** with a 95th percentile of **0.411**. Of **180** prompt x temperature cells in this run, **172** beat the chance *mean* and **72** beat chance *p95*. Best cell: **0.463**.
 - Only 72 of 180 cells cleared chance p95, so most of this grid is indistinguishable from random word draws. Read the percentile column before comparing models.
+
+| scorer | chance p95 | cells above | models above |
+|---|---|---|---|
+| `nomic-embed-text-v1.5` | 0.550 | 12 / 180 | 0 / 21 |
+| `embeddinggemma-300m` | 0.451 | 15 / 180 | 0 / 21 |
+| `qwen3-embedding-0.6b` | 0.406 | 36 / 180 | 1 / 21 |
+| `qwen3-embedding-4b` ★ | 0.411 | 72 / 180 | 6 / 21 |
+
+*★ is the scorer the leaderboard uses. The count spans 12–72 depending on who scores, so quoting one of them alone overstates or understates the result. 2 scorer(s) place NO model above their own p95 — they have almost no headroom above chance, so a strong-looking correlation there describes models climbing up to chance, not past it.*
 
 ## Chance baselines (per embedder)
 
@@ -519,13 +528,13 @@ Registry notes: local via LM Studio; small and fast (~0.2s/call), expect low val
 
 *rank correlation of the model ordering between two embedders, over the models both scored.*
 
-**Robustness to embedder choice: the ranking is **not** robust** (worst pairwise Spearman ρ = 0.04 over 6 pair(s)) — embedders disagree about the ordering, which means this leaderboard is largely an artifact of the embedder chosen.
+**Robustness to embedder choice: the ranking is NOT robust** (worst pairwise Spearman ρ = 0.04 over 6 pair(s)) — embedders disagree about the ordering, which means this leaderboard is largely an artifact of the embedder chosen. Before concluding the scorers disagree about capability, check whether the roster mixes unlike things — size tiers, specialised variants, local and hosted models. Ranking those together inflates disagreement, and an aggregate trend across a like-for-like subset can be stable even when individual placings are not.
 
 ## Provenance
 
-- **generated**: 2026-09-01T08:39:23Z
+- **generated**: 2026-09-01T08:45:28Z
 - **dat-bench version**: 0.1.0
-- **git commit**: 3a26b8a
+- **git commit**: e97bdce
 - **summary schema**: v1
 - **replicates (n)**: 10 per model x prompt x temperature cell
 - **words scored per run (n_use)**: 7
