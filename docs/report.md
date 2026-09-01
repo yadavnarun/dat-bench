@@ -1,6 +1,6 @@
 # dat-bench: Divergent Association Task over N runs
 
-*21 model(s) · 4 embedder(s) · n=10 replicates per cell · generated 2026-09-01T08:17:04Z*
+*21 model(s) · 4 embedder(s) · n=10 replicates per cell · generated 2026-09-01T08:39:23Z*
 
 > ⚠️ **Read this first: these are NOT DAT scores**
 >
@@ -523,9 +523,9 @@ Registry notes: local via LM Studio; small and fast (~0.2s/call), expect low val
 
 ## Provenance
 
-- **generated**: 2026-09-01T08:17:04Z
+- **generated**: 2026-09-01T08:39:23Z
 - **dat-bench version**: 0.1.0
-- **git commit**: not available
+- **git commit**: 3a26b8a
 - **summary schema**: v1
 - **replicates (n)**: 10 per model x prompt x temperature cell
 - **words scored per run (n_use)**: 7

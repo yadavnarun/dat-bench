@@ -866,7 +866,12 @@ draw();
     (worst ? ", and the least-agreeing pair of scorers correlate at " + worst.rho.toFixed(2) +
       " \u2014 essentially not at all" : "") +
     ". A leaderboard that changes this much when you swap the ruler is telling you about " +
-    "the ruler, not the contestants.";
+    "the ruler, not the contestants." +
+    " \u2014 with one important exception: much of this churn comes from mixing model " +
+    "sizes together. Compare like with like (the 11 full-size OpenAI models, no " +
+    "nano/mini/search variants) and all four scorers agree that newer models score " +
+    "higher, pooled \u03c1 = +0.74. Individual placings here are not trustworthy; the " +
+    "generational trend behind them is.";
 
   const t = document.getElementById("ranktable");
   const head = document.createElement("tr");

@@ -26,39 +26,59 @@ repeats. Every answer, every word, every score is in this repo.
 
 ## Three findings
 
-### 1. The leaderboard is mostly an artifact of the scoring model
+### 1. Individual ranks are unstable — but the generational trend is real
 
-Four embedding models scored the same 1800 answers and ranked all 21 contestants. They
-disagree almost completely — the worst-agreeing pair correlates at **Spearman ρ = +0.04**.
+Four embedding models scored the same 1800 answers and ranked all 21 contestants.
+Individual placings move wildly:
 
 | model | gemma-300m | nomic | qwen3-0.6b | qwen3-4b | rank swing |
 |---|---|---|---|---|---|
 | `lfm2.5-1.2b` | **1st** | 21st | 21st | 21st | **±20** |
 | `gpt-4o-mini` | 21st | 16th | **1st** | 2nd | **±20** |
 | `gemma-4-e4b` | 10th | 13th | 3rd | 20th | ±17 |
-| `gpt-5.6-terra` | 3rd | 6th | 19th | 6th | ±16 |
-| … | | | | | |
 | `gpt-5.1` | 2nd | 1st | 4th | 1st | ±3 |
-| `gpt-5.4-mini` | 8th | 9th | 7th | 7th | ±2 |
 
-A 1.2B model running on a laptop places **1st** under one scorer and **21st** under the
-other three. Only **5 of 21 models** hold their position within 3 places across all four.
+Only **5 of 21** models hold their position within 3 places across all four scorers, and
+the worst-agreeing pair of scorers correlates at **Spearman ρ = +0.04**. So a
+single-scorer leaderboard is not reporting a fact about the models.
 
-So the honest reading is narrow but real: `gpt-5.1` and `gpt-5.6-sol` are stably near the
-top whichever scorer you use, and `gpt-5-mini` stably near the bottom. **Everything
-between them is noise**, and a single-scorer leaderboard would present it as a ranking.
+**But the aggregate trend survives.** Comparing like-for-like — the 11 *base* OpenAI
+models, without mixing in the nano/mini/search variants — every scorer agrees that newer
+models score higher:
+
+| | gemma-300m | nomic | qwen3-0.6b | qwen3-4b | pooled |
+|---|---|---|---|---|---|
+| ρ(generation, score) | +0.817 | +0.596 | +0.220 | **+0.642** | **+0.743** (p=0.011) |
+
+Much of the rank chaos above comes from **mixing model tiers**, not from the scorers
+disagreeing about capability. Size is where they genuinely contradict each other:
+ρ(nano→mini→base, score) is **−0.73** under one scorer and **+0.78** under another.
+
+The honest summary: *trust the trend, not the table.* `gpt-5.1` is top-3 under all four
+scorers; `gpt-5-mini` is bottom-5 under all four; the ordering in between is not
+recoverable from this data.
 
 ### 2. Most answers are no better than random words
 
-Seven common nouns pulled from a dictionary at random score **0.373** on average, and
-land below **0.411** nineteen times out of twenty. Only **72 of 180** prompt ×
-temperature cells beat that 95th percentile. The models clearly understand the task —
-they score far above what naming seven animals gets you — but on most settings they do
-not beat chance at it.
+Seven common nouns pulled from a dictionary at random are the bar, and most answers do
+not clear it. How badly depends on who is scoring — which is itself the point:
 
-This is why the harness computes a **random-noun baseline per scorer** and reports every
-score as a percentile against it. Without that reference, "0.44 beats 0.42" reads like a
-result.
+| scorer | cells beating chance p95 | models beating it |
+|---|---|---|
+| `nomic-embed-text-v1.5` | 12 / 180 | **0 / 21** |
+| `embeddinggemma-300m` | 15 / 180 | **0 / 21** |
+| `qwen3-embedding-0.6b` | 36 / 180 | 1 / 21 |
+| `qwen3-embedding-4b` | **72 / 180** | 6 / 21 |
+
+Only **2 of 180** cells clear chance under *all four*. Two of the scorers place **no
+model at all** above their own 95th percentile — they have almost no headroom above chance,
+so a strong-looking correlation on those scorers describes models climbing *up to* chance,
+never past it.
+
+The models clearly understand the task — they score far above what naming seven animals
+gets you — but "beats chance" is not a scorer-independent verdict here. This is why the
+harness computes a **random-noun baseline per scorer** and reports every score as a
+percentile against it. Without that reference, "0.44 beats 0.42" reads like a result.
 
 ### 3. Independent models converge on the same words
 
