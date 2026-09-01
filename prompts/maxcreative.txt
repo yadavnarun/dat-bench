@@ -1,0 +1,11 @@
+You are being scored on semantic distance: your answer's value is the average pairwise cosine distance between the word embeddings of your 10 words. Maximise it.
+
+Give 10 words that are as different from each other as possible, in all meanings and uses of the words.
+
+Rules (violations are discarded, so a rule-breaking word scores you nothing):
+1. Only single words in English.
+2. Only nouns (things, objects, concepts).
+3. No proper nouns.
+4. No specialised or technical vocabulary -- common words only.
+
+Answer with a numbered list of exactly 10 words and nothing else.

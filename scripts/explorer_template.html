@@ -1,0 +1,1269 @@
+<title>Ten Unrelated Words</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+/* ---------------------------------------------------------------- tokens ---
+   Light is the complete palette on bare :root. Dark redefines only tokens,
+   twice: once for prefers-color-scheme (guarded so an explicit light choice
+   wins) and once for the [data-theme="dark"] stamp. No component rule ever
+   declares a colour inside a media or [data-theme] block. */
+:root {
+  --paper:      #eceee7;   /* pale green-grey: a chosen neutral, not default */
+  --card:       #f6f7f3;
+  --sunken:     #e3e6dc;
+  --ink:        #16181f;
+  --ink-2:      #4a4f5c;
+  --ink-3:      #6f7480;
+  --rule:       #cbcdc4;
+  --rule-soft:  #dcdfd6;
+  --accent:     #3a4fa0;   /* fountain-pen ink */
+  --accent-soft:#dfe3f4;
+  --m1:         #3a4fa0;   /* model series 1 — validated pair, ΔE 25.8 protan */
+  --m2:         #b8742a;   /* model series 2 */
+  /* Text-safe steps of the same hues. The mark colours clear 3:1 against the
+     surface, which is right for a dot but not for 11px type; these clear 4.5:1. */
+  --m1-text:    #3a4fa0;
+  --m2-text:    #8f5618;
+  --far:        #1c6b5c;   /* semantic: fresh / spread out */
+  --near:       #a8443a;   /* semantic: repeated / collapsed */
+  --chance-fill:#d2d5c9;
+  --chance-ink: #75796d;
+  --shadow:     0 1px 2px rgba(20,23,31,.06), 0 6px 18px rgba(20,23,31,.05);
+  --focus:      #3a4fa0;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper:      #15181a;
+    --card:       #1d2124;
+    --sunken:     #121517;
+    --ink:        #e8eae4;
+    --ink-2:      #aeb3ab;
+    --ink-3:      #838982;
+    --rule:       #333a3d;
+    --rule-soft:  #262c2f;
+    --accent:     #93aef0;
+    --accent-soft:#232c3f;
+    --m1:         #6284e0;
+    --m2:         #c2842f;
+    --m1-text:    #93aef0;
+    --m2-text:    #d9a05a;
+    --far:        #4fb39c;
+    --near:       #dd7c70;
+    --chance-fill:#2b3134;
+    --chance-ink: #8b918a;
+    --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 22px rgba(0,0,0,.3);
+    --focus:      #93aef0;
+  }
+}
+:root[data-theme="dark"] {
+  --paper:      #15181a;
+  --card:       #1d2124;
+  --sunken:     #121517;
+  --ink:        #e8eae4;
+  --ink-2:      #aeb3ab;
+  --ink-3:      #838982;
+  --rule:       #333a3d;
+  --rule-soft:  #262c2f;
+  --accent:     #93aef0;
+  --accent-soft:#232c3f;
+  --m1:         #6284e0;
+  --m2:         #c2842f;
+  --m1-text:    #93aef0;
+  --m2-text:    #d9a05a;
+  --far:        #4fb39c;
+  --near:       #dd7c70;
+  --chance-fill:#2b3134;
+  --chance-ink: #8b918a;
+  --shadow:     0 1px 2px rgba(0,0,0,.4), 0 8px 22px rgba(0,0,0,.3);
+  --focus:      #93aef0;
+}
+
+/* ---------------------------------------------------------------- base --- */
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 16px/1.6 "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.prose { max-width: 64ch; }
+h1, h2, h3 { font-family: Spectral, Georgia, serif; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight: 600; letter-spacing: -.015em; line-height: 1.08; }
+h2 { font-size: clamp(1.45rem, 2.6vw, 2rem); font-weight: 600; letter-spacing: -.01em; }
+h3 { font-size: 1.1rem; font-weight: 600; }
+p { margin: 0 0 1em; }
+a { color: var(--accent); }
+.lede { font-size: 1.15rem; color: var(--ink-2); }
+.eyebrow {
+  font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.num { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
+hr.rule { border: 0; border-top: 1px solid var(--rule); margin: 0; }
+
+/* ---------------------------------------------------------------- header --- */
+header.top { padding: clamp(48px, 8vw, 96px) 0 40px; }
+.title-row { display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-end; justify-content: space-between; }
+.provenance {
+  display: flex; flex-wrap: wrap; gap: 4px 22px; margin-top: 34px;
+  padding-top: 16px; border-top: 1px solid var(--rule);
+  font: 400 12.5px/1.5 "IBM Plex Mono", monospace; color: var(--ink-3);
+}
+.provenance b { color: var(--ink-2); font-weight: 500; }
+.themebtn {
+  font: 500 12px/1 "IBM Plex Mono", monospace; letter-spacing: .06em;
+  background: var(--card); color: var(--ink-2); border: 1px solid var(--rule);
+  border-radius: 999px; padding: 9px 15px; cursor: pointer; white-space: nowrap;
+}
+.themebtn:hover { color: var(--ink); border-color: var(--ink-3); }
+
+/* ---------------------------------------------------------------- sections --- */
+section { padding: 56px 0; }
+section + section { border-top: 1px solid var(--rule-soft); }
+.sec-head { margin-bottom: 28px; }
+.sec-head .eyebrow { display: block; margin-bottom: 10px; }
+
+/* ---------------------------------------------------------------- rules card --- */
+.rules {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft);
+  border-radius: 10px; overflow: hidden; margin: 26px 0;
+}
+.rule-item { background: var(--card); padding: 18px 20px; }
+.rule-item .n {
+  font: 500 11px/1 "IBM Plex Mono", monospace; color: var(--accent);
+  letter-spacing: .1em; display: block; margin-bottom: 8px;
+}
+.rule-item p { margin: 0; font-size: 14.5px; color: var(--ink-2); }
+.rule-item strong { color: var(--ink); font-weight: 600; }
+
+.example {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 22px 24px; margin: 26px 0 0;
+}
+.example .eyebrow { display: block; margin-bottom: 14px; }
+.wordset { font-family: Spectral, Georgia, serif; font-size: 1.28rem; line-height: 1.9; }
+.wordset .w { margin-right: .1em; }
+.wordset .sep { color: var(--ink-3); margin-right: .45em; }
+
+/* ---------------------------------------------------------------- verdict --- */
+.verdict {
+  background: var(--card); border: 1px solid var(--rule); border-left: 3px solid var(--near);
+  border-radius: 10px; padding: 26px 28px; margin-bottom: 34px;
+}
+.verdict h3 { font-size: 1.35rem; margin-bottom: 10px; }
+.verdict p:last-child { margin-bottom: 0; }
+.verdict .big {
+  font-family: Spectral, Georgia, serif; font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  font-weight: 600; line-height: 1.2; margin: 0 0 14px;
+}
+
+/* ---------------------------------------------------------------- scale chart --- */
+.chart { margin: 8px 0 0; }
+.chart-frame { position: relative; overflow-x: auto; }
+.chart svg { display: block; min-width: 620px; width: 100%; height: auto; }
+.legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin: 14px 0 0; font-size: 13px; color: var(--ink-2); }
+.legend .key { display: inline-flex; align-items: center; gap: 7px; }
+.swatch { width: 11px; height: 11px; border-radius: 50%; flex: none; }
+.swatch.band { border-radius: 2px; width: 16px; height: 10px; }
+
+/* ---------------------------------------------------------------- rank table --- */
+.ranktable { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 13.5px; }
+.ranktable th, .ranktable td { padding: 7px 10px; border-bottom: 1px solid var(--rule-soft); text-align: center; }
+.ranktable th { font: 500 10.5px/1.3 "IBM Plex Mono", monospace; letter-spacing: .07em;
+  text-transform: uppercase; color: var(--ink-3); vertical-align: bottom; }
+.ranktable th.model, .ranktable td.model {
+  text-align: left; font-family: "IBM Plex Mono", monospace; font-size: 12.5px; white-space: nowrap;
+}
+.ranktable td.rk { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.ranktable td.swing { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; font-weight: 500; }
+.ranktable tr.wild td.model, .ranktable tr.wild td.swing { color: var(--near); }
+.ranktable tr.wild { background: color-mix(in srgb, var(--near) 7%, transparent); }
+.rk-bar { display: inline-block; height: 6px; border-radius: 3px; background: var(--near); vertical-align: middle; margin-left: 7px; }
+
+/* ---------------------------------------------------------------- stat row --- */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin: 0 0 30px; }
+.stat { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 16px 18px; }
+.stat .k { font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
+.stat .v { font-family: Spectral, Georgia, serif; font-size: 1.85rem; font-weight: 600; line-height: 1.1; margin: 9px 0 3px; font-variant-numeric: tabular-nums; }
+.stat .s { font-size: 12.5px; color: var(--ink-3); line-height: 1.45; }
+
+/* ---------------------------------------------------------------- controls --- */
+.controls {
+  position: sticky; top: 0; z-index: 20; background: var(--paper);
+  border-bottom: 1px solid var(--rule); padding: 14px 0; margin-bottom: 26px;
+}
+.controls-in { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.group { display: flex; align-items: center; gap: 7px; }
+.group > label { font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .09em; text-transform: uppercase; color: var(--ink-3); }
+select, input[type="search"] {
+  font: 400 13.5px/1 "IBM Plex Sans", sans-serif; color: var(--ink);
+  background: var(--card); border: 1px solid var(--rule); border-radius: 7px;
+  padding: 8px 10px; min-width: 0;
+}
+input[type="search"] { min-width: 190px; }
+.count { font: 400 13px/1 "IBM Plex Mono", monospace; color: var(--ink-3); margin-left: auto; white-space: nowrap; }
+.chipbtn {
+  font: 500 12px/1 "IBM Plex Mono", monospace; background: transparent; color: var(--ink-3);
+  border: 1px solid var(--rule); border-radius: 999px; padding: 7px 12px; cursor: pointer;
+}
+.chipbtn[aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
+
+/* ---------------------------------------------------------------- run cards --- */
+.runs { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+.run {
+  background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+  padding: 15px 17px 13px; box-shadow: var(--shadow);
+}
+.run-head { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; margin-bottom: 12px; }
+.mchip {
+  font: 500 11px/1 "IBM Plex Mono", monospace; letter-spacing: .03em;
+  padding: 4px 8px; border-radius: 5px; white-space: nowrap;
+  background: transparent; border: 1px solid currentColor;
+}
+.coords { font: 400 12px/1.3 "IBM Plex Mono", monospace; color: var(--ink-3); }
+.samebadge {
+  font: 500 10px/1 "IBM Plex Mono", monospace; letter-spacing: .04em;
+  color: var(--near); border: 1px solid var(--near); border-radius: 4px;
+  padding: 3px 6px; white-space: nowrap;
+}
+.run-score { margin-left: auto; text-align: right; white-space: nowrap; }
+.run-score .sv { font: 500 15px/1 "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; color: var(--ink); }
+.run-score .sp { font: 400 11px/1.4 "IBM Plex Mono", monospace; color: var(--ink-3); display: block; margin-top: 3px; }
+
+/* the ten words: the actual content of this page */
+.words { font-family: Spectral, Georgia, serif; font-size: 1.12rem; line-height: 1.95; }
+.tok { position: relative; display: inline-block; margin: 0 .5em .1em 0; white-space: nowrap; }
+.tok .idx {
+  font: 500 9.5px/1 "IBM Plex Mono", monospace; color: var(--ink-3);
+  vertical-align: .55em; margin-right: .18em;
+}
+.tok.scored .idx { color: var(--accent); }
+.tok.unscored { color: var(--ink-3); }
+.tok.bad { color: var(--near); text-decoration: underline dotted currentColor 1.5px; text-underline-offset: 3px; }
+.tok .flag {
+  font: 500 9px/1 "IBM Plex Mono", monospace; color: var(--near);
+  vertical-align: .6em; margin-left: .15em; letter-spacing: .02em;
+}
+.words-note { font-size: 11.5px; color: var(--ink-3); margin-top: 10px; font-family: "IBM Plex Mono", monospace; }
+
+.run details { margin-top: 11px; border-top: 1px solid var(--rule-soft); padding-top: 9px; }
+.run summary {
+  font: 400 11.5px/1 "IBM Plex Mono", monospace; color: var(--ink-3);
+  cursor: pointer; list-style: none; display: flex; align-items: center; gap: 6px;
+}
+.run summary::-webkit-details-marker { display: none; }
+.run summary::before { content: "▸"; font-size: 9px; }
+.run details[open] summary::before { content: "▾"; }
+.run summary:hover { color: var(--ink-2); }
+.raw {
+  font: 400 12px/1.65 "IBM Plex Mono", monospace; color: var(--ink-2);
+  background: var(--sunken); border-radius: 7px; padding: 11px 13px; margin: 10px 0 0;
+  white-space: pre-wrap; word-break: break-word; max-height: 260px; overflow-y: auto;
+}
+.embtable { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+.embtable th, .embtable td { text-align: left; padding: 5px 8px 5px 0; border-bottom: 1px solid var(--rule-soft); }
+.embtable th { font: 500 10px/1 "IBM Plex Mono", monospace; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+.embtable td { font-family: "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; color: var(--ink-2); }
+.embtable td.is-primary { color: var(--ink); font-weight: 500; }
+
+.empty { color: var(--ink-3); font-style: italic; padding: 40px 0; text-align: center; }
+.morebtn {
+  display: block; margin: 22px auto 0; font: 500 13px/1 "IBM Plex Sans", sans-serif;
+  background: var(--card); color: var(--ink); border: 1px solid var(--rule);
+  border-radius: 999px; padding: 12px 22px; cursor: pointer;
+}
+.morebtn:hover { border-color: var(--ink-3); }
+
+/* ---------------------------------------------------------------- vocab --- */
+.vocab { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 26px; }
+.vocab-col h3 { display: flex; align-items: baseline; gap: 9px; margin-bottom: 4px; }
+.vocab-col .sub { font: 400 12.5px/1.5 "IBM Plex Mono", monospace; color: var(--ink-3); margin-bottom: 16px; }
+.bar-row { display: grid; grid-template-columns: 8.5em 1fr 2.6em; align-items: center; gap: 10px; margin-bottom: 5px; }
+.bar-row .lab { font-family: Spectral, Georgia, serif; font-size: 15px; text-align: right; overflow: hidden; text-overflow: ellipsis; }
+.bar-track { background: var(--sunken); border-radius: 3px; height: 15px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 0 3px 3px 0; }
+.bar-row .val { font: 400 11.5px/1 "IBM Plex Mono", monospace; font-variant-numeric: tabular-nums; color: var(--ink-3); }
+
+/* ---------------------------------------------------------------- caveats --- */
+.caveats { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.caveat { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 18px 20px; }
+.caveat h3 { font-size: 1rem; margin-bottom: 8px; }
+.caveat p { font-size: 14px; color: var(--ink-2); margin: 0; }
+
+footer { padding: 44px 0 72px; border-top: 1px solid var(--rule); }
+footer p { font: 400 12.5px/1.7 "IBM Plex Mono", monospace; color: var(--ink-3); max-width: 70ch; }
+
+/* tooltip */
+#tip {
+  position: fixed; z-index: 60; pointer-events: none; opacity: 0;
+  background: var(--ink); color: var(--paper); border-radius: 6px;
+  padding: 7px 10px; font: 400 12px/1.45 "IBM Plex Mono", monospace;
+  max-width: 260px; transition: opacity .1s;
+}
+#tip.on { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+}
+@media (max-width: 640px) {
+  .wrap { padding: 0 16px; }
+  .runs { grid-template-columns: 1fr; }
+  .count { margin-left: 0; width: 100%; }
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="title-row">
+      <div>
+        <span class="eyebrow">Divergent Association Task &middot; language-model run</span>
+        <h1 style="margin-top:12px">Ten unrelated words</h1>
+      </div>
+      <button class="themebtn" id="themebtn" type="button">theme</button>
+    </div>
+    <p class="lede prose" style="margin-top:20px" id="lede"></p>
+    <div class="provenance" id="provenance"></div>
+  </div>
+</header>
+
+<main>
+  <section id="game">
+    <div class="wrap">
+      <div class="sec-head prose">
+        <span class="eyebrow">The task</span>
+        <h2>A creativity test built out of ten nouns</h2>
+      </div>
+      <div class="prose">
+        <p>
+          The Divergent Association Task is a real psychology instrument. You name ten
+          words that are as unrelated as possible, and a computer measures how far apart
+          their meanings are. People who score higher tend to score higher on other
+          creativity measures too &mdash; naming <em>thimble</em> and <em>galaxy</em> takes
+          more reaching than naming <em>cat</em> and <em>dog</em>.
+        </p>
+        <p>These are the rules, given to the models verbatim:</p>
+      </div>
+      <div class="rules">
+        <div class="rule-item"><span class="n">01</span><p><strong>Single words</strong> in English only.</p></div>
+        <div class="rule-item"><span class="n">02</span><p><strong>Nouns only</strong> &mdash; things, objects, concepts.</p></div>
+        <div class="rule-item"><span class="n">03</span><p><strong>No proper nouns</strong> &mdash; no specific people or places.</p></div>
+        <div class="rule-item"><span class="n">04</span><p><strong>No specialised vocabulary</strong> &mdash; no technical terms.</p></div>
+        <div class="rule-item"><span class="n">05</span><p><strong>Think of them yourself</strong>, and be creative.</p></div>
+      </div>
+      <div class="prose">
+        <p>
+          Only the <strong>first seven valid words</strong> count, which is how the original
+          test is scored. The score is the average distance between all
+          twenty-one pairs among those seven. Higher means further apart.
+        </p>
+      </div>
+      <div class="example" id="example"></div>
+    </div>
+  </section>
+
+  <section id="verdict">
+    <div class="wrap">
+      <div class="sec-head prose">
+        <span class="eyebrow">The result</span>
+        <h2 id="verdict-h2"></h2>
+      </div>
+      <div class="verdict" id="verdict-card"></div>
+      <div class="chart">
+        <div class="chart-frame"><svg id="scale" role="img" aria-label="Every prompt and temperature combination plotted against the range of scores from randomly chosen words"></svg></div>
+        <div class="legend" id="scale-legend"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ranking">
+    <div class="wrap">
+      <div class="sec-head prose">
+        <span class="eyebrow">The catch</span>
+        <h2 id="rank-h2">Change the ruler and the ranking changes</h2>
+      </div>
+      <div class="prose">
+        <p id="rank-note"></p>
+      </div>
+      <div class="chart-frame">
+        <table class="ranktable" id="ranktable"></table>
+      </div>
+      <div class="legend" id="rank-legend"></div>
+    </div>
+  </section>
+
+  <section id="players">
+    <div class="wrap">
+      <div class="sec-head prose">
+        <span class="eyebrow">The players</span>
+        <h2 id="players-h2"></h2>
+      </div>
+      <div class="stats" id="playerstats"></div>
+      <div class="prose">
+        <p id="players-note"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="explore">
+    <div class="wrap">
+      <div class="sec-head prose">
+        <span class="eyebrow">Every attempt</span>
+        <h2>What each model actually said</h2>
+      </div>
+      <div class="prose">
+        <p>
+          One card per attempt. Numbered words are the seven that were scored; the rest
+          came back but fell outside the count. A word in
+          <span style="color:var(--near)">red with a dotted underline</span> broke one of
+          the rules &mdash; hover it to see which. Open a card to read the model's raw
+          reply and its score under all four scoring models.
+        </p>
+      </div>
+    </div>
+    <div class="controls">
+      <div class="wrap controls-in">
+        <div class="group"><label for="f-model">Model</label><select id="f-model"></select></div>
+        <div class="group"><label for="f-prompt">Prompt</label><select id="f-prompt"></select></div>
+        <div class="group"><label for="f-temp">Temp</label><select id="f-temp"></select></div>
+        <div class="group"><label for="f-sort">Sort</label><select id="f-sort">
+          <option value="natural">Model, prompt, attempt</option>
+          <option value="score-desc">Score, high to low</option>
+          <option value="score-asc">Score, low to high</option>
+          <option value="invalid">Most rule-breaking words</option>
+        </select></div>
+        <div class="group"><input type="search" id="f-word" placeholder="Search a word…" aria-label="Search for a word"></div>
+        <button class="chipbtn" id="f-flagged" type="button" aria-pressed="false">Only rule-breakers</button>
+        <button class="chipbtn" id="f-group" type="button" aria-pressed="false">Group identical</button>
+        <span class="count" id="runcount"></span>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="runs" id="runs"></div>
+      <button class="morebtn" id="morebtn" type="button" hidden>Show more attempts</button>
+    </div>
+  </section>
+
+  <section id="vocab">
+    <div class="wrap">
+      <div class="sec-head prose">
+        <span class="eyebrow">Vocabulary</span>
+        <h2>The same words, again and again</h2>
+      </div>
+      <div class="prose">
+        <p id="vocab-note"></p>
+      </div>
+      <div class="vocab" id="vocabgrid"></div>
+
+      <div class="sec-head prose" style="margin-top:56px">
+        <span class="eyebrow">Convergence</span>
+        <h3 style="font-size:1.35rem;font-family:Spectral,Georgia,serif">The words almost every model reaches for</h3>
+      </div>
+      <div class="prose"><p id="conv-note"></p></div>
+      <div id="convgrid"></div>
+    </div>
+  </section>
+
+  <section id="method">
+    <div class="wrap">
+      <div class="sec-head prose">
+        <span class="eyebrow">Read this before quoting a number</span>
+        <h2>Four things the scores do not mean</h2>
+      </div>
+      <div class="caveats">
+        <div class="caveat">
+          <h3>These are not the published scores</h3>
+          <p>The original test measures distance with a specific word-meaning model
+          (GloVe). This run used models running locally instead, which put every distance
+          on a different scale. Human scores average about 78 on the published scale;
+          nothing here is comparable to that, which is why no number on this page is
+          dressed up to look like it.</p>
+        </div>
+        <div class="caveat">
+          <h3>The scale is squashed at the far end</h3>
+          <p>The local models agree with the original about words that are close together,
+          but compress the ones that are far apart to about half the distance. The far end
+          is exactly where this test separates good answers from great ones, so real
+          differences show up smaller here than they would on the real instrument.</p>
+        </div>
+        <div class="caveat">
+          <h3>A repeated answer is not ten answers</h3>
+          <p>At temperature 0 a model gives the same reply every time. Ten identical
+          attempts look like ten measurements but carry the information of one, so those
+          cells are marked as repeats instead of being given an error range.</p>
+        </div>
+        <div class="caveat">
+          <h3>This is not a creativity score</h3>
+          <p>The task earns its reputation from correlating with human creativity in
+          humans. That link is not established for language models. What is measured here
+          is the average distance between the nouns a model emitted &mdash; nothing more.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p id="footnote"></p>
+  </div>
+</footer>
+
+<div id="tip" role="tooltip" aria-hidden="true"></div>
+
+<script>
+const DATA = /*__DATA__*/;
+
+/* ------------------------------------------------------------------ utils --- */
+const $ = s => document.querySelector(s);
+const el = (t, cls, txt) => { const n = document.createElement(t); if (cls) n.className = cls; if (txt != null) n.textContent = txt; return n; };
+const fmt = (v, d = 3) => (v == null || Number.isNaN(v)) ? "—" : Number(v).toFixed(d);
+const pctTxt = p => p == null ? "—" : (p >= 0.95 ? "top 5%" : p <= 0.05 ? "bottom 5%" : Math.round(p * 100) + ordinal(Math.round(p * 100)) + " pct");
+function ordinal(n) { const s = ["th","st","nd","rd"], v = n % 100; return s[(v - 20) % 10] || s[v] || s[0]; }
+const tempTxt = t => t == null ? "no temp" : "T=" + t;
+
+const MODELS = [...new Set(DATA.runs.map(r => r.model))].sort();
+const PROV_OF = {};
+DATA.runs.forEach(r => { PROV_OF[r.model] = r.provider || "other"; });
+const PROVIDERS = [...new Set(MODELS.map(m => PROV_OF[m]))].sort();
+// Colour encodes WHERE the model ran, a real two-level split. Encoding 13 model
+// identities by hue is impossible to read and the dataviz rule forbids cycling;
+// the row label carries identity instead.
+const PCOLOR = {}, PTEXT = {};
+PROVIDERS.forEach((p, i) => {
+  PCOLOR[p] = i === 0 ? "var(--m1)" : "var(--m2)";
+  PTEXT[p]  = i === 0 ? "var(--m1-text)" : "var(--m2-text)";
+});
+const MCOLOR = {}, MTEXT = {};
+MODELS.forEach(m => { MCOLOR[m] = PCOLOR[PROV_OF[m]]; MTEXT[m] = PTEXT[PROV_OF[m]]; });
+
+const FLAG_TEXT = {
+  multiword: "more than one word",
+  not_in_dict: "not in the dictionary",
+  not_noun: "not a noun",
+  proper_noun: "a proper noun (a name)",
+  rare: "flagged as rare / specialised",
+  duplicate: "already said earlier in this answer",
+  not_alpha: "contains unexpected characters",
+  empty: "empty",
+};
+const FLAG_ABBR = { multiword: "2w", not_in_dict: "dict", not_noun: "vb", proper_noun: "name", rare: "rare", duplicate: "dup", not_alpha: "ch", empty: "—" };
+
+/* ------------------------------------------------------------------ tooltip --- */
+const tip = $("#tip");
+function showTip(html, x, y) {
+  tip.textContent = html;
+  tip.classList.add("on");
+  const r = tip.getBoundingClientRect();
+  tip.style.left = Math.min(Math.max(8, x - r.width / 2), innerWidth - r.width - 8) + "px";
+  tip.style.top = (y - r.height - 12 < 8 ? y + 18 : y - r.height - 12) + "px";
+}
+const hideTip = () => tip.classList.remove("on");
+document.addEventListener("scroll", hideTip, true);
+
+/* ------------------------------------------------------------------ theme --- */
+(function theme() {
+  const btn = $("#themebtn");
+  const root = document.documentElement;
+  btn.addEventListener("click", () => {
+    const cur = root.getAttribute("data-theme");
+    const sysDark = matchMedia("(prefers-color-scheme: dark)").matches;
+    const next = cur ? (cur === "dark" ? "light" : "dark") : (sysDark ? "light" : "dark");
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("datbench-theme", next); } catch (e) {}
+    draw();
+  });
+  try { const s = localStorage.getItem("datbench-theme"); if (s) root.setAttribute("data-theme", s); } catch (e) {}
+})();
+
+/* ------------------------------------------------------------------ header --- */
+(function provenance() {
+  const c = DATA.capabilities || {};
+  const caps = Object.keys(c).length
+    ? Object.entries(c).map(([k, v]) => v ? k : k + " (off)").join(", ")
+    : "not recorded";
+  const bits = [
+    ["attempts", DATA.runs.length],
+    ["models", MODELS.length],
+    ["prompts", Object.keys(DATA.prompts || {}).length],
+    ["repeats per setting", DATA.n_replicates ?? "—"],
+    ["words scored each", DATA.n_use ?? 7],
+    ["scoring models", (DATA.embedders || []).length],
+    ["rule checks", caps],
+  ];
+  const box = $("#provenance");
+  bits.forEach(([k, v]) => {
+    const s = el("span");
+    s.append(document.createTextNode(k + " "));
+    s.append(el("b", null, String(v)));
+    box.append(s);
+  });
+})();
+
+/* ------------------------------------------------------------------ example --- */
+(function example() {
+  // A real answer from the run, not an invented one -- pick the highest-scoring
+  // attempt so the illustration is something a model actually produced.
+  const best = DATA.runs.filter(r => r.score != null).sort((a, b) => b.score - a.score)[0];
+  const box = $("#example");
+  if (!best) { box.remove(); return; }
+  box.append(el("span", "eyebrow", "The single best answer out of " + DATA.runs.length +
+    " — " + best.model + ", " + best.prompt + " prompt"));
+  const set = el("div", "wordset");
+  best.words.forEach((w, i) => {
+    const s = el("span", "w" + (i < (DATA.n_use ?? 7) ? "" : " "));
+    s.textContent = w.w;
+    if (i >= (DATA.n_use ?? 7)) s.style.color = "var(--ink-3)";
+    set.append(s);
+    if (i < best.words.length - 1) set.append(el("span", "sep", "·"));
+  });
+  box.append(set);
+  const note = el("p");
+  note.style.cssText = "margin:14px 0 0;font-size:13px;color:var(--ink-3)";
+  // One lucky attempt can clear the chance band even when no setting's AVERAGE
+  // does. Saying only "top 5%" here would read as contradicting the verdict
+  // below, so the cell average is quoted next to it.
+  const cell = (DATA.cells || []).find(c =>
+    c.model === best.model && c.prompt === best.prompt && (c.temp ?? null) === (best.temp ?? null));
+  let txt = "Scored " + fmt(best.score) + " — " + pctTxt(best.pct) +
+    " of what random words score. The first " + (DATA.n_use ?? 7) + " words are the ones that counted.";
+  if (cell && cell.mean != null) {
+    txt += " That is one attempt, though: averaged over all " + (cell.n ?? "its") +
+      " repeats of the same setting it comes to " + fmt(cell.mean) +
+      ", which is inside the random range. Single answers get lucky; averages are the honest number.";
+  }
+  note.textContent = txt;
+  box.append(note);
+})();
+
+/* ------------------------------------------------------------------ copy --- */
+(function headings() {
+  const ch = DATA.chance || {};
+  const cells = DATA.cells || [];
+  const above = cells.filter(c => c.mean != null && ch.p95 != null && c.mean > ch.p95).length;
+  const nM = MODELS.length;
+  const hosted = MODELS.filter(m => PROV_OF[m] !== "local").length;
+  const local = nM - hosted;
+
+  $("#lede").textContent =
+    nM + " language models were asked, over and over, to name ten words as different " +
+    "from each other as possible. This page shows every one of the " + DATA.runs.length +
+    " answers they gave, what each scored, and why the ranking turns out to be less " +
+    "solid than it looks.";
+
+  $("#verdict-h2").textContent =
+    above === 0 ? "No model beat picking words at random"
+    : above < cells.length / 2 ? "Most settings are no better than random words"
+    : "Beating random is possible, but the ranking is not";
+
+  const parts = [];
+  if (hosted) parts.push(hosted + " hosted");
+  if (local) parts.push(local + " running on one laptop");
+  $("#players-h2").textContent = nM + " models" +
+    (parts.length ? " \u2014 " + parts.join(", ") : "");
+})();
+
+/* ------------------------------------------------------------------ verdict --- */
+(function verdict() {
+  const ch = DATA.chance || {};
+  const cells = DATA.cells || [];
+  const above = cells.filter(c => c.mean != null && ch.p95 != null && c.mean > ch.p95);
+  const aboveMean = cells.filter(c => c.mean != null && ch.mean != null && c.mean > ch.mean);
+  const best = cells.filter(c => c.mean != null).sort((a, b) => b.mean - a.mean)[0];
+  const box = $("#verdict-card");
+
+  const big = el("p", "big");
+  big.textContent = above.length === 0
+    ? "None of the " + cells.length + " settings beat random word-picking."
+    : above.length + " of " + cells.length + " settings beat random word-picking.";
+  box.append(big);
+
+  const p1 = el("p");
+  p1.innerHTML = "Seven common nouns pulled out of a dictionary at random score <b class='num'>" +
+    fmt(ch.mean) + "</b> on average, and land below <b class='num'>" + fmt(ch.p95) +
+    "</b> nineteen times out of twenty. The best setting here managed <b class='num'>" +
+    fmt(best && best.mean) + "</b>.";
+  box.append(p1);
+
+  const p2 = el("p");
+  p2.textContent = above.length === 0
+    ? "So the models understood the task \u2014 they score far above what you get by naming seven animals or seven tools \u2014 but they did not do better at it than chance. Which model ranks first is not a meaningful question here."
+    : "The ones that clear the band do the task properly. But before reading the order as a ranking, check the last section: swap the scoring model and the order largely scrambles.";
+  box.append(p2);
+
+  if (aboveMean.length) {
+    const p3 = el("p");
+    p3.style.cssText = "font-size:14px;color:var(--ink-3);margin-bottom:0";
+    p3.textContent = aboveMean.length + " of " + cells.length +
+      " settings did beat the average random draw — just not by enough to stand out from the spread.";
+    box.append(p3);
+  }
+})();
+
+/* ------------------------------------------------------------------ scale chart --- */
+function draw() {
+  const svg = $("#scale");
+  const ch = DATA.chance || {};
+  const cells = (DATA.cells || []).filter(c => c.mean != null);
+  if (!cells.length || ch.p05 == null) { svg.closest("section").querySelector(".chart").remove(); return; }
+
+  const floors = (DATA.baselines[DATA.primary_embedder] || {}).categories || {};
+  const floorVals = Object.entries(floors);
+
+  // Rows ordered best-first under the headline embedder: with 13 models the
+  // vertical order is the ranking, and the eye reads it without a legend.
+  const rowMean = {};
+  MODELS.forEach(m => {
+    const v = cells.filter(c => c.model === m).map(c => c.mean);
+    rowMean[m] = v.length ? Math.max(...v) : -1;
+  });
+  const ROWS = MODELS.slice().sort((a, b) => rowMean[b] - rowMean[a]);
+  const W = 1080, PADL = 132, PADR = 26, TOP = 34;
+  const rowH = ROWS.length > 6 ? 22 : 26;
+  const H = TOP + ROWS.length * rowH + 84;
+
+  const all = cells.map(c => c.mean).concat([ch.p05, ch.p95], floorVals.map(f => f[1]));
+  let lo = Math.min(...all), hi = Math.max(...all);
+  const pad = (hi - lo) * 0.12 || 0.02;
+  lo -= pad; hi += pad;
+  const X = v => PADL + ((v - lo) / (hi - lo)) * (W - PADL - PADR);
+
+  svg.setAttribute("viewBox", "0 0 " + W + " " + H);
+  svg.innerHTML = "";
+  const NS = "http://www.w3.org/2000/svg";
+  const mk = (t, a) => { const n = document.createElementNS(NS, t); for (const k in a) n.setAttribute(k, a[k]); return n; };
+
+  const plotTop = TOP, plotBot = H - 46;
+
+  // chance band: the reference this whole page turns on
+  svg.append(mk("rect", { x: X(ch.p05), y: plotTop, width: Math.max(1, X(ch.p95) - X(ch.p05)),
+    height: plotBot - plotTop, fill: "var(--chance-fill)", rx: 3 }));
+  if (ch.p50 != null) {
+    svg.append(mk("line", { x1: X(ch.p50), x2: X(ch.p50), y1: plotTop, y2: plotBot,
+      stroke: "var(--chance-ink)", "stroke-width": 1.5, "stroke-dasharray": "3 3" }));
+  }
+  const bandLab = mk("text", { x: X(ch.p50), y: plotTop - 12, "text-anchor": "middle",
+    fill: "var(--chance-ink)", "font-size": 11.5, "font-family": "IBM Plex Mono, monospace" });
+  bandLab.textContent = "what random words score (middle 90%)";
+  svg.append(bandLab);
+
+  // tight-category floors: what a deliberately un-spread answer looks like
+  floorVals.slice().sort((a, b) => a[1] - b[1]).forEach(([name, v], i) => {
+    const labY = plotBot - (i % 2 ? 22 : 8);
+    svg.append(mk("line", { x1: X(v), x2: X(v), y1: plotTop + 6, y2: labY - 9,
+      stroke: "var(--rule)", "stroke-width": 1 }));
+    svg.append(mk("line", { x1: X(v), x2: X(v), y1: labY + 3, y2: plotBot,
+      stroke: "var(--rule)", "stroke-width": 1 }));
+    const t = mk("text", { x: X(v), y: labY, "text-anchor": "middle",
+      fill: "var(--ink-3)", "font-size": 10, "font-family": "IBM Plex Mono, monospace" });
+    t.textContent = "7 " + name;
+    svg.append(t);
+  });
+
+  // one row per model, dots = settings
+  ROWS.forEach((m, mi) => {
+    const y = plotTop + 26 + mi * rowH;
+    const lab = mk("text", { x: PADL - 14, y: y + 4, "text-anchor": "end", fill: "var(--ink-2)",
+      "font-size": 11.5, "font-family": "IBM Plex Mono, monospace" });
+    lab.textContent = m;
+    svg.append(lab);
+
+    cells.filter(c => c.model === m).forEach(c => {
+      const g = mk("g", { style: "cursor:pointer" });
+      // 2px surface ring keeps overlapping dots readable
+      g.append(mk("circle", { cx: X(c.mean), cy: y, r: 6.5, fill: "var(--card)" }));
+      g.append(mk("circle", {
+        cx: X(c.mean), cy: y, r: 4.5,
+        fill: c.degenerate ? "var(--card)" : MCOLOR[m],
+        stroke: MCOLOR[m], "stroke-width": 2,
+      }));
+      const on = ev => {
+        const r = ev.currentTarget.getBoundingClientRect();
+        showTip(c.prompt + " · " + tempTxt(c.temp) + "  →  " + fmt(c.mean) +
+          "  (" + pctTxt(c.pct) + ")" +
+          (c.degenerate ? "  · same answer every time" : "") +
+          "  · repeats " + (c.n ?? "—"),
+          r.left + r.width / 2, r.top);
+      };
+      g.addEventListener("mouseenter", on);
+      g.addEventListener("mousemove", on);
+      g.addEventListener("mouseleave", hideTip);
+      svg.append(g);
+    });
+  });
+
+  // axis
+  svg.append(mk("line", { x1: PADL, x2: W - PADR, y1: plotBot, y2: plotBot, stroke: "var(--rule)", "stroke-width": 1 }));
+  const ticks = 5;
+  for (let i = 0; i <= ticks; i++) {
+    const v = lo + (hi - lo) * i / ticks;
+    const t = mk("text", { x: X(v), y: plotBot + 17, "text-anchor": "middle", fill: "var(--ink-3)",
+      "font-size": 10.5, "font-family": "IBM Plex Mono, monospace" });
+    t.textContent = v.toFixed(2);
+    svg.append(t);
+  }
+  const ax = mk("text", { x: (PADL + W - PADR) / 2, y: H - 4, "text-anchor": "middle",
+    fill: "var(--ink-3)", "font-size": 11, "font-family": "IBM Plex Mono, monospace" });
+  ax.textContent = "average distance between word meanings  →  further apart";
+  svg.append(ax);
+
+  const lg = $("#scale-legend");
+  lg.innerHTML = "";
+  PROVIDERS.forEach(pv => {
+    const k = el("span", "key");
+    const sw = el("span", "swatch");
+    sw.style.background = PCOLOR[pv];
+    k.append(sw, document.createTextNode(pv === "local" ? "ran locally" : pv));
+    lg.append(k);
+  });
+  const k2 = el("span", "key");
+  const sw2 = el("span", "swatch");
+  sw2.style.cssText = "border-radius:50%;background:var(--card);box-shadow:inset 0 0 0 2px var(--ink-3)";
+  k2.append(sw2, document.createTextNode("hollow = same answer every repeat"));
+  lg.append(k2);
+  const k3 = el("span", "key");
+  const sw3 = el("span", "swatch band");
+  sw3.style.background = "var(--chance-fill)";
+  k3.append(sw3, document.createTextNode("range of random-word scores"));
+  lg.append(k3);
+}
+draw();
+
+/* ------------------------------------------------------------------ ranking --- */
+(function ranking() {
+  const R = DATA.ranking || {};
+  const embs = Object.keys(R).sort();
+  const sec = document.getElementById("ranking");
+  if (embs.length < 2) { sec.remove(); return; }
+
+  const primary = DATA.primary_embedder;
+  const order = MODELS.slice().sort((a, b) =>
+    ((R[primary] || {}).rank || {})[a] - ((R[primary] || {}).rank || {})[b]);
+
+  const swingOf = m => {
+    const rs = embs.map(e => (R[e].rank || {})[m]).filter(v => v != null);
+    return rs.length < 2 ? 0 : Math.max(...rs) - Math.min(...rs);
+  };
+  const maxSwing = Math.max(...MODELS.map(swingOf), 1);
+
+  const worst = (DATA.rho_pairs || []).reduce((a, b) => (a && a.rho <= b.rho ? a : b), null);
+  const shortName = e => e.replace(/^text-embedding-/, "");
+
+  const note = document.getElementById("rank-note");
+  const biggest = MODELS.slice().sort((a, b) => swingOf(b) - swingOf(a))[0];
+  const lo = Math.min(...embs.map(e => (R[e].rank || {})[biggest]));
+  const hi = Math.max(...embs.map(e => (R[e].rank || {})[biggest]));
+  const ord = n => n + ordinal(n);   // "1th" is not a word
+  note.textContent =
+    "Each of the " + embs.length + " scoring models was asked to rank all " + MODELS.length +
+    " contestants. They do not agree. " + biggest + " comes " + ord(lo) +
+    " under one and " + ord(hi) + " under another" +
+    (worst ? ", and the least-agreeing pair of scorers correlate at " + worst.rho.toFixed(2) +
+      " \u2014 essentially not at all" : "") +
+    ". A leaderboard that changes this much when you swap the ruler is telling you about " +
+    "the ruler, not the contestants.";
+
+  const t = document.getElementById("ranktable");
+  const head = document.createElement("tr");
+  head.append(Object.assign(document.createElement("th"), { className: "model", textContent: "model" }));
+  embs.forEach(e => {
+    const th = document.createElement("th");
+    th.textContent = shortName(e) + (e === primary ? " ★" : "");
+    head.append(th);
+  });
+  head.append(Object.assign(document.createElement("th"), { textContent: "rank swing" }));
+  t.append(head);
+
+  order.forEach(m => {
+    const sw = swingOf(m);
+    const tr = document.createElement("tr");
+    if (sw >= Math.max(4, MODELS.length / 2)) tr.className = "wild";
+    const td = document.createElement("td");
+    td.className = "model";
+    const dot = document.createElement("span");
+    dot.style.cssText = "display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;background:" + MCOLOR[m];
+    td.append(dot, document.createTextNode(m));
+    tr.append(td);
+    embs.forEach(e => {
+      const cell = document.createElement("td");
+      cell.className = "rk";
+      const r = (R[e].rank || {})[m];
+      cell.textContent = r == null ? "\u2014" : r;
+      tr.append(cell);
+    });
+    const s2 = document.createElement("td");
+    s2.className = "swing";
+    s2.append(document.createTextNode(sw ? "\u00b1" + sw : "0"));
+    const bar = document.createElement("span");
+    bar.className = "rk-bar";
+    bar.style.width = Math.round((sw / maxSwing) * 46) + "px";
+    if (sw) s2.append(bar);
+    tr.append(s2);
+    t.append(tr);
+  });
+
+  const lg = document.getElementById("rank-legend");
+  lg.textContent = "\u2605 marks the scoring model the rest of this page uses. " +
+    "Rank swing is the gap between a model's best and worst placing across scorers; " +
+    "a large swing means its position is not a fact about the model.";
+})();
+
+/* ------------------------------------------------------------------ players --- */
+(function players() {
+  const box = $("#playerstats");
+  const lb = DATA.leaderboard || [];
+  // With 13 models a stat-per-model row stops being scannable; the top few by
+  // best cell plus the chance reference is what a reader can actually hold.
+  const ranked = MODELS.slice().sort((a, b) => {
+    const bm = m => Math.max(...(DATA.cells || []).filter(c => c.model === m)
+      .map(c => c.mean == null ? -1 : c.mean), -1);
+    return bm(b) - bm(a);
+  });
+  ranked.slice(0, 5).forEach(m => {
+    const d = (DATA.models_detail || {})[m] || {};
+    const e = lb.find(x => x.model_id === m) || {};
+    const v = (DATA.vocab || {})[m] || {};
+    const runs = DATA.runs.filter(r => r.model === m);
+    const withScore = runs.filter(r => r.score != null);
+    const avg = withScore.length ? withScore.reduce((s, r) => s + r.score, 0) / withScore.length : null;
+
+    const card = el("div", "stat");
+    const k = el("div", "k");
+    const dot = el("span");
+    dot.style.cssText = "display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;background:" + MCOLOR[m];
+    k.append(dot, document.createTextNode(m));
+    card.append(k);
+    card.append(el("div", "v", fmt(avg)));
+    const s = el("div", "s");
+    s.textContent = "average over " + runs.length + " attempts · " +
+      (v.distinct ?? "—") + " different words used across " + (v.total_slots ?? "—") + " slots · " +
+      Math.round((e.valid_rate ?? d.valid_rate ?? 0) * 100) + "% of words followed the rules";
+    card.append(s);
+    box.append(card);
+  });
+
+  // Chance card, so the reference sits in the same row as the models it judges.
+  const ch = DATA.chance || {};
+  const card = el("div", "stat");
+  card.style.borderStyle = "dashed";
+  const k = el("div", "k");
+  const dot = el("span");
+  dot.style.cssText = "display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:7px;background:var(--chance-fill)";
+  k.append(dot, document.createTextNode("random words"));
+  card.append(k);
+  card.append(el("div", "v", fmt(ch.mean)));
+  card.append(el("div", "s", "seven common nouns drawn from a dictionary, " + (ch.n ?? "—") +
+    " times · the bar both models had to clear"));
+  box.append(card);
+
+  const slow = DATA.runs.filter(r => r.ms != null);
+  const note = $("#players-note");
+  if (slow.length) {
+    const by = {};
+    MODELS.forEach(m => {
+      const v = slow.filter(r => r.model === m).map(r => r.ms).sort((a, b) => a - b);
+      if (v.length) by[m] = v[Math.floor(v.length / 2)];
+    });
+    note.textContent = "Both ran locally, no cloud API involved. Typical time to answer: " +
+      Object.entries(by).map(([m, ms]) => m + " " + (ms >= 1000 ? (ms / 1000).toFixed(1) + "s" : ms + "ms")).join(", ") + ".";
+  } else { note.remove(); }
+})();
+
+/* ------------------------------------------------------------------ runs --- */
+const F = { model: "", prompt: "", temp: "", sort: "natural", word: "", flagged: false, group: false };
+let shown = 60;
+
+(function initFilters() {
+  const opts = (sel, vals, allLabel) => {
+    sel.append(new Option(allLabel, ""));
+    vals.forEach(v => sel.append(new Option(String(v.label ?? v), String(v.value ?? v))));
+  };
+  opts($("#f-model"), MODELS, "All models");
+  opts($("#f-prompt"), [...new Set(DATA.runs.map(r => r.prompt))].sort(), "All prompts");
+  const temps = [...new Set(DATA.runs.map(r => r.temp))].sort((a, b) => (a ?? -1) - (b ?? -1));
+  opts($("#f-temp"), temps.map(t => ({ label: tempTxt(t), value: t == null ? "null" : t })), "All temps");
+
+  const bind = (sel, key) => sel.addEventListener("change", () => { F[key] = sel.value; shown = 60; render(); });
+  bind($("#f-model"), "model"); bind($("#f-prompt"), "prompt");
+  bind($("#f-temp"), "temp"); bind($("#f-sort"), "sort");
+
+  let t;
+  $("#f-word").addEventListener("input", e => {
+    clearTimeout(t);
+    t = setTimeout(() => { F.word = e.target.value.trim().toLowerCase(); shown = 60; render(); }, 140);
+  });
+  $("#f-flagged").addEventListener("click", e => {
+    F.flagged = !F.flagged;
+    e.currentTarget.setAttribute("aria-pressed", String(F.flagged));
+    shown = 60; render();
+  });
+  $("#f-group").addEventListener("click", e => {
+    F.group = !F.group;
+    e.currentTarget.setAttribute("aria-pressed", String(F.group));
+    shown = 60; render();
+  });
+  $("#morebtn").addEventListener("click", () => { shown += 120; render(); });
+})();
+
+function filtered() {
+  let rs = DATA.runs.filter(r => {
+    if (F.model && r.model !== F.model) return false;
+    if (F.prompt && r.prompt !== F.prompt) return false;
+    if (F.temp) {
+      const want = F.temp === "null" ? null : Number(F.temp);
+      if ((r.temp ?? null) !== want) return false;
+    }
+    if (F.flagged && !r.words.some(w => !w.ok)) return false;
+    if (F.word && !r.words.some(w => (w.c || w.w || "").toLowerCase().includes(F.word))) return false;
+    return true;
+  });
+  if (F.group) {
+    const seen = new Map();
+    for (const r of rs) {
+      const key = [r.model, r.prompt, r.temp, r.words.map(w => w.w).join("|")].join("~");
+      const hit = seen.get(key);
+      if (hit) { hit._same = (hit._same || 1) + 1; }
+      else { seen.set(key, Object.assign(Object.create(Object.getPrototypeOf(r)), r, { _same: 1 })); }
+    }
+    rs = [...seen.values()];
+  }
+  const bad = r => r.words.filter(w => !w.ok).length;
+  if (F.sort === "score-desc") rs = rs.slice().sort((a, b) => (b.score ?? -1) - (a.score ?? -1));
+  else if (F.sort === "score-asc") rs = rs.slice().sort((a, b) => (a.score ?? 9) - (b.score ?? 9));
+  else if (F.sort === "invalid") rs = rs.slice().sort((a, b) => bad(b) - bad(a) || (b.score ?? 0) - (a.score ?? 0));
+  return rs;
+}
+
+function runCard(r) {
+  const card = el("div", "run");
+  const head = el("div", "run-head");
+  const chip = el("span", "mchip", r.model);
+  chip.style.color = MTEXT[r.model];
+  head.append(chip);
+  head.append(el("span", "coords", r.prompt + " · " + tempTxt(r.temp) +
+    (r._same > 1 ? "" : " · try " + r.rep)));
+  if (r._same > 1) {
+    const b = el("span", "samebadge", "×" + r._same + " identical");
+    head.append(b);
+  }
+
+  const sc = el("div", "run-score");
+  if (r.score != null) {
+    sc.append(el("span", "sv", fmt(r.score)));
+    sc.append(el("span", "sp", pctTxt(r.pct)));
+  } else {
+    sc.append(el("span", "sv", "not scored"));
+    sc.append(el("span", "sp", r.error ? "call failed" : "too few valid words"));
+  }
+  head.append(sc);
+  card.append(head);
+
+  const nUse = DATA.n_use ?? 7;
+  const words = el("div", "words");
+  if (!r.words.length) {
+    const e = el("span");
+    e.style.cssText = "color:var(--ink-3);font-style:italic;font-size:.95rem";
+    e.textContent = r.error ? "the call failed: " + r.error
+      : (r.finish === "length" ? "the reply hit the length limit before any words came back"
+                               : "no words could be read from the reply");
+    words.append(e);
+  } else {
+    let scoredSoFar = 0;
+    r.words.forEach(w => {
+      const isScored = w.ok && scoredSoFar < nUse;
+      if (isScored) scoredSoFar++;
+      const t = el("span", "tok " + (w.ok ? (isScored ? "scored" : "unscored") : "bad"));
+      if (isScored) t.append(el("sup", "idx", String(scoredSoFar)));
+      t.append(document.createTextNode(w.w));
+      if (!w.ok && w.f.length) {
+        t.append(el("sup", "flag", FLAG_ABBR[w.f[0]] || "?"));
+        const why = w.f.map(f => FLAG_TEXT[f] || f).join("; ");
+        const on = ev => {
+          const b = ev.currentTarget.getBoundingClientRect();
+          showTip("“" + w.w + "” — " + why, b.left + b.width / 2, b.top);
+        };
+        t.addEventListener("mouseenter", on);
+        t.addEventListener("mouseleave", hideTip);
+        t.tabIndex = 0;
+        t.addEventListener("focus", on);
+        t.addEventListener("blur", hideTip);
+      }
+      words.append(t);
+    });
+  }
+  card.append(words);
+
+  if (r.words.length) {
+    const valid = r.words.filter(w => w.ok).length;
+    const note = el("div", "words-note");
+    note.textContent = valid + " of " + r.words.length + " words followed the rules" +
+      (valid >= nUse ? " · first " + nUse + " scored" : " · fewer than " + nUse + ", so this attempt was set aside");
+    card.append(note);
+  }
+
+  const det = el("details");
+  det.append(el("summary", null, "raw reply and all four scores"));
+  const raw = el("pre", "raw");
+  raw.textContent = r.raw && r.raw.trim() ? r.raw : "(the model returned nothing)";
+  det.append(raw);
+
+  const meta = el("div", "words-note");
+  meta.textContent = [
+    r.served ? "served as " + r.served : null,
+    r.tokens != null ? r.tokens + " tokens" : null,
+    r.ms != null ? (r.ms >= 1000 ? (r.ms / 1000).toFixed(1) + "s" : r.ms + "ms") : null,
+    r.finish ? "finished: " + r.finish : null,
+  ].filter(Boolean).join(" · ");
+  det.append(meta);
+
+  const embs = Object.keys(r.scores || {});
+  if (embs.length) {
+    const tb = el("table", "embtable");
+    const hr = el("tr");
+    ["scoring model", "strict", "lenient"].forEach(h => hr.append(el("th", null, h)));
+    tb.append(hr);
+    embs.sort().forEach(e => {
+      const tr = el("tr");
+      const short = e.replace(/^text-embedding-/, "");
+      const nm = el("td", e === DATA.primary_embedder ? "is-primary" : null, short);
+      tr.append(nm);
+      ["strict", "lenient"].forEach(p => {
+        const v = (r.scores[e] || {})[p] || {};
+        tr.append(el("td", e === DATA.primary_embedder ? "is-primary" : null,
+          v.score != null ? fmt(v.score) : (v.reason ? "set aside" : "—")));
+      });
+      tb.append(tr);
+    });
+    det.append(tb);
+  }
+  card.append(det);
+  return card;
+}
+
+function render() {
+  const rs = filtered();
+  const box = $("#runs");
+  box.innerHTML = "";
+  const slice = rs.slice(0, shown);
+  slice.forEach(r => box.append(runCard(r)));
+  if (!rs.length) box.append(el("div", "empty", "No attempt matches those filters."));
+
+  const c = $("#runcount");
+  const unit = F.group ? " distinct answers" : " attempts";
+  const collapsed = F.group ? rs.reduce((n, r) => n + (r._same || 1), 0) : rs.length;
+  c.textContent = F.group
+    ? rs.length + unit + " from " + collapsed + " attempts · showing " + slice.length
+    : (rs.length === DATA.runs.length
+        ? "showing " + slice.length + " of " + rs.length + " attempts"
+        : rs.length + " of " + DATA.runs.length + " attempts match · showing " + slice.length);
+
+  const more = $("#morebtn");
+  more.hidden = slice.length >= rs.length;
+  more.textContent = "Show more attempts (" + (rs.length - slice.length) + " left)";
+}
+render();
+
+/* ------------------------------------------------------------------ vocab --- */
+(function vocab() {
+  const grid = $("#vocabgrid");
+  const note = $("#vocab-note");
+  // Enumerating every model here produced an unreadable run-on sentence once the
+  // roster passed a handful. Name the extremes and give the range instead.
+  const stats = MODELS.map(m => {
+    const v = (DATA.vocab || {})[m] || {};
+    return { m, d: v.distinct ?? 0, s: v.total_slots ?? 0,
+             ratio: v.total_slots ? (v.distinct || 0) / v.total_slots : 0 };
+  }).filter(x => x.s);
+  stats.sort((a, b) => a.ratio - b.ratio);
+  const worst = stats[0], best = stats[stats.length - 1];
+  note.textContent = worst && best
+    ? "Every model recycles. The narrowest is " + worst.m + ", which used just " +
+      worst.d + " different words to fill " + worst.s + " slots; the broadest is " +
+      best.m + " at " + best.d + " across " + best.s + ". A model inventing afresh each " +
+      "time would use far more than any of them. This repetition is the clearest signal " +
+      "in the run — and none of it shows up in the score."
+    : "No vocabulary recorded for this run.";
+
+  MODELS.forEach(m => {
+    const v = (DATA.vocab || {})[m] || {};
+    const top = (v.top || []).slice(0, 18);
+    const col = el("div", "vocab-col");
+    const h = el("h3");
+    const dot = el("span");
+    dot.style.cssText = "display:inline-block;width:9px;height:9px;border-radius:50%;background:" + MCOLOR[m];
+    h.append(dot, document.createTextNode(m));
+    col.append(h);
+    col.append(el("div", "sub", (v.distinct ?? "—") + " different words · " +
+      (v.total_slots ?? "—") + " slots filled"));
+    const max = top.length ? top[0][1] : 1;
+    top.forEach(([w, n]) => {
+      const row = el("div", "bar-row");
+      row.append(el("span", "lab", w));
+      const track = el("div", "bar-track");
+      const fill = el("div", "bar-fill");
+      fill.style.width = Math.max(2, (n / max) * 100) + "%";
+      fill.style.background = MCOLOR[m];
+      track.append(fill);
+      row.append(track);
+      row.append(el("span", "val", String(n)));
+      col.append(row);
+    });
+    if (!top.length) col.append(el("div", "empty", "no words recorded"));
+    grid.append(col);
+  });
+})();
+
+/* ------------------------------------------------------------------ convergence --- */
+(function convergence() {
+  const C = DATA.convergence;
+  const host = document.getElementById("convgrid");
+  const note = document.getElementById("conv-note");
+  if (!C || !C.top || !C.top.length) { host.closest("section") && host.remove(); return; }
+
+  const solo = C.only_one_model, tot = C.distinct_total, nm = C.n_models;
+  const universal = C.top.filter(t => t[1] === nm).map(t => t[0]);
+  note.textContent =
+    "These models were run independently, and told to think of the words on their own. " +
+    (universal.length
+      ? "Yet " + universal.map(w => "\u201c" + w + "\u201d").join(" and ") +
+        (universal.length > 1 ? " appear" : " appears") + " in all " + nm + " of them. "
+      : "") +
+    "Across the whole run only " + tot + " distinct words were used, and " + solo +
+    " of those (" + Math.round(100 * solo / tot) + "%) came from a single model \u2014 so " +
+    "the shared core is small and the long tail is where the models differ. Bars show how " +
+    "many of the " + nm + " models used each word at least once.";
+
+  const max = nm;
+  C.top.forEach(([w, nmodels, times]) => {
+    const row = el("div", "bar-row");
+    row.append(el("span", "lab", w));
+    const track = el("div", "bar-track");
+    const fill = el("div", "bar-fill");
+    fill.style.width = Math.max(2, (nmodels / max) * 100) + "%";
+    fill.style.background = nmodels === nm ? "var(--near)" : "var(--accent)";
+    track.append(fill);
+    row.append(track);
+    const v = el("span", "val", nmodels + "/" + nm);
+    v.title = times + " times in total";
+    row.append(v);
+    host.append(row);
+  });
+})();
+
+/* ------------------------------------------------------------------ footnote --- */
+(function footnote() {
+  const f = $("#footnote");
+  f.textContent = "Task from datcreativity.com (Olson & Martin). Scored with " +
+    (DATA.primary_embedder || "a local model").replace(/^text-embedding-/, "") +
+    " under the " + (DATA.primary_policy || "strict") + " rule, running locally via LM Studio — " +
+    "not the GloVe vectors the published test uses, so these numbers are on their own scale " +
+    "and are not comparable to human norms. Every attempt, word, flag and raw reply on this " +
+    "page is the complete recorded dataset, nothing sampled. Generated by dat-bench" +
+    (DATA.generated ? " on " + DATA.generated : "") + ".";
+})();
+</script>

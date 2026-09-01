@@ -1,0 +1,34 @@
+[project]
+name = "dat-bench"
+version = "0.1.0"
+description = "Benchmark LLMs on the Divergent Association Task over N runs, scored with local embeddings"
+requires-python = ">=3.10"
+
+# Core: the harness runs with just these. Every validity check degrades
+# gracefully when its optional dependency is absent, and reports that it did
+# (see datbench.validate.capabilities) rather than silently passing words.
+dependencies = [
+    "openai>=1.40",       # one client, every provider -- they all serve /v1/chat/completions
+    "pyyaml>=6.0",        # models.yaml
+    "numpy>=1.24",        # cosine distances, bootstrap
+]
+
+[project.optional-dependencies]
+# Without these two, `not_noun` and `proper_noun` are skipped -- which means a
+# model emitting verbs or place names is not caught. Strongly recommended: the
+# validity rate is half the point of this benchmark.
+validity = [
+    "nltk>=3.8",          # WordNet: is it a noun? is it a proper noun?
+    "wordfreq>=3.0",      # Zipf frequency: is it specialised vocabulary?
+]
+
+# HTML report only. The markdown report needs nothing extra.
+report = ["jinja2>=3.1"]
+
+dev = ["pytest>=8.0"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

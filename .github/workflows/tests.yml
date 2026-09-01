@@ -1,0 +1,44 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[validity,report,dev]"
+
+      # WordNet powers the noun / proper-noun rules. validate.capabilities()
+      # degrades gracefully without it, and two tests assert that degraded path,
+      # so the suite passes either way -- but we want the real checks exercised.
+      - name: Fetch WordNet
+        run: python -c "import nltk; nltk.download('wordnet'); nltk.download('omw-1.4')"
+
+      # The suite is deliberately network-free: no LM Studio, no API keys. Every
+      # provider and embedder call is faked, so CI runs the same code paths a
+      # real run does without spending a cent.
+      - name: Tests
+        run: python -m pytest -q
+
+      - name: Check the report renders
+        run: |
+          python -c "
+          from datbench import report
+          md = report.build_markdown({'primary_embedder': 'e', 'n_replicates': 10}, {})
+          assert 'arbitrary scale' in md and 'NOT comparable' in md
+          print('report renders with its caveats intact')
+          "

@@ -1,0 +1,10 @@
+Please enter 10 words that are as different from each other as possible, in all meanings and uses of the words.
+
+Rules:
+1. Only single words in English.
+2. Only nouns (e.g., things, objects, concepts).
+3. No proper nouns (e.g., no specific people or places).
+4. No specialised vocabulary (e.g., no technical terms).
+5. Think of the words on your own (e.g., do not just look at objects in your surroundings).
+
+Be creative!

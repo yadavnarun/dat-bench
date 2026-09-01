@@ -1,0 +1,4884 @@
+{
+  "schema_version": 1,
+  "primary_embedder": "text-embedding-qwen3-embedding-4b",
+  "primary_policy": "strict",
+  "embedders": [
+    "text-embedding-embeddinggemma-300m",
+    "text-embedding-nomic-embed-text-v1.5",
+    "text-embedding-qwen3-embedding-0.6b",
+    "text-embedding-qwen3-embedding-4b"
+  ],
+  "policies": [
+    "strict",
+    "lenient"
+  ],
+  "n_replicates": 10,
+  "n_use": 7,
+  "prompts": [
+    "verbatim",
+    "terse",
+    "cot",
+    "maxcreative"
+  ],
+  "temperatures": [
+    0.0,
+    0.7,
+    1.0,
+    null
+  ],
+  "capabilities": {
+    "dictionary": true,
+    "wordnet": true,
+    "wordfreq": true
+  },
+  "baselines": {
+    "text-embedding-embeddinggemma-300m": {
+      "random": {
+        "mean": 0.4118325333673998,
+        "sd": 0.023345864148948896,
+        "n": 1000,
+        "k": 7,
+        "p05": 0.3727822311479033,
+        "p50": 0.4116117512917318,
+        "p95": 0.45064464176708924,
+        "seed": 0
+      },
+      "categories": {
+        "animals": 0.2776199901127548,
+        "tools": 0.23693063807792858,
+        "colours": 0.36175285237936283,
+        "furniture": 0.3376473888543863
+      }
+    },
+    "text-embedding-nomic-embed-text-v1.5": {
+      "random": {
+        "mean": 0.5226290404116292,
+        "sd": 0.017113935630609246,
+        "n": 1000,
+        "k": 7,
+        "p05": 0.4936966204512276,
+        "p50": 0.5234476278149484,
+        "p95": 0.5496712308124531,
+        "seed": 0
+      },
+      "categories": {
+        "animals": 0.3399525687095098,
+        "tools": 0.467436191796077,
+        "colours": 0.44392489415592656,
+        "furniture": 0.4058091841764434
+      }
+    },
+    "text-embedding-qwen3-embedding-0.6b": {
+      "random": {
+        "mean": 0.3667679650706079,
+        "sd": 0.024578714546773836,
+        "n": 1000,
+        "k": 7,
+        "p05": 0.32554423154065654,
+        "p50": 0.36708326237531563,
+        "p95": 0.40637236201133814,
+        "seed": 0
+      },
+      "categories": {
+        "animals": 0.2004117380420688,
+        "tools": 0.287601710752464,
+        "colours": 0.13249763818297342,
+        "furniture": 0.24321657758863324
+      }
+    },
+    "text-embedding-qwen3-embedding-4b": {
+      "random": {
+        "mean": 0.37259249198712496,
+        "sd": 0.02332257269136093,
+        "n": 1000,
+        "k": 7,
+        "p05": 0.3345201706318213,
+        "p50": 0.3735881617358999,
+        "p95": 0.41131050025799415,
+        "seed": 0
+      },
+      "categories": {
+        "animals": 0.21235606057305093,
+        "tools": 0.2892629632479387,
+        "colours": 0.2152193940907678,
+        "furniture": 0.28673092366561276
+      }
+    }
+  },
+  "run_counts": {
+    "written": 1800,
+    "failed": 0,
+    "scored": 1798,
+    "refused": 2
+  },
+  "leaderboard": [
+    {
+      "model_id": "gpt-5.1",
+      "model_reported": [
+        "gpt-5.1-2025-11-13"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9916666666666667,
+      "best_prompt": "maxcreative",
+      "best_temperature": 0.0,
+      "n": 10,
+      "mean": 0.462890006882691,
+      "sd": 0.016995505264278222,
+      "ci_lo": 0.45241748773756907,
+      "ci_hi": 0.4726663428421441,
+      "jaccard": 0.49017931959108424,
+      "distinct_pool": {
+        "distinct": 21,
+        "total": 100,
+        "ratio": 0.21
+      },
+      "gaming_index": 0.459033,
+      "percentile_vs_chance": 0.9999459558810114,
+      "z_vs_chance": 3.8716789991617753
+    },
+    {
+      "model_id": "gpt-4o-mini",
+      "model_reported": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9966666666666666,
+      "best_prompt": "cot",
+      "best_temperature": 0.0,
+      "n": 10,
+      "mean": 0.4429357285510296,
+      "sd": 0.0,
+      "ci_lo": 0.4429357285510296,
+      "ci_hi": 0.4429357285510296,
+      "jaccard": 0.7986531986531985,
+      "distinct_pool": {
+        "distinct": 13,
+        "total": 100,
+        "ratio": 0.13
+      },
+      "gaming_index": 0.441459,
+      "percentile_vs_chance": 0.9987197605355778,
+      "z_vs_chance": 3.016101074902467
+    },
+    {
+      "model_id": "gpt-5.6-luna",
+      "model_reported": [
+        "gpt-5.6-luna"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.99,
+      "best_prompt": "cot",
+      "best_temperature": null,
+      "n": 10,
+      "mean": 0.4413090596682102,
+      "sd": 0.023423256090675283,
+      "ci_lo": 0.4278648916107238,
+      "ci_hi": 0.45533432547826236,
+      "jaccard": 0.21964206225300134,
+      "distinct_pool": {
+        "distinct": 46,
+        "total": 97,
+        "ratio": 0.4742268041237113
+      },
+      "gaming_index": 0.436896,
+      "percentile_vs_chance": 0.9983922818788971,
+      "z_vs_chance": 2.946354529169889
+    },
+    {
+      "model_id": "gpt-5.6-sol",
+      "model_reported": [
+        "gpt-5.6-sol"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.99,
+      "best_prompt": "maxcreative",
+      "best_temperature": null,
+      "n": 10,
+      "mean": 0.44019786816259404,
+      "sd": 0.026776572649565605,
+      "ci_lo": 0.4232971439429165,
+      "ci_hi": 0.4550931784481832,
+      "jaccard": 0.09718495585368649,
+      "distinct_pool": {
+        "distinct": 61,
+        "total": 100,
+        "ratio": 0.61
+      },
+      "gaming_index": 0.435796,
+      "percentile_vs_chance": 0.9981264939354004,
+      "z_vs_chance": 2.8987100638563446
+    },
+    {
+      "model_id": "gpt-4o",
+      "model_reported": [
+        "gpt-4o-2024-08-06"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9825,
+      "best_prompt": "maxcreative",
+      "best_temperature": 0.0,
+      "n": 10,
+      "mean": 0.43476940410361636,
+      "sd": 5.851389114294502e-17,
+      "ci_lo": 0.43476940410361636,
+      "ci_hi": 0.43476940410361636,
+      "jaccard": 1.0,
+      "distinct_pool": {
+        "distinct": 10,
+        "total": 100,
+        "ratio": 0.1
+      },
+      "gaming_index": 0.427161,
+      "percentile_vs_chance": 0.9961614931870567,
+      "z_vs_chance": 2.665954264107526
+    },
+    {
+      "model_id": "gpt-5.6-terra",
+      "model_reported": [
+        "gpt-5.6-terra"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9875,
+      "best_prompt": "cot",
+      "best_temperature": null,
+      "n": 10,
+      "mean": 0.4299518169916413,
+      "sd": 0.011889641797677954,
+      "ci_lo": 0.4229992553695113,
+      "ci_hi": 0.4369590638079628,
+      "jaccard": 0.2080174816965323,
+      "distinct_pool": {
+        "distinct": 47,
+        "total": 97,
+        "ratio": 0.4845360824742268
+      },
+      "gaming_index": 0.424577,
+      "percentile_vs_chance": 0.9930413520980573,
+      "z_vs_chance": 2.459390984158587
+    },
+    {
+      "model_id": "gpt-5.4-mini",
+      "model_reported": [
+        "gpt-5.4-mini-2026-03-17"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 1.0,
+      "best_prompt": "terse",
+      "best_temperature": 0.0,
+      "n": 10,
+      "mean": 0.4290415821280388,
+      "sd": 0.0,
+      "ci_lo": 0.4290415821280388,
+      "ci_hi": 0.4290415821280388,
+      "jaccard": 1.0,
+      "distinct_pool": {
+        "distinct": 10,
+        "total": 100,
+        "ratio": 0.1
+      },
+      "gaming_index": 0.429042,
+      "percentile_vs_chance": 0.9922474880212105,
+      "z_vs_chance": 2.4203629199888184
+    },
+    {
+      "model_id": "gpt-4.1-mini",
+      "model_reported": [
+        "gpt-4.1-mini-2025-04-14"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.995,
+      "best_prompt": "maxcreative",
+      "best_temperature": 1.0,
+      "n": 10,
+      "mean": 0.42631862376191093,
+      "sd": 0.009399606784910407,
+      "ci_lo": 0.4218199666777313,
+      "ci_hi": 0.43260355854813254,
+      "jaccard": 0.43020780961957433,
+      "distinct_pool": {
+        "distinct": 32,
+        "total": 100,
+        "ratio": 0.32
+      },
+      "gaming_index": 0.424187,
+      "percentile_vs_chance": 0.9893777512090782,
+      "z_vs_chance": 2.3036108617076803
+    },
+    {
+      "model_id": "gpt-5.4",
+      "model_reported": [
+        "gpt-5.4-2026-03-05"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.995,
+      "best_prompt": "maxcreative",
+      "best_temperature": 0.7,
+      "n": 10,
+      "mean": 0.42591170520926874,
+      "sd": 0.01632305323483754,
+      "ci_lo": 0.41605436262756157,
+      "ci_hi": 0.43490971998439926,
+      "jaccard": 0.40917002387590606,
+      "distinct_pool": {
+        "distinct": 26,
+        "total": 100,
+        "ratio": 0.26
+      },
+      "gaming_index": 0.423782,
+      "percentile_vs_chance": 0.9888776508959467,
+      "z_vs_chance": 2.2861634489360645
+    },
+    {
+      "model_id": "gpt-5-search-api",
+      "model_reported": [
+        "gpt-5-search-api-2025-10-14"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 1.0,
+      "best_prompt": "maxcreative",
+      "best_temperature": null,
+      "n": 10,
+      "mean": 0.4246108540303342,
+      "sd": 0.013292995847622358,
+      "ci_lo": 0.4171169006974198,
+      "ci_hi": 0.4325992805745988,
+      "jaccard": 0.2802689226837834,
+      "distinct_pool": {
+        "distinct": 40,
+        "total": 100,
+        "ratio": 0.4
+      },
+      "gaming_index": 0.424611,
+      "percentile_vs_chance": 0.9871391177953102,
+      "z_vs_chance": 2.2303869616612975
+    },
+    {
+      "model_id": "gpt-3.5-turbo",
+      "model_reported": [
+        "gpt-3.5-turbo-0125"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9958333333333333,
+      "best_prompt": "cot",
+      "best_temperature": 1.0,
+      "n": 10,
+      "mean": 0.4245280720086274,
+      "sd": 0.013923667972896854,
+      "ci_lo": 0.4159045331401863,
+      "ci_hi": 0.4320921444654102,
+      "jaccard": 0.23337628783707218,
+      "distinct_pool": {
+        "distinct": 45,
+        "total": 97,
+        "ratio": 0.4639175257731959
+      },
+      "gaming_index": 0.422759,
+      "percentile_vs_chance": 0.9870209327241092,
+      "z_vs_chance": 2.2268375238354494
+    },
+    {
+      "model_id": "gpt-5.4-nano",
+      "model_reported": [
+        "gpt-5.4-nano-2026-03-17"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9941666666666666,
+      "best_prompt": "terse",
+      "best_temperature": 0.0,
+      "n": 10,
+      "mean": 0.4229371383165129,
+      "sd": 0.0,
+      "ci_lo": 0.4229371383165129,
+      "ci_hi": 0.4229371383165129,
+      "jaccard": 0.8087542087542089,
+      "distinct_pool": {
+        "distinct": 12,
+        "total": 100,
+        "ratio": 0.12
+      },
+      "gaming_index": 0.42047,
+      "percentile_vs_chance": 0.9845602940370674,
+      "z_vs_chance": 2.158623192887998
+    },
+    {
+      "model_id": "gpt-5.5",
+      "model_reported": [
+        "gpt-5.5-2026-04-23"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9875,
+      "best_prompt": "maxcreative",
+      "best_temperature": null,
+      "n": 10,
+      "mean": 0.4221610150887963,
+      "sd": 0.027545786446774686,
+      "ci_lo": 0.4074941619736499,
+      "ci_hi": 0.4395078448252255,
+      "jaccard": 0.05888659557390208,
+      "distinct_pool": {
+        "distinct": 66,
+        "total": 99,
+        "ratio": 0.6666666666666666
+      },
+      "gaming_index": 0.416884,
+      "percentile_vs_chance": 0.9832210996146572,
+      "z_vs_chance": 2.1253454221211334
+    },
+    {
+      "model_id": "gpt-4.1",
+      "model_reported": [
+        "gpt-4.1-2025-04-14"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9983333333333333,
+      "best_prompt": "maxcreative",
+      "best_temperature": 0.7,
+      "n": 10,
+      "mean": 0.4209206153860796,
+      "sd": 0.01328346178289517,
+      "ci_lo": 0.41409748890754255,
+      "ci_hi": 0.4295399336092271,
+      "jaccard": 0.19752758803326398,
+      "distinct_pool": {
+        "distinct": 39,
+        "total": 100,
+        "ratio": 0.39
+      },
+      "gaming_index": 0.420219,
+      "percentile_vs_chance": 0.9808747811342815,
+      "z_vs_chance": 2.072160907739659
+    },
+    {
+      "model_id": "gpt-5.2",
+      "model_reported": [
+        "gpt-5.2-2025-12-11"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9791666666666666,
+      "best_prompt": "terse",
+      "best_temperature": 1.0,
+      "n": 10,
+      "mean": 0.4183337841806082,
+      "sd": 0.005771504383584753,
+      "ci_lo": 0.41488572196216056,
+      "ci_hi": 0.42167297054349234,
+      "jaccard": 0.5663651163651164,
+      "distinct_pool": {
+        "distinct": 24,
+        "total": 100,
+        "ratio": 0.24
+      },
+      "gaming_index": 0.409618,
+      "percentile_vs_chance": 0.9750748078916902,
+      "z_vs_chance": 1.961245562348555
+    },
+    {
+      "model_id": "o4-mini",
+      "model_reported": [
+        "o4-mini-2025-04-16"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9974999999999999,
+      "best_prompt": "maxcreative",
+      "best_temperature": null,
+      "n": 10,
+      "mean": 0.4173290045791613,
+      "sd": 0.014309629059048326,
+      "ci_lo": 0.40925096890384605,
+      "ci_hi": 0.42587237676222794,
+      "jaccard": 0.24214136396798935,
+      "distinct_pool": {
+        "distinct": 38,
+        "total": 100,
+        "ratio": 0.38
+      },
+      "gaming_index": 0.416286,
+      "percentile_vs_chance": 0.9724548720017916,
+      "z_vs_chance": 1.9181637113562289
+    },
+    {
+      "model_id": "gpt-5",
+      "model_reported": [
+        "gpt-5-2025-08-07"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9800000000000001,
+      "best_prompt": "verbatim",
+      "best_temperature": null,
+      "n": 10,
+      "mean": 0.4133681237310336,
+      "sd": 0.013018413051256497,
+      "ci_lo": 0.40561183185047084,
+      "ci_hi": 0.4209142756467507,
+      "jaccard": 0.11387724485505701,
+      "distinct_pool": {
+        "distinct": 53,
+        "total": 99,
+        "ratio": 0.5353535353535354
+      },
+      "gaming_index": 0.405101,
+      "percentile_vs_chance": 0.9597968395781145,
+      "z_vs_chance": 1.7483333542792476
+    },
+    {
+      "model_id": "gpt-5-nano",
+      "model_reported": [
+        "gpt-5-nano-2025-08-07"
+      ],
+      "n_runs": 40,
+      "n_scored": 39,
+      "n_refused": 1,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.97,
+      "best_prompt": "terse",
+      "best_temperature": null,
+      "n": 10,
+      "mean": 0.4042899846039768,
+      "sd": 0.013201071804242157,
+      "ci_lo": 0.3974856778326502,
+      "ci_hi": 0.41292631339417135,
+      "jaccard": 0.26779874942929643,
+      "distinct_pool": {
+        "distinct": 41,
+        "total": 100,
+        "ratio": 0.41
+      },
+      "gaming_index": 0.392161,
+      "percentile_vs_chance": 0.9129410818756147,
+      "z_vs_chance": 1.359090741674186
+    },
+    {
+      "model_id": "gpt-5-mini",
+      "model_reported": [
+        "gpt-5-mini-2025-08-07"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9974999999999999,
+      "best_prompt": "verbatim",
+      "best_temperature": null,
+      "n": 10,
+      "mean": 0.40366970897374266,
+      "sd": 0.01449303535399467,
+      "ci_lo": 0.3955884122686706,
+      "ci_hi": 0.4127535520106598,
+      "jaccard": 0.19424951267056528,
+      "distinct_pool": {
+        "distinct": 46,
+        "total": 100,
+        "ratio": 0.46
+      },
+      "gaming_index": 0.402661,
+      "percentile_vs_chance": 0.9086512469423362,
+      "z_vs_chance": 1.332495235318924
+    },
+    {
+      "model_id": "gemma-4-e4b",
+      "model_reported": [
+        "google/gemma-4-e4b"
+      ],
+      "n_runs": 120,
+      "n_scored": 119,
+      "n_refused": 1,
+      "n_failed": 0,
+      "n_truncated": 1,
+      "valid_rate": 1.0,
+      "best_prompt": "terse",
+      "best_temperature": 0.0,
+      "n": 10,
+      "mean": 0.4010464974918545,
+      "sd": 0.0,
+      "ci_lo": 0.4010464974918545,
+      "ci_hi": 0.4010464974918545,
+      "jaccard": 1.0,
+      "distinct_pool": {
+        "distinct": 10,
+        "total": 100,
+        "ratio": 0.1
+      },
+      "gaming_index": 0.401046,
+      "percentile_vs_chance": 0.8887713563745048,
+      "z_vs_chance": 1.220020015856543
+    },
+    {
+      "model_id": "lfm2.5-1.2b",
+      "model_reported": [
+        "liquid/lfm2.5-1.2b"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9424074074074074,
+      "best_prompt": "terse",
+      "best_temperature": 0.0,
+      "n": 10,
+      "mean": 0.3961609512004457,
+      "sd": 0.0,
+      "ci_lo": 0.3961609512004457,
+      "ci_hi": 0.3961609512004457,
+      "jaccard": 0.8814814814814814,
+      "distinct_pool": {
+        "distinct": 9,
+        "total": 80,
+        "ratio": 0.1125
+      },
+      "gaming_index": 0.373345,
+      "percentile_vs_chance": 0.8438823610439714,
+      "z_vs_chance": 1.0105428558510137
+    }
+  ],
+  "models": {
+    "lfm2.5-1.2b": {
+      "model_reported": [
+        "liquid/lfm2.5-1.2b"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9424074074074074,
+      "notes": "local via LM Studio; small and fast (~0.2s/call), expect low validity rate",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3895476229036343,
+          "sd": 0.0,
+          "ci_lo": 0.3895476229036343,
+          "ci_hi": 0.3895476229036343,
+          "min": 0.3895476229036343,
+          "max": 0.3895476229036343,
+          "valid_rate": 1.0,
+          "jaccard": 0.8179176379176382,
+          "distinct_pool": {
+            "distinct": 13,
+            "total": 97,
+            "ratio": 0.13402061855670103
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.3916561480958566,
+          "sd": 0.002773562661740464,
+          "ci_lo": 0.39004490907751066,
+          "ci_hi": 0.39326738711420256,
+          "min": 0.38948793265527587,
+          "max": 0.3948786261325484,
+          "valid_rate": 0.99,
+          "jaccard": 0.623046213046213,
+          "distinct_pool": {
+            "distinct": 16,
+            "total": 98,
+            "ratio": 0.16326530612244897
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.3844937721413264,
+          "sd": 0.007902943223861713,
+          "ci_lo": 0.3797479147122325,
+          "ci_hi": 0.38888368815984126,
+          "min": 0.37248503000130884,
+          "max": 0.3948786261325484,
+          "valid_rate": 0.9888888888888889,
+          "jaccard": 0.588062308062308,
+          "distinct_pool": {
+            "distinct": 17,
+            "total": 97,
+            "ratio": 0.17525773195876287
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3961609512004457,
+          "sd": 0.0,
+          "ci_lo": 0.3961609512004457,
+          "ci_hi": 0.3961609512004457,
+          "min": 0.3961609512004457,
+          "max": 0.3961609512004457,
+          "valid_rate": 0.8,
+          "jaccard": 0.8814814814814814,
+          "distinct_pool": {
+            "distinct": 9,
+            "total": 80,
+            "ratio": 0.1125
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.3880110618226657,
+          "sd": 0.010691514304687526,
+          "ci_lo": 0.3814621343786026,
+          "ci_hi": 0.39366385104211626,
+          "min": 0.36460406058923545,
+          "max": 0.3961609512004457,
+          "valid_rate": 0.85,
+          "jaccard": 0.6807856341189674,
+          "distinct_pool": {
+            "distinct": 14,
+            "total": 85,
+            "ratio": 0.16470588235294117
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.3848553727615447,
+          "sd": 0.012519582787302147,
+          "ci_lo": 0.37702753041500014,
+          "ci_hi": 0.391986363302196,
+          "min": 0.36460406058923545,
+          "max": 0.3961609512004457,
+          "valid_rate": 0.86,
+          "jaccard": 0.6579349046015713,
+          "distinct_pool": {
+            "distinct": 14,
+            "total": 86,
+            "ratio": 0.16279069767441862
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3489085662003397,
+          "sd": 0.0,
+          "ci_lo": 0.3489085662003397,
+          "ci_hi": 0.3489085662003397,
+          "min": 0.3489085662003397,
+          "max": 0.3489085662003397,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.3489085662003397,
+          "sd": 0.0,
+          "ci_lo": 0.3489085662003397,
+          "ci_hi": 0.3489085662003397,
+          "min": 0.3489085662003397,
+          "max": 0.3489085662003397,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.3489085662003397,
+          "sd": 0.0,
+          "ci_lo": 0.3489085662003397,
+          "ci_hi": 0.3489085662003397,
+          "min": 0.3489085662003397,
+          "max": 0.3489085662003397,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.38213156306739526,
+          "sd": 0.0017338434370400282,
+          "ci_lo": 0.38105474399032147,
+          "ci_hi": 0.3828584159444199,
+          "min": 0.3796189852208897,
+          "max": 0.383208382144469,
+          "valid_rate": 0.93,
+          "jaccard": 0.8727272727272728,
+          "distinct_pool": {
+            "distinct": 11,
+            "total": 93,
+            "ratio": 0.11827956989247312
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.38213156306739526,
+          "sd": 0.0017338434370400282,
+          "ci_lo": 0.38105474399032147,
+          "ci_hi": 0.38320838214446906,
+          "min": 0.3796189852208897,
+          "max": 0.383208382144469,
+          "valid_rate": 0.9400000000000001,
+          "jaccard": 0.8177777777777777,
+          "distinct_pool": {
+            "distinct": 13,
+            "total": 94,
+            "ratio": 0.13829787234042554
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.38177262337503726,
+          "sd": 0.0018535566010600974,
+          "ci_lo": 0.38069580429796346,
+          "ci_hi": 0.38284944245211106,
+          "min": 0.3796189852208897,
+          "max": 0.383208382144469,
+          "valid_rate": 0.95,
+          "jaccard": 0.8337373737373739,
+          "distinct_pool": {
+            "distinct": 12,
+            "total": 95,
+            "ratio": 0.12631578947368421
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gemma-4-e4b": {
+      "model_reported": [
+        "google/gemma-4-e4b"
+      ],
+      "n_runs": 120,
+      "n_scored": 119,
+      "n_refused": 1,
+      "n_failed": 0,
+      "n_truncated": 1,
+      "valid_rate": 1.0,
+      "notes": "local via LM Studio; reasoning model, ~1000 completion tokens per answer",
+      "refusal_reasons": [
+        [
+          "policy 'strict' needs >= 7 valid words, got 2",
+          1
+        ]
+      ],
+      "truncated_by_prompt": [
+        [
+          "verbatim",
+          1
+        ]
+      ],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3654489267830254,
+          "sd": 5.851389114294502e-17,
+          "ci_lo": 0.3654489267830254,
+          "ci_hi": 0.3654489267830254,
+          "min": 0.36544892678302543,
+          "max": 0.36544892678302543,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 9,
+          "mean": 0.37558870228945346,
+          "sd": 0.011690475796592038,
+          "ci_lo": 0.36842092178966196,
+          "ci_hi": 0.38276897789707665,
+          "min": 0.3568047460171045,
+          "max": 0.3944847167111926,
+          "valid_rate": 1.0,
+          "jaccard": 0.08043107372312738,
+          "distinct_pool": {
+            "distinct": 55,
+            "total": 92,
+            "ratio": 0.5978260869565217
+          },
+          "n_runs": 10,
+          "n_refused": 1,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.37944191513016257,
+          "sd": 0.014864788785811454,
+          "ci_lo": 0.3704764713352361,
+          "ci_hi": 0.38784326915724926,
+          "min": 0.3583970772450295,
+          "max": 0.3988521173324023,
+          "valid_rate": 1.0,
+          "jaccard": 0.07413331804456677,
+          "distinct_pool": {
+            "distinct": 62,
+            "total": 100,
+            "ratio": 0.62
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4010464974918545,
+          "sd": 0.0,
+          "ci_lo": 0.4010464974918545,
+          "ci_hi": 0.4010464974918545,
+          "min": 0.4010464974918545,
+          "max": 0.4010464974918545,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.39523274762773114,
+          "sd": 0.013064329635223783,
+          "ci_lo": 0.38736069763945835,
+          "ci_hi": 0.40283291312087854,
+          "min": 0.3705356537330931,
+          "max": 0.4139731842137336,
+          "valid_rate": 1.0,
+          "jaccard": 0.34889478713008126,
+          "distinct_pool": {
+            "distinct": 30,
+            "total": 100,
+            "ratio": 0.3
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.3899417797244429,
+          "sd": 0.012290381460807418,
+          "ci_lo": 0.382886596983393,
+          "ci_hi": 0.39719468476765446,
+          "min": 0.372531078345869,
+          "max": 0.41174209808661405,
+          "valid_rate": 1.0,
+          "jaccard": 0.4264750500044618,
+          "distinct_pool": {
+            "distinct": 24,
+            "total": 100,
+            "ratio": 0.24
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.36407571410278977,
+          "sd": 0.0030502282863461364,
+          "ci_lo": 0.36214658034912456,
+          "ci_hi": 0.3650402809796224,
+          "min": 0.35539461221129637,
+          "max": 0.36504028097962243,
+          "valid_rate": 1.0,
+          "jaccard": 0.9333333333333333,
+          "distinct_pool": {
+            "distinct": 12,
+            "total": 100,
+            "ratio": 0.12
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.37403794883771535,
+          "sd": 0.019920206268597255,
+          "ci_lo": 0.36236877227047515,
+          "ci_hi": 0.3857569895871998,
+          "min": 0.3373828092368263,
+          "max": 0.4007614130310916,
+          "valid_rate": 1.0,
+          "jaccard": 0.03801551809807744,
+          "distinct_pool": {
+            "distinct": 78,
+            "total": 100,
+            "ratio": 0.78
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.36272285281951183,
+          "sd": 0.01518906863552848,
+          "ci_lo": 0.3542398802726519,
+          "ci_hi": 0.37212774833017676,
+          "min": 0.3421823998531261,
+          "max": 0.39419712864733714,
+          "valid_rate": 1.0,
+          "jaccard": 0.08030997974238428,
+          "distinct_pool": {
+            "distinct": 62,
+            "total": 100,
+            "ratio": 0.62
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3809822252446634,
+          "sd": 0.0,
+          "ci_lo": 0.3809822252446634,
+          "ci_hi": 0.3809822252446634,
+          "min": 0.3809822252446634,
+          "max": 0.3809822252446634,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.37845235179927084,
+          "sd": 0.02691829630070118,
+          "ci_lo": 0.36179965840082606,
+          "ci_hi": 0.393168818939752,
+          "min": 0.32700493086778526,
+          "max": 0.41080265481199973,
+          "valid_rate": 1.0,
+          "jaccard": 0.08644077514046554,
+          "distinct_pool": {
+            "distinct": 65,
+            "total": 100,
+            "ratio": 0.65
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.3801260622594379,
+          "sd": 0.02958977285957167,
+          "ci_lo": 0.3624313875747981,
+          "ci_hi": 0.3971138885242449,
+          "min": 0.32471193270209775,
+          "max": 0.42979091623983234,
+          "valid_rate": 1.0,
+          "jaccard": 0.08310017964300731,
+          "distinct_pool": {
+            "distinct": 58,
+            "total": 100,
+            "ratio": 0.58
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5.5": {
+      "model_reported": [
+        "gpt-5.5-2026-04-23"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9875,
+      "notes": "reasoning model; ~512 reasoning tokens per answer",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4178845139219901,
+          "sd": 0.01773999149212905,
+          "ci_lo": 0.40768847709135136,
+          "ci_hi": 0.4284633519492729,
+          "min": 0.3902909078112806,
+          "max": 0.44963567991573905,
+          "valid_rate": 1.0,
+          "jaccard": 0.11611053778236444,
+          "distinct_pool": {
+            "distinct": 58,
+            "total": 100,
+            "ratio": 0.58
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4125089552189052,
+          "sd": 0.012654548292424116,
+          "ci_lo": 0.404762116695927,
+          "ci_hi": 0.41941672428741594,
+          "min": 0.38953729419206173,
+          "max": 0.4263443398461514,
+          "valid_rate": 1.0,
+          "jaccard": 0.5478595478595477,
+          "distinct_pool": {
+            "distinct": 18,
+            "total": 100,
+            "ratio": 0.18
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4082419479287088,
+          "sd": 0.015251593217828914,
+          "ci_lo": 0.4003923487635548,
+          "ci_hi": 0.41822047483767233,
+          "min": 0.393238611547882,
+          "max": 0.44291510682912744,
+          "valid_rate": 0.96,
+          "jaccard": 0.16967380009433672,
+          "distinct_pool": {
+            "distinct": 52,
+            "total": 96,
+            "ratio": 0.5416666666666666
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4221610150887963,
+          "sd": 0.027545786446774686,
+          "ci_lo": 0.4074941619736499,
+          "ci_hi": 0.4395078448252255,
+          "min": 0.3866541051922561,
+          "max": 0.482067163922106,
+          "valid_rate": 0.99,
+          "jaccard": 0.05888659557390208,
+          "distinct_pool": {
+            "distinct": 66,
+            "total": 99,
+            "ratio": 0.6666666666666666
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5.6-sol": {
+      "model_reported": [
+        "gpt-5.6-sol"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.99,
+      "notes": "reasoning model; ~240 reasoning tokens per answer",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4339118994342896,
+          "sd": 0.018850500600558467,
+          "ci_lo": 0.42178188662401384,
+          "ci_hi": 0.4439393252108945,
+          "min": 0.3905906685484003,
+          "max": 0.4579601435085913,
+          "valid_rate": 0.99,
+          "jaccard": 0.09354957382563163,
+          "distinct_pool": {
+            "distinct": 61,
+            "total": 99,
+            "ratio": 0.6161616161616161
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.37595919084991875,
+          "sd": 0.030250088382619906,
+          "ci_lo": 0.3583960224938387,
+          "ci_hi": 0.39366150802014344,
+          "min": 0.34669207557455933,
+          "max": 0.4133012131631265,
+          "valid_rate": 1.0,
+          "jaccard": 0.2638756878178963,
+          "distinct_pool": {
+            "distinct": 31,
+            "total": 100,
+            "ratio": 0.31
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4227948217269952,
+          "sd": 0.016733763635668326,
+          "ci_lo": 0.4129470841835092,
+          "ci_hi": 0.43245069417041193,
+          "min": 0.3952914368286398,
+          "max": 0.44601942879668616,
+          "valid_rate": 0.97,
+          "jaccard": 0.06531530350931795,
+          "distinct_pool": {
+            "distinct": 65,
+            "total": 97,
+            "ratio": 0.6701030927835051
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.44019786816259404,
+          "sd": 0.026776572649565605,
+          "ci_lo": 0.4232971439429165,
+          "ci_hi": 0.4550931784481832,
+          "min": 0.38406854332536317,
+          "max": 0.48322122667295797,
+          "valid_rate": 1.0,
+          "jaccard": 0.09718495585368649,
+          "distinct_pool": {
+            "distinct": 61,
+            "total": 100,
+            "ratio": 0.61
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "o4-mini": {
+      "model_reported": [
+        "o4-mini-2025-04-16"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9974999999999999,
+      "notes": "reasoning model; the most verbose here, needs a much larger token ceiling",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4102037876068475,
+          "sd": 0.02325354123825483,
+          "ci_lo": 0.39657864369680684,
+          "ci_hi": 0.4241275556538341,
+          "min": 0.3641268548552154,
+          "max": 0.456797718097372,
+          "valid_rate": 0.99,
+          "jaccard": 0.11346204563696824,
+          "distinct_pool": {
+            "distinct": 55,
+            "total": 99,
+            "ratio": 0.5555555555555556
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.3948645290200037,
+          "sd": 0.010843092875096294,
+          "ci_lo": 0.3888123545544321,
+          "ci_hi": 0.40142304409431534,
+          "min": 0.3816309793522721,
+          "max": 0.41282928137759795,
+          "valid_rate": 1.0,
+          "jaccard": 0.279558604068408,
+          "distinct_pool": {
+            "distinct": 36,
+            "total": 100,
+            "ratio": 0.36
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4037024074150496,
+          "sd": 0.011060992298556468,
+          "ci_lo": 0.3977686323454523,
+          "ci_hi": 0.410639802900633,
+          "min": 0.38875708061158865,
+          "max": 0.42794718255352276,
+          "valid_rate": 1.0,
+          "jaccard": 0.0589515728318618,
+          "distinct_pool": {
+            "distinct": 69,
+            "total": 100,
+            "ratio": 0.69
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4173290045791613,
+          "sd": 0.014309629059048326,
+          "ci_lo": 0.40925096890384605,
+          "ci_hi": 0.42587237676222794,
+          "min": 0.4000108449049725,
+          "max": 0.44098551191614827,
+          "valid_rate": 1.0,
+          "jaccard": 0.24214136396798935,
+          "distinct_pool": {
+            "distinct": 38,
+            "total": 100,
+            "ratio": 0.38
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5.4": {
+      "model_reported": [
+        "gpt-5.4-2026-03-05"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.995,
+      "notes": "",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3792050227153999,
+          "sd": 5.851389114294502e-17,
+          "ci_lo": 0.3792050227153999,
+          "ci_hi": 0.3792050227153999,
+          "min": 0.37920502271539985,
+          "max": 0.37920502271539985,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.385612167009021,
+          "sd": 0.010079232493483812,
+          "ci_lo": 0.3800966774190127,
+          "ci_hi": 0.3917039923398464,
+          "min": 0.37421397754061825,
+          "max": 0.40291952742044035,
+          "valid_rate": 1.0,
+          "jaccard": 0.34369388781153487,
+          "distinct_pool": {
+            "distinct": 34,
+            "total": 100,
+            "ratio": 0.34
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.38530614057121404,
+          "sd": 0.011488145385989685,
+          "ci_lo": 0.37858593502526355,
+          "ci_hi": 0.3920791191691986,
+          "min": 0.3680208865427452,
+          "max": 0.40373769746703647,
+          "valid_rate": 1.0,
+          "jaccard": 0.3437853359421987,
+          "distinct_pool": {
+            "distinct": 37,
+            "total": 100,
+            "ratio": 0.37
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4174115402949027,
+          "sd": 5.851389114294502e-17,
+          "ci_lo": 0.4174115402949027,
+          "ci_hi": 0.4174115402949027,
+          "min": 0.4174115402949026,
+          "max": 0.4174115402949026,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.40315851627024124,
+          "sd": 0.018254118125264698,
+          "ci_lo": 0.39162382502006465,
+          "ci_hi": 0.4133919237399876,
+          "min": 0.37249694640018566,
+          "max": 0.4212895825579233,
+          "valid_rate": 1.0,
+          "jaccard": 0.42245532245532236,
+          "distinct_pool": {
+            "distinct": 26,
+            "total": 100,
+            "ratio": 0.26
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4048097165667386,
+          "sd": 0.013408050901378197,
+          "ci_lo": 0.39628145061434955,
+          "ci_hi": 0.4117290098986735,
+          "min": 0.37336441501209655,
+          "max": 0.4174115402949026,
+          "valid_rate": 1.0,
+          "jaccard": 0.43577236126255736,
+          "distinct_pool": {
+            "distinct": 26,
+            "total": 100,
+            "ratio": 0.26
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4060662176521217,
+          "sd": 0.0,
+          "ci_lo": 0.4060662176521217,
+          "ci_hi": 0.4060662176521217,
+          "min": 0.4060662176521217,
+          "max": 0.4060662176521217,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4130914778876888,
+          "sd": 0.021481844730777275,
+          "ci_lo": 0.4003813172645174,
+          "ci_hi": 0.4255836611831861,
+          "min": 0.3839308885320784,
+          "max": 0.44955640359405796,
+          "valid_rate": 0.9400000000000001,
+          "jaccard": 0.4439024864024864,
+          "distinct_pool": {
+            "distinct": 28,
+            "total": 94,
+            "ratio": 0.2978723404255319
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4054811923658728,
+          "sd": 0.020211225266063896,
+          "ci_lo": 0.3931689761664092,
+          "ci_hi": 0.41674225409167814,
+          "min": 0.3695503045960568,
+          "max": 0.42960339047005097,
+          "valid_rate": 1.0,
+          "jaccard": 0.40914553855730307,
+          "distinct_pool": {
+            "distinct": 29,
+            "total": 100,
+            "ratio": 0.29
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.40054619474557407,
+          "sd": 5.851389114294502e-17,
+          "ci_lo": 0.40054619474557407,
+          "ci_hi": 0.40054619474557407,
+          "min": 0.4005461947455741,
+          "max": 0.4005461947455741,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.42591170520926874,
+          "sd": 0.01632305323483754,
+          "ci_lo": 0.41605436262756157,
+          "ci_hi": 0.43490971998439926,
+          "min": 0.4005461947455741,
+          "max": 0.44715144604112667,
+          "valid_rate": 1.0,
+          "jaccard": 0.40917002387590606,
+          "distinct_pool": {
+            "distinct": 26,
+            "total": 100,
+            "ratio": 0.26
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.42559249588063575,
+          "sd": 0.013039240826129592,
+          "ci_lo": 0.41790426455391827,
+          "ci_hi": 0.4331679856428251,
+          "min": 0.411011343230534,
+          "max": 0.43984474311640465,
+          "valid_rate": 1.0,
+          "jaccard": 0.4885410885410885,
+          "distinct_pool": {
+            "distinct": 26,
+            "total": 100,
+            "ratio": 0.26
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5.4-mini": {
+      "model_reported": [
+        "gpt-5.4-mini-2026-03-17"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 1.0,
+      "notes": "",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.41210214567604286,
+          "sd": 0.0,
+          "ci_lo": 0.41210214567604286,
+          "ci_hi": 0.41210214567604286,
+          "min": 0.41210214567604286,
+          "max": 0.41210214567604286,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.398044953632092,
+          "sd": 0.019428934294791703,
+          "ci_lo": 0.38557493657288666,
+          "ci_hi": 0.40793369504438526,
+          "min": 0.3514327526109132,
+          "max": 0.41657111375038913,
+          "valid_rate": 1.0,
+          "jaccard": 0.3036574173829076,
+          "distinct_pool": {
+            "distinct": 37,
+            "total": 100,
+            "ratio": 0.37
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.39782450464788705,
+          "sd": 0.01593006823072607,
+          "ci_lo": 0.38827425732195453,
+          "ci_hi": 0.4071077957446786,
+          "min": 0.37545375527797614,
+          "max": 0.42286407934956477,
+          "valid_rate": 1.0,
+          "jaccard": 0.24494859572258948,
+          "distinct_pool": {
+            "distinct": 40,
+            "total": 100,
+            "ratio": 0.4
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4290415821280388,
+          "sd": 0.0,
+          "ci_lo": 0.4290415821280388,
+          "ci_hi": 0.4290415821280388,
+          "min": 0.4290415821280388,
+          "max": 0.4290415821280388,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.41583839119300237,
+          "sd": 0.008014361418051051,
+          "ci_lo": 0.4110347996547914,
+          "ci_hi": 0.4204202311196842,
+          "min": 0.4028274460529972,
+          "max": 0.4241008790709701,
+          "valid_rate": 1.0,
+          "jaccard": 0.6447404447404449,
+          "distinct_pool": {
+            "distinct": 17,
+            "total": 100,
+            "ratio": 0.17
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.39933224265600803,
+          "sd": 0.01676774279118927,
+          "ci_lo": 0.3897661239223835,
+          "ci_hi": 0.4091091991599339,
+          "min": 0.37413119868772376,
+          "max": 0.4241008790709701,
+          "valid_rate": 1.0,
+          "jaccard": 0.38545945702808443,
+          "distinct_pool": {
+            "distinct": 29,
+            "total": 100,
+            "ratio": 0.29
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.38683446594481297,
+          "sd": 0.011307267917180024,
+          "ci_lo": 0.37983988580608763,
+          "ci_hi": 0.39314468834710453,
+          "min": 0.36697365636676793,
+          "max": 0.4011811345138484,
+          "valid_rate": 1.0,
+          "jaccard": 0.6602952602952604,
+          "distinct_pool": {
+            "distinct": 17,
+            "total": 100,
+            "ratio": 0.17
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.3879623056846161,
+          "sd": 0.020060495467775538,
+          "ci_lo": 0.3756393576233011,
+          "ci_hi": 0.3991567235106687,
+          "min": 0.3506502904865441,
+          "max": 0.41291290673802983,
+          "valid_rate": 1.0,
+          "jaccard": 0.2990431500235422,
+          "distinct_pool": {
+            "distinct": 35,
+            "total": 100,
+            "ratio": 0.35
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.40119502933528733,
+          "sd": 0.014001327964759542,
+          "ci_lo": 0.3924860583874868,
+          "ci_hi": 0.40884660518255755,
+          "min": 0.3718059890844704,
+          "max": 0.4171313579569305,
+          "valid_rate": 1.0,
+          "jaccard": 0.18426649412201526,
+          "distinct_pool": {
+            "distinct": 47,
+            "total": 100,
+            "ratio": 0.47
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.41951566539976026,
+          "sd": 0.0025710693033379663,
+          "ci_lo": 0.41788957839562213,
+          "ci_hi": 0.4203287089018293,
+          "min": 0.41219827388113894,
+          "max": 0.4203287089018293,
+          "valid_rate": 1.0,
+          "jaccard": 0.8698782698782698,
+          "distinct_pool": {
+            "distinct": 13,
+            "total": 100,
+            "ratio": 0.13
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.42320486403836916,
+          "sd": 0.008548116027677521,
+          "ci_lo": 0.4183405597882331,
+          "ci_hi": 0.4284012714707105,
+          "min": 0.41144382936147395,
+          "max": 0.4390123798388427,
+          "valid_rate": 1.0,
+          "jaccard": 0.38533368363089715,
+          "distinct_pool": {
+            "distinct": 28,
+            "total": 100,
+            "ratio": 0.28
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4112215475633619,
+          "sd": 0.01791191276900734,
+          "ci_lo": 0.4012298793648274,
+          "ci_hi": 0.4218705157340918,
+          "min": 0.3844025798337581,
+          "max": 0.4447856528232531,
+          "valid_rate": 1.0,
+          "jaccard": 0.2878558260911202,
+          "distinct_pool": {
+            "distinct": 38,
+            "total": 100,
+            "ratio": 0.38
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5.1": {
+      "model_reported": [
+        "gpt-5.1-2025-11-13"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9916666666666667,
+      "notes": "",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.39767201447565126,
+          "sd": 5.851389114294502e-17,
+          "ci_lo": 0.39767201447565126,
+          "ci_hi": 0.39767201447565126,
+          "min": 0.3976720144756512,
+          "max": 0.3976720144756512,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.38692001755172667,
+          "sd": 0.015563666442349643,
+          "ci_lo": 0.3775588113322071,
+          "ci_hi": 0.3957997898938004,
+          "min": 0.35852988017366094,
+          "max": 0.4086416690020699,
+          "valid_rate": 1.0,
+          "jaccard": 0.18313840155945418,
+          "distinct_pool": {
+            "distinct": 47,
+            "total": 100,
+            "ratio": 0.47
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.40349429932002234,
+          "sd": 0.016529706824599345,
+          "ci_lo": 0.3940689503894471,
+          "ci_hi": 0.41339215600132156,
+          "min": 0.3838705433757862,
+          "max": 0.4325032379505928,
+          "valid_rate": 0.9800000000000001,
+          "jaccard": 0.17328923742236432,
+          "distinct_pool": {
+            "distinct": 48,
+            "total": 98,
+            "ratio": 0.4897959183673469
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4210088871691636,
+          "sd": 0.007650173157969971,
+          "ci_lo": 0.41682973678059704,
+          "ci_hi": 0.42571683074474886,
+          "min": 0.4150045581798232,
+          "max": 0.43854427605774937,
+          "valid_rate": 1.0,
+          "jaccard": 0.6537240537240536,
+          "distinct_pool": {
+            "distinct": 15,
+            "total": 100,
+            "ratio": 0.15
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.43149932257733015,
+          "sd": 0.010008209868860399,
+          "ci_lo": 0.42575954365934016,
+          "ci_hi": 0.43726867458825647,
+          "min": 0.4160744519099384,
+          "max": 0.4480269574083955,
+          "valid_rate": 1.0,
+          "jaccard": 0.6031302031302033,
+          "distinct_pool": {
+            "distinct": 22,
+            "total": 100,
+            "ratio": 0.22
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.41986589501045,
+          "sd": 0.012921900923163707,
+          "ci_lo": 0.41214292998296903,
+          "ci_hi": 0.4275449623670951,
+          "min": 0.39510892878029746,
+          "max": 0.44288075687090983,
+          "valid_rate": 1.0,
+          "jaccard": 0.43333228137149693,
+          "distinct_pool": {
+            "distinct": 29,
+            "total": 100,
+            "ratio": 0.29
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.41766721966624676,
+          "sd": 0.013316687427428295,
+          "ci_lo": 0.409696558744624,
+          "ci_hi": 0.4253635745747998,
+          "min": 0.4006555363630336,
+          "max": 0.4337577447429079,
+          "valid_rate": 0.97,
+          "jaccard": 0.5165974765974766,
+          "distinct_pool": {
+            "distinct": 19,
+            "total": 97,
+            "ratio": 0.1958762886597938
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4287809314145961,
+          "sd": 0.013335347330726485,
+          "ci_lo": 0.4204076564064488,
+          "ci_hi": 0.43592640203539573,
+          "min": 0.4002314875009586,
+          "max": 0.4430011059962687,
+          "valid_rate": 0.9800000000000001,
+          "jaccard": 0.3526521699070719,
+          "distinct_pool": {
+            "distinct": 30,
+            "total": 98,
+            "ratio": 0.30612244897959184
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4359825412632533,
+          "sd": 0.015100684864174829,
+          "ci_lo": 0.42682904464926585,
+          "ci_hi": 0.4444245999781618,
+          "min": 0.41150509346076614,
+          "max": 0.453271560204689,
+          "valid_rate": 0.99,
+          "jaccard": 0.1537232514838294,
+          "distinct_pool": {
+            "distinct": 55,
+            "total": 99,
+            "ratio": 0.5555555555555556
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.462890006882691,
+          "sd": 0.016995505264278222,
+          "ci_lo": 0.45241748773756907,
+          "ci_hi": 0.4726663428421441,
+          "min": 0.4397282742977599,
+          "max": 0.4763261282359646,
+          "valid_rate": 1.0,
+          "jaccard": 0.49017931959108424,
+          "distinct_pool": {
+            "distinct": 21,
+            "total": 100,
+            "ratio": 0.21
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.45013725852960657,
+          "sd": 0.02520404539723038,
+          "ci_lo": 0.4357091994104315,
+          "ci_hi": 0.46551341564346715,
+          "min": 0.41610579429613215,
+          "max": 0.496693434665326,
+          "valid_rate": 0.9800000000000001,
+          "jaccard": 0.2157662811713379,
+          "distinct_pool": {
+            "distinct": 41,
+            "total": 98,
+            "ratio": 0.41836734693877553
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.45124734371759345,
+          "sd": 0.018427831879818817,
+          "ci_lo": 0.441342561089175,
+          "ci_hi": 0.4628749931600937,
+          "min": 0.4240537451237223,
+          "max": 0.49469271443496865,
+          "valid_rate": 1.0,
+          "jaccard": 0.18471751273608858,
+          "distinct_pool": {
+            "distinct": 44,
+            "total": 100,
+            "ratio": 0.44
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-4.1": {
+      "model_reported": [
+        "gpt-4.1-2025-04-14"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9983333333333333,
+      "notes": "",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3800309957274379,
+          "sd": 0.002406158612220765,
+          "ci_lo": 0.37863292743578836,
+          "ci_hi": 0.3814729423320653,
+          "min": 0.3782963049096385,
+          "max": 0.3839323465923765,
+          "valid_rate": 1.0,
+          "jaccard": 0.5958450046685341,
+          "distinct_pool": {
+            "distinct": 22,
+            "total": 100,
+            "ratio": 0.22
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.3942789661824756,
+          "sd": 0.019188370007200778,
+          "ci_lo": 0.38300566590872126,
+          "ci_hi": 0.4058684726815159,
+          "min": 0.3645711860936339,
+          "max": 0.42243236404018214,
+          "valid_rate": 1.0,
+          "jaccard": 0.2342786747327511,
+          "distinct_pool": {
+            "distinct": 36,
+            "total": 100,
+            "ratio": 0.36
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.40157340367467836,
+          "sd": 0.010179929765747338,
+          "ci_lo": 0.39550169838972027,
+          "ci_hi": 0.40748289383452263,
+          "min": 0.3835946753761577,
+          "max": 0.41713851173204164,
+          "valid_rate": 1.0,
+          "jaccard": 0.13213889844436796,
+          "distinct_pool": {
+            "distinct": 52,
+            "total": 100,
+            "ratio": 0.52
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.40473120106973914,
+          "sd": 0.0008379770611909751,
+          "ci_lo": 0.40446620945570533,
+          "ci_hi": 0.40526118429780666,
+          "min": 0.40446620945570533,
+          "max": 0.4071161255960431,
+          "valid_rate": 1.0,
+          "jaccard": 0.8411292411292413,
+          "distinct_pool": {
+            "distinct": 13,
+            "total": 100,
+            "ratio": 0.13
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.40680098626197675,
+          "sd": 0.01294555942923959,
+          "ci_lo": 0.39881919476605343,
+          "ci_hi": 0.41407770773407354,
+          "min": 0.382218688287303,
+          "max": 0.4215990368721235,
+          "valid_rate": 1.0,
+          "jaccard": 0.4857549857549858,
+          "distinct_pool": {
+            "distinct": 22,
+            "total": 100,
+            "ratio": 0.22
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4027294681289394,
+          "sd": 0.014137779040370075,
+          "ci_lo": 0.3945599996635884,
+          "ci_hi": 0.4111746981589923,
+          "min": 0.3817842382764967,
+          "max": 0.4290415821280388,
+          "valid_rate": 1.0,
+          "jaccard": 0.34707877452975494,
+          "distinct_pool": {
+            "distinct": 30,
+            "total": 100,
+            "ratio": 0.3
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4121840211328408,
+          "sd": 0.023801135987082018,
+          "ci_lo": 0.3978032897640504,
+          "ci_hi": 0.4254143371556848,
+          "min": 0.3727729230254436,
+          "max": 0.44081738477567345,
+          "valid_rate": 1.0,
+          "jaccard": 0.1869597321609705,
+          "distinct_pool": {
+            "distinct": 42,
+            "total": 100,
+            "ratio": 0.42
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.40334809302438446,
+          "sd": 0.033303158961478306,
+          "ci_lo": 0.38339457950367173,
+          "ci_hi": 0.4225520187832156,
+          "min": 0.35080155604748126,
+          "max": 0.4510669801949099,
+          "valid_rate": 1.0,
+          "jaccard": 0.10630661621373695,
+          "distinct_pool": {
+            "distinct": 62,
+            "total": 100,
+            "ratio": 0.62
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4041298032801233,
+          "sd": 0.017752103096570195,
+          "ci_lo": 0.39358003367835814,
+          "ci_hi": 0.41408591692570285,
+          "min": 0.3761990047124961,
+          "max": 0.4244583547139659,
+          "valid_rate": 0.9800000000000001,
+          "jaccard": 0.08131903833658218,
+          "distinct_pool": {
+            "distinct": 66,
+            "total": 98,
+            "ratio": 0.673469387755102
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.40720563673771115,
+          "sd": 0.01528851370630558,
+          "ci_lo": 0.3980220235078117,
+          "ci_hi": 0.41638924996761056,
+          "min": 0.3931148339304658,
+          "max": 0.42372687803013065,
+          "valid_rate": 1.0,
+          "jaccard": 0.5755651755651755,
+          "distinct_pool": {
+            "distinct": 19,
+            "total": 100,
+            "ratio": 0.19
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4209206153860796,
+          "sd": 0.01328346178289517,
+          "ci_lo": 0.41409748890754255,
+          "ci_hi": 0.4295399336092271,
+          "min": 0.4064750906510713,
+          "max": 0.45133384477447647,
+          "valid_rate": 1.0,
+          "jaccard": 0.19752758803326398,
+          "distinct_pool": {
+            "distinct": 39,
+            "total": 100,
+            "ratio": 0.39
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4208804795408409,
+          "sd": 0.013105227880674199,
+          "ci_lo": 0.41261469924517763,
+          "ci_hi": 0.427678665203015,
+          "min": 0.3906655675347201,
+          "max": 0.435830879104329,
+          "valid_rate": 1.0,
+          "jaccard": 0.21490791248273183,
+          "distinct_pool": {
+            "distinct": 42,
+            "total": 100,
+            "ratio": 0.42
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-4.1-mini": {
+      "model_reported": [
+        "gpt-4.1-mini-2025-04-14"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.995,
+      "notes": "",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.41128387997152843,
+          "sd": 0.004847852764643024,
+          "ci_lo": 0.40975085432178676,
+          "ci_hi": 0.4143499312710116,
+          "min": 0.40975085432178676,
+          "max": 0.4250811108192029,
+          "valid_rate": 1.0,
+          "jaccard": 0.804906204906205,
+          "distinct_pool": {
+            "distinct": 15,
+            "total": 100,
+            "ratio": 0.15
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4138711710593985,
+          "sd": 0.0117039823364874,
+          "ci_lo": 0.4070642974470824,
+          "ci_hi": 0.42069380072552837,
+          "min": 0.39724888822040827,
+          "max": 0.42906014698472117,
+          "valid_rate": 1.0,
+          "jaccard": 0.2719500905775415,
+          "distinct_pool": {
+            "distinct": 39,
+            "total": 100,
+            "ratio": 0.39
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4121275357303653,
+          "sd": 0.018296097223356785,
+          "ci_lo": 0.40050957058498843,
+          "ci_hi": 0.421957128625271,
+          "min": 0.3701624053900731,
+          "max": 0.4387606673419536,
+          "valid_rate": 1.0,
+          "jaccard": 0.23708372237784003,
+          "distinct_pool": {
+            "distinct": 43,
+            "total": 100,
+            "ratio": 0.43
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.40522948370321143,
+          "sd": 0.0007784136752181592,
+          "ci_lo": 0.4048602496768847,
+          "ci_hi": 0.40578333474270173,
+          "min": 0.4048602496768847,
+          "max": 0.4067064198085187,
+          "valid_rate": 1.0,
+          "jaccard": 0.7712509712509713,
+          "distinct_pool": {
+            "distinct": 14,
+            "total": 100,
+            "ratio": 0.14
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.40787614381638637,
+          "sd": 0.010849393395639631,
+          "ci_lo": 0.4018780022243044,
+          "ci_hi": 0.4146325100096662,
+          "min": 0.39815546090233056,
+          "max": 0.4263496512565394,
+          "valid_rate": 1.0,
+          "jaccard": 0.48565138565138544,
+          "distinct_pool": {
+            "distinct": 24,
+            "total": 100,
+            "ratio": 0.24
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4033204305134247,
+          "sd": 0.015667385267563963,
+          "ci_lo": 0.3938576186835083,
+          "ci_hi": 0.41232714468220516,
+          "min": 0.37129533810634097,
+          "max": 0.4231638259195732,
+          "valid_rate": 1.0,
+          "jaccard": 0.4533577533577532,
+          "distinct_pool": {
+            "distinct": 27,
+            "total": 100,
+            "ratio": 0.27
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4079439016794432,
+          "sd": 0.0033113356555306696,
+          "ci_lo": 0.4060068400266892,
+          "ci_hi": 0.40997498566057383,
+          "min": 0.4017543763431239,
+          "max": 0.4138808495174279,
+          "valid_rate": 1.0,
+          "jaccard": 0.6423280423280424,
+          "distinct_pool": {
+            "distinct": 18,
+            "total": 100,
+            "ratio": 0.18
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.40868301791447087,
+          "sd": 0.017886531723293377,
+          "ci_lo": 0.3983091087581499,
+          "ci_hi": 0.4190416499203896,
+          "min": 0.38681843340798766,
+          "max": 0.43121622433415074,
+          "valid_rate": 0.97,
+          "jaccard": 0.2858722377840025,
+          "distinct_pool": {
+            "distinct": 33,
+            "total": 97,
+            "ratio": 0.3402061855670103
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.411626478913565,
+          "sd": 0.02374023139213558,
+          "ci_lo": 0.3973086113573142,
+          "ci_hi": 0.42527392266371894,
+          "min": 0.3715138752379061,
+          "max": 0.44548827621029397,
+          "valid_rate": 0.97,
+          "jaccard": 0.21386465472378782,
+          "distinct_pool": {
+            "distinct": 44,
+            "total": 97,
+            "ratio": 0.4536082474226804
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.42191954758947386,
+          "sd": 0.0,
+          "ci_lo": 0.42191954758947386,
+          "ci_hi": 0.42191954758947386,
+          "min": 0.42191954758947386,
+          "max": 0.42191954758947386,
+          "valid_rate": 1.0,
+          "jaccard": 0.9333333333333333,
+          "distinct_pool": {
+            "distinct": 12,
+            "total": 100,
+            "ratio": 0.12
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4210529641095012,
+          "sd": 0.005391674731459213,
+          "ci_lo": 0.4177147541881266,
+          "ci_hi": 0.4239498721521336,
+          "min": 0.4094334957980521,
+          "max": 0.4277826596616527,
+          "valid_rate": 1.0,
+          "jaccard": 0.5442779442779442,
+          "distinct_pool": {
+            "distinct": 22,
+            "total": 100,
+            "ratio": 0.22
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.42631862376191093,
+          "sd": 0.009399606784910407,
+          "ci_lo": 0.4218199666777313,
+          "ci_hi": 0.43260355854813254,
+          "min": 0.4169070641523818,
+          "max": 0.45102806278389856,
+          "valid_rate": 1.0,
+          "jaccard": 0.43020780961957433,
+          "distinct_pool": {
+            "distinct": 32,
+            "total": 100,
+            "ratio": 0.32
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-4o": {
+      "model_reported": [
+        "gpt-4o-2024-08-06"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9825,
+      "notes": "",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.384261617912752,
+          "sd": 0.004575869309212556,
+          "ci_lo": 0.38266774430589023,
+          "ci_hi": 0.387212747853661,
+          "min": 0.3821156373359895,
+          "max": 0.397265649161892,
+          "valid_rate": 0.99,
+          "jaccard": 0.8121693121693122,
+          "distinct_pool": {
+            "distinct": 16,
+            "total": 99,
+            "ratio": 0.16161616161616163
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.39060492968457944,
+          "sd": 0.026842356436695303,
+          "ci_lo": 0.3750094310280497,
+          "ci_hi": 0.406406379632787,
+          "min": 0.3522232901721653,
+          "max": 0.42547045495278824,
+          "valid_rate": 0.99,
+          "jaccard": 0.15823108970683789,
+          "distinct_pool": {
+            "distinct": 55,
+            "total": 99,
+            "ratio": 0.5555555555555556
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.40024504354886214,
+          "sd": 0.014071566015980887,
+          "ci_lo": 0.39199237791301117,
+          "ci_hi": 0.408575789333015,
+          "min": 0.3822865596888868,
+          "max": 0.419759894599255,
+          "valid_rate": 0.99,
+          "jaccard": 0.1852905957704719,
+          "distinct_pool": {
+            "distinct": 49,
+            "total": 99,
+            "ratio": 0.494949494949495
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.41237971144598207,
+          "sd": 5.851389114294502e-17,
+          "ci_lo": 0.41237971144598207,
+          "ci_hi": 0.41237971144598207,
+          "min": 0.4123797114459821,
+          "max": 0.4123797114459821,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.41507296484819217,
+          "sd": 0.009374081071177669,
+          "ci_lo": 0.409301333899774,
+          "ci_hi": 0.4202654845603213,
+          "min": 0.39790013701823895,
+          "max": 0.42743491550232804,
+          "valid_rate": 1.0,
+          "jaccard": 0.38514169200443704,
+          "distinct_pool": {
+            "distinct": 33,
+            "total": 100,
+            "ratio": 0.33
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4090459285686644,
+          "sd": 0.014770585828476398,
+          "ci_lo": 0.40040249001958733,
+          "ci_hi": 0.4174291455579314,
+          "min": 0.3860423054009715,
+          "max": 0.4274702810001267,
+          "valid_rate": 1.0,
+          "jaccard": 0.3504788240082357,
+          "distinct_pool": {
+            "distinct": 35,
+            "total": 100,
+            "ratio": 0.35
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4060233921446523,
+          "sd": 0.004755458608527727,
+          "ci_lo": 0.40329163390949196,
+          "ci_hi": 0.4092763992693323,
+          "min": 0.40108112456385114,
+          "max": 0.4173461601872511,
+          "valid_rate": 0.9099999999999999,
+          "jaccard": 0.7215384615384616,
+          "distinct_pool": {
+            "distinct": 13,
+            "total": 91,
+            "ratio": 0.14285714285714285
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4155082020070931,
+          "sd": 0.010297661926462288,
+          "ci_lo": 0.40986078810487714,
+          "ci_hi": 0.4217492021865685,
+          "min": 0.4022795473819488,
+          "max": 0.435510310411576,
+          "valid_rate": 0.96,
+          "jaccard": 0.16373945904647658,
+          "distinct_pool": {
+            "distinct": 51,
+            "total": 96,
+            "ratio": 0.53125
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4208321896110899,
+          "sd": 0.017041406004618842,
+          "ci_lo": 0.4115964167884724,
+          "ci_hi": 0.43134390853543453,
+          "min": 0.3984033487891626,
+          "max": 0.4507407475364255,
+          "valid_rate": 0.95,
+          "jaccard": 0.10041496715645322,
+          "distinct_pool": {
+            "distinct": 58,
+            "total": 95,
+            "ratio": 0.6105263157894737
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.43476940410361636,
+          "sd": 5.851389114294502e-17,
+          "ci_lo": 0.43476940410361636,
+          "ci_hi": 0.43476940410361636,
+          "min": 0.4347694041036163,
+          "max": 0.4347694041036163,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4177006742095159,
+          "sd": 0.015740223154273033,
+          "ci_lo": 0.407289903248431,
+          "ci_hi": 0.42586451778664114,
+          "min": 0.38740388341095183,
+          "max": 0.43063210189810475,
+          "valid_rate": 1.0,
+          "jaccard": 0.29009512636963614,
+          "distinct_pool": {
+            "distinct": 39,
+            "total": 100,
+            "ratio": 0.39
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.42073336590487587,
+          "sd": 0.020551742971818353,
+          "ci_lo": 0.40846886646771674,
+          "ci_hi": 0.43275002697452797,
+          "min": 0.38615435220732247,
+          "max": 0.4488213201834411,
+          "valid_rate": 1.0,
+          "jaccard": 0.16590605052937354,
+          "distinct_pool": {
+            "distinct": 52,
+            "total": 100,
+            "ratio": 0.52
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-4o-mini": {
+      "model_reported": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9966666666666666,
+      "notes": "",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.40966882979987096,
+          "sd": 0.0033300728248811056,
+          "ci_lo": 0.4078417268381365,
+          "ci_hi": 0.4115742388153721,
+          "min": 0.40424879715053663,
+          "max": 0.416690503741322,
+          "valid_rate": 1.0,
+          "jaccard": 0.6935490435490437,
+          "distinct_pool": {
+            "distinct": 20,
+            "total": 100,
+            "ratio": 0.2
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4198857368278154,
+          "sd": 0.02077974315512506,
+          "ci_lo": 0.407224237824324,
+          "ci_hi": 0.43169536963461574,
+          "min": 0.38201032762251785,
+          "max": 0.4446068731921806,
+          "valid_rate": 1.0,
+          "jaccard": 0.2112012056284502,
+          "distinct_pool": {
+            "distinct": 45,
+            "total": 100,
+            "ratio": 0.45
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.41758567477291414,
+          "sd": 0.01817148811662094,
+          "ci_lo": 0.40702969041846937,
+          "ci_hi": 0.428341581885592,
+          "min": 0.38905591399124373,
+          "max": 0.4523762293550455,
+          "valid_rate": 0.97,
+          "jaccard": 0.17811399833587657,
+          "distinct_pool": {
+            "distinct": 48,
+            "total": 97,
+            "ratio": 0.4948453608247423
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.43323002201698546,
+          "sd": 0.0,
+          "ci_lo": 0.43323002201698546,
+          "ci_hi": 0.43323002201698546,
+          "min": 0.43323002201698546,
+          "max": 0.43323002201698546,
+          "valid_rate": 1.0,
+          "jaccard": 0.7193473193473194,
+          "distinct_pool": {
+            "distinct": 14,
+            "total": 100,
+            "ratio": 0.14
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4256301309964671,
+          "sd": 0.006759427277349638,
+          "ci_lo": 0.4215713355811657,
+          "ci_hi": 0.42961135805774137,
+          "min": 0.41408256027154866,
+          "max": 0.4382189178112496,
+          "valid_rate": 1.0,
+          "jaccard": 0.5425853014088309,
+          "distinct_pool": {
+            "distinct": 22,
+            "total": 100,
+            "ratio": 0.22
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.42222460290617764,
+          "sd": 0.010481668833247155,
+          "ci_lo": 0.416276178324559,
+          "ci_hi": 0.4284816548213485,
+          "min": 0.41031106722997795,
+          "max": 0.4382189178112496,
+          "valid_rate": 0.99,
+          "jaccard": 0.36029586245272516,
+          "distinct_pool": {
+            "distinct": 35,
+            "total": 99,
+            "ratio": 0.35353535353535354
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4429357285510296,
+          "sd": 0.0,
+          "ci_lo": 0.4429357285510296,
+          "ci_hi": 0.4429357285510296,
+          "min": 0.4429357285510296,
+          "max": 0.4429357285510296,
+          "valid_rate": 1.0,
+          "jaccard": 0.7986531986531985,
+          "distinct_pool": {
+            "distinct": 13,
+            "total": 100,
+            "ratio": 0.13
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.43955519385469416,
+          "sd": 0.015232440317014413,
+          "ci_lo": 0.4302081722480814,
+          "ci_hi": 0.4480020619470185,
+          "min": 0.4130547485362488,
+          "max": 0.4586876918453237,
+          "valid_rate": 1.0,
+          "jaccard": 0.25475715852392833,
+          "distinct_pool": {
+            "distinct": 41,
+            "total": 100,
+            "ratio": 0.41
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.42573822814403756,
+          "sd": 0.015354877126191937,
+          "ci_lo": 0.4170784141276439,
+          "ci_hi": 0.43490006053213487,
+          "min": 0.40594262396443964,
+          "max": 0.4518836684051696,
+          "valid_rate": 1.0,
+          "jaccard": 0.16486685542413096,
+          "distinct_pool": {
+            "distinct": 52,
+            "total": 100,
+            "ratio": 0.52
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.42760864799739406,
+          "sd": 0.00025345591030872513,
+          "ci_lo": 0.4274512369223299,
+          "ci_hi": 0.4277660590724583,
+          "min": 0.4274512369223299,
+          "max": 0.42797594050587734,
+          "valid_rate": 1.0,
+          "jaccard": 0.9151515151515153,
+          "distinct_pool": {
+            "distinct": 11,
+            "total": 100,
+            "ratio": 0.11
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.43426895154353956,
+          "sd": 0.015387311054636447,
+          "ci_lo": 0.4254792195104114,
+          "ci_hi": 0.4434181483706586,
+          "min": 0.4145718645750864,
+          "max": 0.46144907838545873,
+          "valid_rate": 1.0,
+          "jaccard": 0.32923579688285565,
+          "distinct_pool": {
+            "distinct": 36,
+            "total": 100,
+            "ratio": 0.36
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4317904427153313,
+          "sd": 0.019795056189960417,
+          "ci_lo": 0.4217074554424482,
+          "ci_hi": 0.4448131983207414,
+          "min": 0.4082386054196161,
+          "max": 0.47988889052451855,
+          "valid_rate": 1.0,
+          "jaccard": 0.2674706919804959,
+          "distinct_pool": {
+            "distinct": 43,
+            "total": 100,
+            "ratio": 0.43
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-3.5-turbo": {
+      "model_reported": [
+        "gpt-3.5-turbo-0125"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9958333333333333,
+      "notes": "",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4173660350009344,
+          "sd": 0.007055631340400483,
+          "ci_lo": 0.41328400323261755,
+          "ci_hi": 0.42146443322995053,
+          "min": 0.4103766319027663,
+          "max": 0.426216348084458,
+          "valid_rate": 1.0,
+          "jaccard": 0.5630591630591629,
+          "distinct_pool": {
+            "distinct": 18,
+            "total": 100,
+            "ratio": 0.18
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.41298145487382787,
+          "sd": 0.01672583647786576,
+          "ci_lo": 0.40333664687493853,
+          "ci_hi": 0.4225981173116361,
+          "min": 0.38853774064671276,
+          "max": 0.44127373237825424,
+          "valid_rate": 0.9800000000000001,
+          "jaccard": 0.32034919510409715,
+          "distinct_pool": {
+            "distinct": 27,
+            "total": 98,
+            "ratio": 0.2755102040816326
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4090141818025372,
+          "sd": 0.016732823396889362,
+          "ci_lo": 0.39853978752549996,
+          "ci_hi": 0.41808064578856863,
+          "min": 0.3723183827868448,
+          "max": 0.43352862564656164,
+          "valid_rate": 1.0,
+          "jaccard": 0.2421578497945887,
+          "distinct_pool": {
+            "distinct": 40,
+            "total": 100,
+            "ratio": 0.4
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3589085807917454,
+          "sd": 0.0,
+          "ci_lo": 0.3589085807917454,
+          "ci_hi": 0.3589085807917454,
+          "min": 0.3589085807917454,
+          "max": 0.3589085807917454,
+          "valid_rate": 1.0,
+          "jaccard": 1.0,
+          "distinct_pool": {
+            "distinct": 10,
+            "total": 100,
+            "ratio": 0.1
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.37364349621801973,
+          "sd": 0.022729521262091625,
+          "ci_lo": 0.36058075216398033,
+          "ci_hi": 0.3873542493483584,
+          "min": 0.3480094971729835,
+          "max": 0.41331161898703705,
+          "valid_rate": 1.0,
+          "jaccard": 0.38369092780857483,
+          "distinct_pool": {
+            "distinct": 28,
+            "total": 100,
+            "ratio": 0.28
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.3808278464570269,
+          "sd": 0.011784696813706348,
+          "ci_lo": 0.3742903702423632,
+          "ci_hi": 0.3879295080597946,
+          "min": 0.36514101925542664,
+          "max": 0.3993801366768897,
+          "valid_rate": 1.0,
+          "jaccard": 0.3091388182203456,
+          "distinct_pool": {
+            "distinct": 38,
+            "total": 100,
+            "ratio": 0.38
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.41903825968726205,
+          "sd": 0.005755956111036683,
+          "ci_lo": 0.4154634713212807,
+          "ci_hi": 0.4226130480532434,
+          "min": 0.4154634713212807,
+          "max": 0.4273794325412184,
+          "valid_rate": 1.0,
+          "jaccard": 0.7333333333333333,
+          "distinct_pool": {
+            "distinct": 14,
+            "total": 100,
+            "ratio": 0.14
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4125446468402118,
+          "sd": 0.011195789332501769,
+          "ci_lo": 0.4061225784255804,
+          "ci_hi": 0.4191836946876795,
+          "min": 0.3998332879244541,
+          "max": 0.43015269278145546,
+          "valid_rate": 1.0,
+          "jaccard": 0.37479324367869254,
+          "distinct_pool": {
+            "distinct": 31,
+            "total": 100,
+            "ratio": 0.31
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4245280720086274,
+          "sd": 0.013923667972896854,
+          "ci_lo": 0.4159045331401863,
+          "ci_hi": 0.4320921444654102,
+          "min": 0.3935723776076478,
+          "max": 0.4448679697683161,
+          "valid_rate": 0.97,
+          "jaccard": 0.23337628783707218,
+          "distinct_pool": {
+            "distinct": 45,
+            "total": 97,
+            "ratio": 0.4639175257731959
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3959268227510685,
+          "sd": 0.004937726932165757,
+          "ci_lo": 0.3930142629277956,
+          "ci_hi": 0.39883938257434126,
+          "min": 0.3902148711410172,
+          "max": 0.4003006306735749,
+          "valid_rate": 1.0,
+          "jaccard": 0.652081252081252,
+          "distinct_pool": {
+            "distinct": 17,
+            "total": 100,
+            "ratio": 0.17
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.40095450194967625,
+          "sd": 0.0157276390210898,
+          "ci_lo": 0.39172928953643815,
+          "ci_hi": 0.4100471895109404,
+          "min": 0.37730462656885233,
+          "max": 0.4222476279354819,
+          "valid_rate": 1.0,
+          "jaccard": 0.4010071990464146,
+          "distinct_pool": {
+            "distinct": 28,
+            "total": 100,
+            "ratio": 0.28
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.39418242862809627,
+          "sd": 0.01376018557073984,
+          "ci_lo": 0.3864446749561858,
+          "ci_hi": 0.4025857796463371,
+          "min": 0.37960853401931044,
+          "max": 0.4181886182870586,
+          "valid_rate": 1.0,
+          "jaccard": 0.37675508950018743,
+          "distinct_pool": {
+            "distinct": 30,
+            "total": 100,
+            "ratio": 0.3
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5": {
+      "model_reported": [
+        "gpt-5-2025-08-07"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9800000000000001,
+      "notes": "heaviest reasoner in the roster, ~3136 reasoning tokens per answer",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4133681237310336,
+          "sd": 0.013018413051256497,
+          "ci_lo": 0.40561183185047084,
+          "ci_hi": 0.4209142756467507,
+          "min": 0.39350361270938644,
+          "max": 0.4303083929452719,
+          "valid_rate": 0.99,
+          "jaccard": 0.11387724485505701,
+          "distinct_pool": {
+            "distinct": 53,
+            "total": 99,
+            "ratio": 0.5353535353535354
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.39299521121467396,
+          "sd": 0.017676452710925515,
+          "ci_lo": 0.3821878348932174,
+          "ci_hi": 0.40280838082873727,
+          "min": 0.35934864680282214,
+          "max": 0.4140924011089921,
+          "valid_rate": 0.9800000000000001,
+          "jaccard": 0.17611550663150247,
+          "distinct_pool": {
+            "distinct": 45,
+            "total": 98,
+            "ratio": 0.45918367346938777
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.410175317272924,
+          "sd": 0.024711491137276134,
+          "ci_lo": 0.397574104733547,
+          "ci_hi": 0.4266531444669461,
+          "min": 0.3850259881790802,
+          "max": 0.4692642034169418,
+          "valid_rate": 0.9800000000000001,
+          "jaccard": 0.07784657722738217,
+          "distinct_pool": {
+            "distinct": 66,
+            "total": 98,
+            "ratio": 0.673469387755102
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.40462681763965846,
+          "sd": 0.015411191399468734,
+          "ci_lo": 0.396022679433037,
+          "ci_hi": 0.41381788241523154,
+          "min": 0.3865589740650165,
+          "max": 0.43179838175539736,
+          "valid_rate": 0.97,
+          "jaccard": 0.10370093261476128,
+          "distinct_pool": {
+            "distinct": 56,
+            "total": 97,
+            "ratio": 0.5773195876288659
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5-mini": {
+      "model_reported": [
+        "gpt-5-mini-2025-08-07"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9974999999999999,
+      "notes": "~960 reasoning tokens per answer",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.40366970897374266,
+          "sd": 0.01449303535399467,
+          "ci_lo": 0.3955884122686706,
+          "ci_hi": 0.4127535520106598,
+          "min": 0.38696949633229716,
+          "max": 0.43375322174418446,
+          "valid_rate": 1.0,
+          "jaccard": 0.19424951267056528,
+          "distinct_pool": {
+            "distinct": 46,
+            "total": 100,
+            "ratio": 0.46
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.401780168448293,
+          "sd": 0.014874400925889951,
+          "ci_lo": 0.39373082938989445,
+          "ci_hi": 0.410964018498251,
+          "min": 0.38408908330712643,
+          "max": 0.4337880503899831,
+          "valid_rate": 1.0,
+          "jaccard": 0.3449843185137303,
+          "distinct_pool": {
+            "distinct": 33,
+            "total": 100,
+            "ratio": 0.33
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.39985185238503756,
+          "sd": 0.022629939478916387,
+          "ci_lo": 0.3864665303830174,
+          "ci_hi": 0.412991783136948,
+          "min": 0.3605990980017197,
+          "max": 0.4399117478918188,
+          "valid_rate": 0.99,
+          "jaccard": 0.14776994228490617,
+          "distinct_pool": {
+            "distinct": 54,
+            "total": 99,
+            "ratio": 0.5454545454545454
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.3965417546360142,
+          "sd": 0.018887841033853547,
+          "ci_lo": 0.38525975637168347,
+          "ci_hi": 0.4075340004341732,
+          "min": 0.3624958226968128,
+          "max": 0.4270451685588676,
+          "valid_rate": 1.0,
+          "jaccard": 0.1264015157720008,
+          "distinct_pool": {
+            "distinct": 48,
+            "total": 100,
+            "ratio": 0.48
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5-nano": {
+      "model_reported": [
+        "gpt-5-nano-2025-08-07"
+      ],
+      "n_runs": 40,
+      "n_scored": 39,
+      "n_refused": 1,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.97,
+      "notes": "~1728 reasoning tokens per answer -- the nano thinks more than the mini",
+      "refusal_reasons": [
+        [
+          "policy 'strict' needs >= 7 valid words, got 0",
+          1
+        ]
+      ],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": null,
+          "n": 9,
+          "mean": 0.39252738582815483,
+          "sd": 0.018352622702619417,
+          "ci_lo": 0.38111421220132646,
+          "ci_hi": 0.40365427134788195,
+          "min": 0.3565837593345609,
+          "max": 0.42355387048520765,
+          "valid_rate": 0.9,
+          "jaccard": 0.18059172986933567,
+          "distinct_pool": {
+            "distinct": 40,
+            "total": 90,
+            "ratio": 0.4444444444444444
+          },
+          "n_runs": 10,
+          "n_refused": 1,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4042899846039768,
+          "sd": 0.013201071804242157,
+          "ci_lo": 0.3974856778326502,
+          "ci_hi": 0.41292631339417135,
+          "min": 0.3891046938198003,
+          "max": 0.43657225648619885,
+          "valid_rate": 1.0,
+          "jaccard": 0.26779874942929643,
+          "distinct_pool": {
+            "distinct": 41,
+            "total": 100,
+            "ratio": 0.41
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.39122640257741753,
+          "sd": 0.018606046432896626,
+          "ci_lo": 0.37962296005026985,
+          "ci_hi": 0.4015010489723959,
+          "min": 0.36110380138340165,
+          "max": 0.41358029268637686,
+          "valid_rate": 0.9800000000000001,
+          "jaccard": 0.05794681420326415,
+          "distinct_pool": {
+            "distinct": 69,
+            "total": 98,
+            "ratio": 0.7040816326530612
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.40426664633356185,
+          "sd": 0.0157368277884429,
+          "ci_lo": 0.3946311177901181,
+          "ci_hi": 0.4131332173955363,
+          "min": 0.37368277215988227,
+          "max": 0.4288997475484126,
+          "valid_rate": 1.0,
+          "jaccard": 0.2158886406564425,
+          "distinct_pool": {
+            "distinct": 46,
+            "total": 100,
+            "ratio": 0.46
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5-search-api": {
+      "model_reported": [
+        "gpt-5-search-api-2025-10-14"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 1.0,
+      "notes": "search-tuned variant, not a general chat model",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4025981100528505,
+          "sd": 0.016707315233119264,
+          "ci_lo": 0.3919893214900417,
+          "ci_hi": 0.41192204865696125,
+          "min": 0.3717286851005565,
+          "max": 0.41957331673051385,
+          "valid_rate": 1.0,
+          "jaccard": 0.1929536846977507,
+          "distinct_pool": {
+            "distinct": 42,
+            "total": 100,
+            "ratio": 0.42
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.3959294829131818,
+          "sd": 0.015504461493430332,
+          "ci_lo": 0.3860244931076183,
+          "ci_hi": 0.40409606740567905,
+          "min": 0.36156860488169745,
+          "max": 0.4144051724780072,
+          "valid_rate": 1.0,
+          "jaccard": 0.22768785126886262,
+          "distinct_pool": {
+            "distinct": 41,
+            "total": 100,
+            "ratio": 0.41
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4211538757059108,
+          "sd": 0.01673875427406163,
+          "ci_lo": 0.41139854626178346,
+          "ci_hi": 0.4308435738730912,
+          "min": 0.39345987139034366,
+          "max": 0.4486251282730362,
+          "valid_rate": 1.0,
+          "jaccard": 0.1292416771776937,
+          "distinct_pool": {
+            "distinct": 52,
+            "total": 100,
+            "ratio": 0.52
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4246108540303342,
+          "sd": 0.013292995847622358,
+          "ci_lo": 0.4171169006974198,
+          "ci_hi": 0.4325992805745988,
+          "min": 0.410058508683371,
+          "max": 0.4449710234937071,
+          "valid_rate": 1.0,
+          "jaccard": 0.2802689226837834,
+          "distinct_pool": {
+            "distinct": 40,
+            "total": 100,
+            "ratio": 0.4
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5.2": {
+      "model_reported": [
+        "gpt-5.2-2025-12-11"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9791666666666666,
+      "notes": "",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3998948631342444,
+          "sd": 0.010318743102953692,
+          "ci_lo": 0.3933687169751469,
+          "ci_hi": 0.4031579362137931,
+          "min": 0.3705272054183061,
+          "max": 0.4031579362137931,
+          "valid_rate": 0.99,
+          "jaccard": 0.8714285714285714,
+          "distinct_pool": {
+            "distinct": 14,
+            "total": 99,
+            "ratio": 0.1414141414141414
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.3934917794180007,
+          "sd": 0.016168606024488063,
+          "ci_lo": 0.3839128519146863,
+          "ci_hi": 0.40292766514205486,
+          "min": 0.36519223837692866,
+          "max": 0.41724640480621167,
+          "valid_rate": 0.99,
+          "jaccard": 0.274683899500721,
+          "distinct_pool": {
+            "distinct": 36,
+            "total": 99,
+            "ratio": 0.36363636363636365
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.40464897315296067,
+          "sd": 0.023606642496632635,
+          "ci_lo": 0.3909457096005468,
+          "ci_hi": 0.418290861935829,
+          "min": 0.36996788481780146,
+          "max": 0.4463998898617533,
+          "valid_rate": 0.97,
+          "jaccard": 0.12606269213338359,
+          "distinct_pool": {
+            "distinct": 60,
+            "total": 97,
+            "ratio": 0.6185567010309279
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4174070102756625,
+          "sd": 0.0028092797005330435,
+          "ci_lo": 0.4160744519099384,
+          "ci_hi": 0.4194058478242485,
+          "min": 0.4160744519099384,
+          "max": 0.42273724373855853,
+          "valid_rate": 1.0,
+          "jaccard": 0.8358974358974358,
+          "distinct_pool": {
+            "distinct": 13,
+            "total": 100,
+            "ratio": 0.13
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4075621752705535,
+          "sd": 0.012849708197226459,
+          "ci_lo": 0.3997787556020755,
+          "ci_hi": 0.41457848750423604,
+          "min": 0.3842617964541464,
+          "max": 0.4241008790709701,
+          "valid_rate": 1.0,
+          "jaccard": 0.5098693245752068,
+          "distinct_pool": {
+            "distinct": 22,
+            "total": 100,
+            "ratio": 0.22
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4183337841806082,
+          "sd": 0.005771504383584753,
+          "ci_lo": 0.41488572196216056,
+          "ci_hi": 0.42167297054349234,
+          "min": 0.40915546667574876,
+          "max": 0.4263443398461514,
+          "valid_rate": 1.0,
+          "jaccard": 0.5663651163651164,
+          "distinct_pool": {
+            "distinct": 24,
+            "total": 100,
+            "ratio": 0.24
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4042653145458698,
+          "sd": 0.02014699327487838,
+          "ci_lo": 0.3925609691314062,
+          "ci_hi": 0.41596965996033325,
+          "min": 0.38085662371694273,
+          "max": 0.4198711084318211,
+          "valid_rate": 0.9,
+          "jaccard": 0.6717948717948717,
+          "distinct_pool": {
+            "distinct": 13,
+            "total": 90,
+            "ratio": 0.14444444444444443
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4074872723791521,
+          "sd": 0.019418173914431416,
+          "ci_lo": 0.39695775956054064,
+          "ci_hi": 0.420170059005768,
+          "min": 0.38275763237687943,
+          "max": 0.45185570712670736,
+          "valid_rate": 0.93,
+          "jaccard": 0.17527845611178944,
+          "distinct_pool": {
+            "distinct": 43,
+            "total": 93,
+            "ratio": 0.46236559139784944
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.3930144875019603,
+          "sd": 0.02150850511961517,
+          "ci_lo": 0.37988468279207943,
+          "ci_hi": 0.40488224296177283,
+          "min": 0.34939631642682184,
+          "max": 0.41777936419406264,
+          "valid_rate": 0.97,
+          "jaccard": 0.1814201353055842,
+          "distinct_pool": {
+            "distinct": 50,
+            "total": 97,
+            "ratio": 0.5154639175257731
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.41787691544120104,
+          "sd": 0.0007657912293059338,
+          "ci_lo": 0.4173931656461435,
+          "ci_hi": 0.41822762376441636,
+          "min": 0.4160509552506855,
+          "max": 0.41822762376441636,
+          "valid_rate": 1.0,
+          "jaccard": 0.7298474945533769,
+          "distinct_pool": {
+            "distinct": 21,
+            "total": 100,
+            "ratio": 0.21
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4125318676026902,
+          "sd": 0.011631670243411947,
+          "ci_lo": 0.4058127517956895,
+          "ci_hi": 0.41937762003410095,
+          "min": 0.3963578179875199,
+          "max": 0.43048148462911795,
+          "valid_rate": 1.0,
+          "jaccard": 0.22830687830687835,
+          "distinct_pool": {
+            "distinct": 45,
+            "total": 100,
+            "ratio": 0.45
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.40717959002493787,
+          "sd": 0.016566184396354714,
+          "ci_lo": 0.39698936715678423,
+          "ci_hi": 0.4163406777734799,
+          "min": 0.3734509770947546,
+          "max": 0.4260548607086754,
+          "valid_rate": 1.0,
+          "jaccard": 0.15397780944736567,
+          "distinct_pool": {
+            "distinct": 58,
+            "total": 100,
+            "ratio": 0.58
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5.4-nano": {
+      "model_reported": [
+        "gpt-5.4-nano-2026-03-17"
+      ],
+      "n_runs": 120,
+      "n_scored": 120,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9941666666666666,
+      "notes": "",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.40347069733673335,
+          "sd": 0.00014883448175014545,
+          "ci_lo": 0.40340009894322815,
+          "ci_hi": 0.4035765949269911,
+          "min": 0.40340009894322815,
+          "max": 0.40375309091075406,
+          "valid_rate": 1.0,
+          "jaccard": 0.7405261405261405,
+          "distinct_pool": {
+            "distinct": 17,
+            "total": 100,
+            "ratio": 0.17
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.3838221137161798,
+          "sd": 0.013247944133773372,
+          "ci_lo": 0.37628347401102785,
+          "ci_hi": 0.39199059544464826,
+          "min": 0.36491091513943313,
+          "max": 0.40869248848435724,
+          "valid_rate": 1.0,
+          "jaccard": 0.22830513521947987,
+          "distinct_pool": {
+            "distinct": 40,
+            "total": 100,
+            "ratio": 0.4
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "verbatim",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.38261781603055556,
+          "sd": 0.01843912438429101,
+          "ci_lo": 0.37194713386914235,
+          "ci_hi": 0.3934758318015289,
+          "min": 0.3539333288763891,
+          "max": 0.4120996630341689,
+          "valid_rate": 0.99,
+          "jaccard": 0.13327504491075182,
+          "distinct_pool": {
+            "distinct": 52,
+            "total": 99,
+            "ratio": 0.5252525252525253
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.4229371383165129,
+          "sd": 0.0,
+          "ci_lo": 0.4229371383165129,
+          "ci_hi": 0.4229371383165129,
+          "min": 0.4229371383165129,
+          "max": 0.4229371383165129,
+          "valid_rate": 1.0,
+          "jaccard": 0.8087542087542089,
+          "distinct_pool": {
+            "distinct": 12,
+            "total": 100,
+            "ratio": 0.12
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.4152727981933916,
+          "sd": 0.01130640021316484,
+          "ci_lo": 0.4086457732458296,
+          "ci_hi": 0.4218745163682068,
+          "min": 0.3934256925875673,
+          "max": 0.43496400127628093,
+          "valid_rate": 1.0,
+          "jaccard": 0.5101010101010099,
+          "distinct_pool": {
+            "distinct": 25,
+            "total": 100,
+            "ratio": 0.25
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.4113919663936982,
+          "sd": 0.021695231475127363,
+          "ci_lo": 0.39777035694194335,
+          "ci_hi": 0.42359966930384285,
+          "min": 0.363136037933864,
+          "max": 0.44519534994804727,
+          "valid_rate": 1.0,
+          "jaccard": 0.3573260073260073,
+          "distinct_pool": {
+            "distinct": 35,
+            "total": 100,
+            "ratio": 0.35
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.3627161458977935,
+          "sd": 0.003773762974534543,
+          "ci_lo": 0.36032940862796525,
+          "ci_hi": 0.36390951453270765,
+          "min": 0.3519758281835665,
+          "max": 0.36390951453270765,
+          "valid_rate": 1.0,
+          "jaccard": 0.7466977466977467,
+          "distinct_pool": {
+            "distinct": 15,
+            "total": 100,
+            "ratio": 0.15
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.37742589694859546,
+          "sd": 0.020425931417089788,
+          "ci_lo": 0.3643675464426855,
+          "ci_hi": 0.38824655616959924,
+          "min": 0.33950731190383704,
+          "max": 0.402494998564138,
+          "valid_rate": 0.97,
+          "jaccard": 0.15100665712378816,
+          "distinct_pool": {
+            "distinct": 52,
+            "total": 97,
+            "ratio": 0.5360824742268041
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.3933681188270989,
+          "sd": 0.027592228176219293,
+          "ci_lo": 0.3769564846447734,
+          "ci_hi": 0.40929286655773395,
+          "min": 0.3440421412496507,
+          "max": 0.4410024825102312,
+          "valid_rate": 0.9800000000000001,
+          "jaccard": 0.07278265107212477,
+          "distinct_pool": {
+            "distinct": 67,
+            "total": 98,
+            "ratio": 0.6836734693877551
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.0,
+          "n": 10,
+          "mean": 0.39561696044013084,
+          "sd": 0.00037241515900641726,
+          "ci_lo": 0.3954403084194857,
+          "ci_hi": 0.3958819384710984,
+          "min": 0.3954403084194857,
+          "max": 0.3963235685227112,
+          "valid_rate": 1.0,
+          "jaccard": 0.7881599881599884,
+          "distinct_pool": {
+            "distinct": 15,
+            "total": 100,
+            "ratio": 0.15
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 0.7,
+          "n": 10,
+          "mean": 0.40063154132494166,
+          "sd": 0.022518163076191536,
+          "ci_lo": 0.38677358068315326,
+          "ci_hi": 0.4133362371648558,
+          "min": 0.3594116967912676,
+          "max": 0.42672577001930473,
+          "valid_rate": 1.0,
+          "jaccard": 0.1946456555331684,
+          "distinct_pool": {
+            "distinct": 46,
+            "total": 100,
+            "ratio": 0.46
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": 1.0,
+          "n": 10,
+          "mean": 0.3808693645046662,
+          "sd": 0.023462517397919273,
+          "ci_lo": 0.3671085940391719,
+          "ci_hi": 0.39476025572014584,
+          "min": 0.3474916747419545,
+          "max": 0.413932807921806,
+          "valid_rate": 0.99,
+          "jaccard": 0.16872457140001,
+          "distinct_pool": {
+            "distinct": 52,
+            "total": 99,
+            "ratio": 0.5252525252525253
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5.6-luna": {
+      "model_reported": [
+        "gpt-5.6-luna"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.99,
+      "notes": "~155 reasoning tokens per answer",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.43975313505510655,
+          "sd": 0.01385099052296836,
+          "ci_lo": 0.43158872702283135,
+          "ci_hi": 0.4478548287261737,
+          "min": 0.4180904069136752,
+          "max": 0.46394280452113246,
+          "valid_rate": 1.0,
+          "jaccard": 0.12046019187402052,
+          "distinct_pool": {
+            "distinct": 61,
+            "total": 100,
+            "ratio": 0.61
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.40295259187518956,
+          "sd": 0.012773819811905542,
+          "ci_lo": 0.39616500195461213,
+          "ci_hi": 0.4111205319560035,
+          "min": 0.38534275143287483,
+          "max": 0.4326606553638165,
+          "valid_rate": 1.0,
+          "jaccard": 0.4064940506116976,
+          "distinct_pool": {
+            "distinct": 30,
+            "total": 100,
+            "ratio": 0.3
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4413090596682102,
+          "sd": 0.023423256090675283,
+          "ci_lo": 0.4278648916107238,
+          "ci_hi": 0.45533432547826236,
+          "min": 0.41364947945295516,
+          "max": 0.4739767679654844,
+          "valid_rate": 0.97,
+          "jaccard": 0.21964206225300134,
+          "distinct_pool": {
+            "distinct": 46,
+            "total": 97,
+            "ratio": 0.4742268041237113
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4304298341373152,
+          "sd": 0.022874299075921794,
+          "ci_lo": 0.4159367092772259,
+          "ci_hi": 0.4423365673468473,
+          "min": 0.37584100422722405,
+          "max": 0.4601278378560372,
+          "valid_rate": 0.99,
+          "jaccard": 0.21887185703491177,
+          "distinct_pool": {
+            "distinct": 41,
+            "total": 99,
+            "ratio": 0.41414141414141414
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    },
+    "gpt-5.6-terra": {
+      "model_reported": [
+        "gpt-5.6-terra"
+      ],
+      "n_runs": 40,
+      "n_scored": 40,
+      "n_refused": 0,
+      "n_failed": 0,
+      "n_truncated": 0,
+      "valid_rate": 0.9875,
+      "notes": "~93 reasoning tokens per answer",
+      "refusal_reasons": [],
+      "truncated_by_prompt": [],
+      "grid": [
+        {
+          "prompt_id": "verbatim",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.3915710109670262,
+          "sd": 0.019968980798658637,
+          "ci_lo": 0.3793547089042439,
+          "ci_hi": 0.4031787912169146,
+          "min": 0.35843269437493486,
+          "max": 0.41486955298269235,
+          "valid_rate": 1.0,
+          "jaccard": 0.3350391438626733,
+          "distinct_pool": {
+            "distinct": 31,
+            "total": 100,
+            "ratio": 0.31
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "terse",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.39535804169994737,
+          "sd": 0.027578613009425965,
+          "ci_lo": 0.3782773653910113,
+          "ci_hi": 0.4101503021131084,
+          "min": 0.3478388507496621,
+          "max": 0.41854754920528847,
+          "valid_rate": 1.0,
+          "jaccard": 0.3209096984122784,
+          "distinct_pool": {
+            "distinct": 27,
+            "total": 100,
+            "ratio": 0.27
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "cot",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4299518169916413,
+          "sd": 0.011889641797677954,
+          "ci_lo": 0.4229992553695113,
+          "ci_hi": 0.4369590638079628,
+          "min": 0.4139860786018617,
+          "max": 0.44837298423795,
+          "valid_rate": 0.97,
+          "jaccard": 0.2080174816965323,
+          "distinct_pool": {
+            "distinct": 47,
+            "total": 97,
+            "ratio": 0.4845360824742268
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        },
+        {
+          "prompt_id": "maxcreative",
+          "temperature": null,
+          "n": 10,
+          "mean": 0.4273996960418748,
+          "sd": 0.02664769044212256,
+          "ci_lo": 0.41210017950024946,
+          "ci_hi": 0.44363538460051055,
+          "min": 0.3792876671539827,
+          "max": 0.47684740094602107,
+          "valid_rate": 0.9800000000000001,
+          "jaccard": 0.15507830032597833,
+          "distinct_pool": {
+            "distinct": 56,
+            "total": 98,
+            "ratio": 0.5714285714285714
+          },
+          "n_runs": 10,
+          "n_refused": 0,
+          "n_failed": 0
+        }
+      ]
+    }
+  },
+  "rank_correlation": [
+    {
+      "a": "text-embedding-embeddinggemma-300m",
+      "b": "text-embedding-nomic-embed-text-v1.5",
+      "rho": 0.845455,
+      "n_models": 21
+    },
+    {
+      "a": "text-embedding-embeddinggemma-300m",
+      "b": "text-embedding-qwen3-embedding-0.6b",
+      "rho": 0.041558,
+      "n_models": 21
+    },
+    {
+      "a": "text-embedding-embeddinggemma-300m",
+      "b": "text-embedding-qwen3-embedding-4b",
+      "rho": 0.488312,
+      "n_models": 21
+    },
+    {
+      "a": "text-embedding-nomic-embed-text-v1.5",
+      "b": "text-embedding-qwen3-embedding-0.6b",
+      "rho": 0.154545,
+      "n_models": 21
+    },
+    {
+      "a": "text-embedding-nomic-embed-text-v1.5",
+      "b": "text-embedding-qwen3-embedding-4b",
+      "rho": 0.603896,
+      "n_models": 21
+    },
+    {
+      "a": "text-embedding-qwen3-embedding-0.6b",
+      "b": "text-embedding-qwen3-embedding-4b",
+      "rho": 0.764935,
+      "n_models": 21
+    }
+  ],
+  "flag_counts": {
+    "proper_noun": 72,
+    "rare": 42,
+    "multiword": 37,
+    "not_in_dict": 24,
+    "not_noun": 24,
+    "duplicate": 20
+  },
+  "warnings": []
+}

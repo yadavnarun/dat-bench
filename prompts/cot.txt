@@ -1,0 +1,12 @@
+You will complete the Divergent Association Task: name 10 words that are as different from each other as possible, in all meanings and uses of the words.
+
+Rules:
+1. Only single words in English.
+2. Only nouns (e.g., things, objects, concepts).
+3. No proper nouns (e.g., no specific people or places).
+4. No specialised vocabulary (e.g., no technical terms).
+5. Think of the words on your own.
+
+First think step by step: identify unrelated semantic domains to draw from, and check that no two of your candidate words share a category, a setting, or a sensory quality. Revise any pair that feels close.
+
+Then give your final answer as a numbered list of exactly 10 words, and nothing after it.

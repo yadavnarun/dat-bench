@@ -1,0 +1,325 @@
+# dat-bench model registry.
+#
+# Every provider below speaks the OpenAI /v1/chat/completions wire format, so one
+# client handles all of them -- the only per-provider facts are base_url and which
+# env var holds the key.
+#
+# ACTIVATION: an entry is used only if `enabled: true` AND its api_key_env names a
+# non-empty environment variable. Cloud entries therefore sit inert until you add a
+# key; nothing else needs editing. Run `python -m datbench models` to see exactly
+# which entries are live and why the rest are not.
+#
+# MODEL IDS: verify cloud ids against your provider's current model list before a
+# long run -- a stale id burns the whole factorial on 404s. `python -m datbench
+# models --probe` sends one 1-token request per live entry to check.
+
+defaults:
+  # Generous on purpose. A reasoning model spends its budget thinking before it
+  # emits any visible text, so too low a cap returns finish_reason="length" with an
+  # EMPTY message -- which looks like a model that failed the task rather than a
+  # harness that cut it off. Measured here: gemma-4-e4b at max_tokens=512 truncated
+  # 30/30 verbatim and 29/30 cot runs while completing 30/30 terse, so its "best
+  # prompt" would have been terse purely because the others never finished. The
+  # answer is 10 words; paying for headroom costs little and removes the artifact.
+  max_tokens: 3072
+  max_concurrency: 1
+
+models:
+  # ---------------------------------------------------------------- local (live now)
+  # LM Studio needs no key. Keep max_concurrency at 1: the same box is serving
+  # the embedding models used for scoring.
+  # Measured on this box (2026-09-01), gemma-4-e4b at max_tokens=3072:
+  #   sequential  -> 33.5s/call
+  #   4 concurrent -> 26.6s/call effective, but per-call latency 33.5s -> ~100s
+  # i.e. a 1.26x throughput gain, NOT 4x. LM Studio is GPU-bound on one model
+  # instance, so concurrent requests mostly queue and only pick up a small batching
+  # benefit. 4 is still the better setting -- it is free -- but do not size a run
+  # plan as though it were 4x. Re-measure if the model or hardware changes.
+  # (The scoring stage embeds on the same box, but run and score never overlap.)
+  - id: gemma-4-e4b
+    model: google/gemma-4-e4b
+    base_url: http://localhost:1234/v1
+    api_key_env: null
+    enabled: true
+    max_concurrency: 4
+    notes: local via LM Studio; reasoning model, ~1000 completion tokens per answer
+
+  - id: lfm2.5-1.2b
+    model: liquid/lfm2.5-1.2b
+    base_url: http://localhost:1234/v1
+    api_key_env: null
+    enabled: true
+    max_concurrency: 4
+    notes: local via LM Studio; small and fast (~0.2s/call), expect low validity rate
+
+  # ---------------------------------------------------------------- OpenAI
+  # Every id below was verified against the live key on 2026-09-01 with one call
+  # each (`datbench models --probe` repeats the check). Spanning generations on
+  # purpose: the interesting question is whether newer or larger models actually
+  # spread their words further, and a flagship-only roster cannot answer it.
+  #
+  # supports_temperature: false is not a guess -- these three returned
+  # 400 "Unsupported value: 'temperature' does not support 0.7". Declaring it
+  # collapses them to ONE temperature cell instead of three identical ones, and
+  # avoids a rejected first request on every call.
+  - id: gpt-5.5
+    model: gpt-5.5
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+    supports_temperature: false
+    notes: reasoning model; ~512 reasoning tokens per answer
+
+  - id: gpt-5.6-sol
+    model: gpt-5.6-sol
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+    supports_temperature: false
+    notes: reasoning model; ~240 reasoning tokens per answer
+
+  # Needs its own ceiling: at the shared 3072 it spent the entire budget thinking
+  # on the cot prompt and returned an EMPTY message on 6 of 40 runs. Measured
+  # ~1344 reasoning tokens on the plain prompt, and a prompt that explicitly asks
+  # it to think step by step costs far more than that.
+  - id: o4-mini
+    model: o4-mini
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+    supports_temperature: false
+    max_tokens: 12288
+    notes: reasoning model; the most verbose here, needs a much larger token ceiling
+
+  - id: gpt-5.4
+    model: gpt-5.4
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+
+  - id: gpt-5.4-mini
+    model: gpt-5.4-mini
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+
+  - id: gpt-5.1
+    model: gpt-5.1
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+
+  - id: gpt-4.1
+    model: gpt-4.1
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+
+  - id: gpt-4.1-mini
+    model: gpt-4.1-mini
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+
+  - id: gpt-4o
+    model: gpt-4o
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+
+  - id: gpt-4o-mini
+    model: gpt-4o-mini
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+
+  # The oldest model still served, kept as the low-water mark: if creativity on
+  # this task improved across generations, it has to show up against this row.
+  - id: gpt-3.5-turbo
+    model: gpt-3.5-turbo
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+
+  # ---------------------------------------------------------------- GPT-5 series
+  # Probed 2026-09-01: of 27 distinct gpt-5* ids the key can see, 13 work on
+  # /v1/chat/completions. The other 14 are NOT missing by choice --
+  #   "not a chat model" (needs the Responses API): gpt-5-pro, gpt-5.2-pro,
+  #                                                 gpt-5.4-pro, gpt-5.5-pro
+  #   deprecated:  gpt-5-chat-latest, gpt-5.1-chat-latest, gpt-5.2-chat-latest,
+  #                gpt-5.3-chat-latest, gpt-5-codex, gpt-5.1-codex,
+  #                gpt-5.1-codex-max, gpt-5.1-codex-mini, gpt-5.2-codex
+  #   unsupported endpoint: gpt-5.3-codex
+  # Dated snapshots (gpt-5.2-2025-12-11 etc.) are aliases of the base id and are
+  # skipped so the same model is not benchmarked twice under two names.
+  #
+  # max_tokens is set per model from measured reasoning spend on the plain
+  # prompt. gpt-5 alone used 3169 output tokens (3136 of them reasoning), i.e.
+  # MORE than the shared 3072 default -- left at the default it would have
+  # returned an empty message on every run.
+  - id: gpt-5
+    model: gpt-5
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+    supports_temperature: false
+    max_tokens: 16384
+    notes: heaviest reasoner in the roster, ~3136 reasoning tokens per answer
+
+  - id: gpt-5-mini
+    model: gpt-5-mini
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+    supports_temperature: false
+    max_tokens: 8192
+    notes: ~960 reasoning tokens per answer
+
+  - id: gpt-5-nano
+    model: gpt-5-nano
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+    supports_temperature: false
+    max_tokens: 12288
+    notes: ~1728 reasoning tokens per answer -- the nano thinks more than the mini
+
+  # Search-specialised rather than a general chat model. Kept because it answers,
+  # but read its row knowing it is tuned for a different job.
+  - id: gpt-5-search-api
+    model: gpt-5-search-api
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+    supports_temperature: false
+    notes: search-tuned variant, not a general chat model
+
+  - id: gpt-5.2
+    model: gpt-5.2
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+
+  - id: gpt-5.4-nano
+    model: gpt-5.4-nano
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+
+  - id: gpt-5.6-luna
+    model: gpt-5.6-luna
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+    supports_temperature: false
+    notes: ~155 reasoning tokens per answer
+
+  - id: gpt-5.6-terra
+    model: gpt-5.6-terra
+    base_url: https://api.openai.com/v1
+    api_key_env: OPENAI_API_KEY
+    enabled: true
+    max_concurrency: 6
+    supports_temperature: false
+    notes: ~93 reasoning tokens per answer
+
+  # ---------------------------------------------------------------- Anthropic
+  # Anthropic serves an OpenAI-compatible surface at /v1, so the same client works.
+  - id: claude-opus-5
+    model: claude-opus-5
+    base_url: https://api.anthropic.com/v1
+    api_key_env: ANTHROPIC_API_KEY
+    enabled: true
+    max_concurrency: 4
+
+  - id: claude-sonnet-5
+    model: claude-sonnet-5
+    base_url: https://api.anthropic.com/v1
+    api_key_env: ANTHROPIC_API_KEY
+    enabled: true
+    max_concurrency: 4
+
+  # ---------------------------------------------------------------- Google
+  - id: gemini-2.5-pro
+    model: gemini-2.5-pro
+    base_url: https://generativelanguage.googleapis.com/v1beta/openai
+    api_key_env: GEMINI_API_KEY
+    enabled: true
+    max_concurrency: 4
+
+  # ---------------------------------------------------------------- DeepSeek
+  - id: deepseek-chat
+    model: deepseek-chat
+    base_url: https://api.deepseek.com/v1
+    api_key_env: DEEPSEEK_API_KEY
+    enabled: true
+    max_concurrency: 4
+
+  # ---------------------------------------------------------------- OpenRouter
+  # Best breadth per key: one OPENROUTER_API_KEY reaches most of the above.
+  # Disabled by default so you do not benchmark the same model twice through two
+  # routes -- enable these instead of the direct entries, not alongside.
+  - id: or-llama-4-maverick
+    model: meta-llama/llama-4-maverick
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    enabled: false
+    max_concurrency: 4
+
+  - id: or-qwen3-235b
+    model: qwen/qwen3-235b-a22b
+    base_url: https://openrouter.ai/api/v1
+    api_key_env: OPENROUTER_API_KEY
+    enabled: false
+    max_concurrency: 4
+
+# Scoring configuration.
+scoring:
+  # All four local embedders run by default. Words are cached, and a full factorial
+  # produces only a few hundred unique words, so the marginal cost of the 2nd-4th
+  # embedder is near zero -- and it is the only way to tell a real ranking from an
+  # artifact of one embedding model.
+  embedders: auto          # "auto" = every /models id containing "embed"
+  embed_base_url: http://localhost:1234/v1
+
+  # Which embedder's numbers head the leaderboard. Measured on this machine
+  # (scripts/premise_check.py, 2026-08-31) as separation between the random-noun
+  # baseline and the worst tight-category floor -- i.e. how much room the scale
+  # actually has to discriminate:
+  #     qwen3-embedding-4b    29.4%   <- best discriminator
+  #     qwen3-embedding-0.6b  26.6%
+  #     embeddinggemma-300m   15.8%
+  #     nomic-embed-text-v1.5 10.3%   <- weakest; a ranking resting on it is suspect
+  # Without this the default is whichever id sorts first, which is a property of
+  # the alphabet rather than of the embedding model. Substring match; the other
+  # embedders are still scored and still appear in the cross-embedder matrix.
+  headline_embedder: qwen3-embedding-4b
+  n_use: 7                 # DAT scores the first 7 valid words
+  policies: [strict, lenient]
+  min_words_lenient: 4
+  rare_zipf_threshold: 2.5
+  baseline_draws: 1000
+  baseline_seed: 0
+
+run:
+  n: 10                    # replicates per (model x prompt x temperature) cell
+  temperatures: [0.0, 0.7, 1.0]
+  prompts: [verbatim, terse, cot, maxcreative]
