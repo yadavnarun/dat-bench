@@ -1,7 +1,12 @@
 # dat-bench
 
-**Do language models get more creative as they get better? 21 of them took the same
-10-word creativity test 1800 times. The answer is not the one the leaderboard gives.**
+**21 language models took the same 10-word creativity test 1800 times, scored by four
+different embedding models. A maintained harness for replicating — and stress-testing —
+the published DAT-on-LLM results.**
+
+> **This is a replication harness, not a new result.** The DAT has been run on LLMs since
+> 2023 and two 2026 papers already report its central weaknesses. See
+> [Related work](#related-work) before quoting anything here as a finding.
 
 [![tests](https://github.com/yadavnarun/dat-bench/actions/workflows/tests.yml/badge.svg)](https://github.com/yadavnarun/dat-bench/actions/workflows/tests.yml)
 [![explore the data](https://img.shields.io/badge/explore-live%20data-3a4fa0)](https://yadavnarun.github.io/dat-bench/)
@@ -16,7 +21,8 @@
 ## The test
 
 The [Divergent Association Task](https://www.datcreativity.com/task) is a real
-psychology instrument (Olson & Martin, *PNAS*). You name **ten words as different from
+psychology instrument ([Olson, Nahas, Chmoulevitch, Cropper & Webb, *PNAS* 2021](https://doi.org/10.1073/pnas.2022340118),
+validated on 8,914 participants). You name **ten words as different from
 each other as possible**; a computer measures how far apart their meanings are. Naming
 *thimble* and *galaxy* takes more reaching than naming *cat* and *dog*, and in humans
 that reaching correlates with other creativity measures.
@@ -24,9 +30,9 @@ that reaching correlates with other creativity measures.
 21 models each did it **1800 times**: 4 prompt variants × up to 3 temperatures × 10
 repeats. Every answer, every word, every score is in this repo.
 
-## Three findings
+## What this run found
 
-### 1. Individual ranks are unstable — but the generational trend is real
+### 1. Individual ranks are unstable; the generational trend is contested
 
 Four embedding models scored the same 1800 answers and ranked all 21 contestants.
 Individual placings move wildly:
@@ -38,9 +44,21 @@ Individual placings move wildly:
 | `gemma-4-e4b` | 10th | 13th | 3rd | 20th | ±17 |
 | `gpt-5.1` | 2nd | 1st | 4th | 1st | ±3 |
 
-Only **5 of 21** models hold their position within 3 places across all four scorers, and
-the worst-agreeing pair of scorers correlates at **Spearman ρ = +0.04**. So a
-single-scorer leaderboard is not reporting a fact about the models.
+Only **5 of 21** models hold their position within 3 places across all four scorers.
+
+**The rank-correlation numbers are much weaker evidence than they look.** Point estimates
+run +0.04 to +0.85 across the 6 scorer pairs, but bootstrap 95% CIs (resampling models,
+5000 draws) are about a full unit wide:
+
+| pair | ρ | 95% CI |
+|---|---|---|
+| gemma-300m ↔ qwen3-0.6b | +0.042 | [−0.49, +0.54] |
+| qwen3-0.6b ↔ qwen3-4b | +0.765 | [+0.44, +0.94] |
+
+**4 of the 6 pairs are statistically consistent with the ρ = +0.73 that Nakajima et al.
+report for SBERT-vs-GloVe.** At n=21 these correlations cannot distinguish "the scorers
+disagree badly" from "the scorers agree as much as published work says". The *rank swings*
+above are direct observations and stand; the correlation is not resolvable here.
 
 **But the aggregate trend survives.** Comparing like-for-like — the 11 *base* OpenAI
 models, without mixing in the nano/mini/search variants — every scorer agrees that newer
@@ -54,11 +72,18 @@ Much of the rank chaos above comes from **mixing model tiers**, not from the sco
 disagreeing about capability. Size is where they genuinely contradict each other:
 ρ(nano→mini→base, score) is **−0.73** under one scorer and **+0.78** under another.
 
-The honest summary: *trust the trend, not the table.* `gpt-5.1` is top-3 under all four
-scorers; `gpt-5-mini` is bottom-5 under all four; the ordering in between is not
-recoverable from this data.
+**And published work disagrees with the trend.** Haase et al. (*Journal of Creativity*
+35(3), 2025) ran 14 models × 100 trials and found **no** creative improvement over
+18–24 months; NoveltyBench finds larger models within a family are often *less* diverse.
+Our +0.74 has to be argued against those, not reported over them — and the most likely
+difference is our like-for-like base-model restriction, which is a choice we made, not a
+fact we found.
 
-### 2. Most answers are no better than random words
+The honest summary: `gpt-5.1` is top-3 under all four scorers and `gpt-5-mini` bottom-5
+under all four. The ordering in between is not recoverable from this data, and the
+generational trend is a live disagreement rather than a result.
+
+### 2. Most answers are no better than random words — *replicating Nakajima et al. 2026*
 
 Seven common nouns pulled from a dictionary at random are the bar, and most answers do
 not clear it. How badly depends on who is scoring — which is itself the point:
@@ -76,11 +101,16 @@ so a strong-looking correlation on those scorers describes models climbing *up t
 never past it.
 
 The models clearly understand the task — they score far above what naming seven animals
-gets you — but "beats chance" is not a scorer-independent verdict here. This is why the
+gets you — but "beats chance" is not a scorer-independent verdict here.
+
+**This is a replication, not a discovery.** Nakajima et al. (Findings of EACL 2026) state
+it as their central claim: under a stronger embedder and stronger baselines, LLM DAT
+scores fall *below* baselines with no creative ability at all. Our contribution is the
+per-embedder version of their baseline. This is why the
 harness computes a **random-noun baseline per scorer** and reports every score as a
 percentile against it. Without that reference, "0.44 beats 0.42" reads like a result.
 
-### 3. Independent models converge on the same words
+### 3. Independent models converge on the same words — *replicating Wenger & Kenett 2026*
 
 Across all 1800 runs there are only **797 distinct words**. `chair` and `pillow` appear
 in **all 21 models**; `mountain`, `apple`, `river`, `thunder`, `cloud`, `justice` and
@@ -91,10 +121,35 @@ Repetition within a model is just as stark: `lfm2.5-1.2b` used **45 different wo
 fill 1194 slots**, and `gpt-5.4` used 97 across 1200 — fewer than `gpt-4o`'s 198, despite
 being newer. None of this shows up in the score.
 
+**Already established.** Wenger & Kenett's paper is titled *Large language models are
+homogeneously creative* and does the cross-model word-overlap analysis on the DAT across
+22 models. Bellemare-Pepin et al. report the per-model version with harder numbers than
+ours — GPT-4 used *microscope* in 70% of responses, GPT-4-turbo used *ocean* in over 90%,
+against humans at *car* 1.4%. Our 797-distinct-words figure is a clean replication.
+
 [![run cards](docs/img/runs.png)](https://yadavnarun.github.io/dat-bench/)
 
 *Nine consecutive attempts by the same model at temperature 0, returning an identical
 answer each time. Ten "measurements" carrying the information of one.*
+
+### 4. Which prompt "wins" depends on who is scoring
+
+Telling a model it is scored on embedding distance (`maxcreative`) beats a
+think-step-by-step prompt (`cot`) by +0.013 under `qwen3-0.6b` (t(20)=+2.76, 16/21 models
+improve) and +0.009 under `qwen3-4b` (t(20)=+2.99, 15/21) — but **loses** to `cot` by
+−0.014 under `nomic` (t(20)=−4.39, only 4/21 improve). The same paired test, significant
+in opposite directions, on identical answers.
+
+Of the four, this is the one the literature search did **not** turn up elsewhere: papers
+with a prompt grid score under one embedder, and papers with multiple embedders have no
+prompt grid. Treat it as provisional — it is a corollary of scorer-dependence that others
+already flag, and a paired test flipping sign is also what small effects plus multiple
+comparisons produce. It needs a multiple-comparison correction before it is a finding.
+
+Temperature, by contrast, does nothing to score level: paired T=1.0 vs T=0.0 gives
+d = −0.0002 (dz = −0.05) while within-cell variance quadruples. Note this **conflicts**
+with Bellemare-Pepin et al., who report higher temperature raising DAT scores — they went
+to 1.5 and we capped at 1.0, which is testable and untested here.
 
 ## What the numbers are not
 
@@ -222,6 +277,79 @@ with `python -m datbench score`, so they are not committed. `responses.jsonl` is
 append-only, so it holds a few superseded rows from retried calls — the pipeline resolves
 each `run_id` to its newest row, and so should you.
 
+## Related work
+
+The DAT has been applied to LLMs since 2023, and this project independently rebuilt a
+design that already exists. Read these before treating anything above as new.
+
+**The prior art that matters most**
+
+- **Nakajima, Zuiderveld & Pezzelle (2026).** *Beyond Divergent Creativity: A Human-Based
+  Evaluation of Creativity in Large Language Models.* Findings of EACL 2026.
+  [arXiv:2601.20546](https://arxiv.org/abs/2601.20546) — 15 LLMs × 500 responses × 3
+  temperatures, four embedders, a WordNet random-noun baseline, and a validity filter
+  near-identical to ours. **Our finding 2 is their headline claim**, seven months earlier.
+- **Bellemare-Pepin, Lespinasse, Thölke, Harel, Mathewson, Olson, Bengio & Jerbi (2026).**
+  *Divergent creativity in humans and large language models.* Scientific Reports 16:1279.
+  [doi:10.1038/s41598-025-25157-3](https://doi.org/10.1038/s41598-025-25157-3) — the
+  prompt × temperature × repeat DAT design we rebuilt, at 500 samples per model per
+  condition against 100k humans, co-authored by an original DAT author. Code:
+  [github.com/AntoineBellemare/DAT_GPT](https://github.com/AntoineBellemare/DAT_GPT),
+  whose README notes its scripts are now outdated and no longer reproducible — which is
+  the clearest statement of what this repo actually contributes.
+- **Wenger & Kenett (2026).** *Large language models are homogeneously creative.* PNAS
+  Nexus 5(3) pgag042 — 22 LLMs with explicit cross-model word overlap on the DAT.
+  **Our finding 3 is this paper's title.**
+- **Schapiro, Gladstone, Black & Ji (2026).** *Assessing the Creativity of Large Language
+  Models.* [arXiv:2605.13450](https://arxiv.org/abs/2605.13450) — up to 54 models across
+  GloVe, fastText and SBERT with per-embedder reporting. Already publishes the rationale
+  for scoring under multiple embedders.
+- **Haase, Hanel & Pokutta (2025).** *Has the Creativity of Large-Language Models peaked?*
+  Journal of Creativity 35(3). [arXiv:2504.12320](https://arxiv.org/abs/2504.12320) —
+  14 models, 2,800 DAT evaluations, finds **no** generational improvement. Directly
+  contradicts our finding 1.
+
+**Also relevant**
+
+- Chen & Ding (2023), *Probing the "Creativity" of Large Language Models*, Findings of
+  EMNLP 2023 ([arXiv:2310.11158](https://arxiv.org/abs/2310.11158)) — first dedicated
+  LLM-DAT paper.
+- Cropley (2023), *Is artificial intelligence more creative than humans?*, Learning
+  Letters 2 — earliest LLM-DAT result.
+- Beaty & Johnson (2021), *SemDis*, Behavior Research Methods 53(2) — five semantic spaces
+  combined into a latent factor. Multi-space scoring has been standard human psychometrics
+  since 2021; the field's answer to scorer variance was a composite, not divergent
+  rankings.
+- Jiang et al. (2025), *Artificial Hivemind*, NeurIPS 2025 D&B (oral)
+  ([arXiv:2510.22954](https://arxiv.org/abs/2510.22954)) — inter-model homogeneity at
+  scale, 71–82% cross-model response similarity.
+- Zhang et al. (2025), *NoveltyBench*
+  ([arXiv:2504.05228](https://arxiv.org/abs/2504.05228)) — mode collapse as a benchmark.
+- Hou et al. (2026), *CreativityPrism*, TMLR
+  ([arXiv:2510.20091](https://arxiv.org/abs/2510.20091)) — 17-model umbrella benchmark
+  that includes the DAT.
+- Haase, Hanel & Pokutta (2025), *S-DAT*
+  ([arXiv:2505.09068](https://arxiv.org/abs/2505.09068)) — multilingual transformer
+  embeddings replacing GloVe.
+- Organisciak et al., *Beyond semantic distance*, Thinking Skills and Creativity (2023) —
+  argues LLM judges outperform embedding distance for divergent-thinking scoring.
+
+### So what is actually new here?
+
+Honestly: not much, and nothing headline. In descending order of defensibility —
+
+1. **The prompt-effect sign reversal** (finding 4). Not found elsewhere; provisional.
+2. **The per-embedder chance baseline** as a reporting unit. Nakajima et al. have the
+   random-noun baseline; recomputing it per scorer and reporting percentiles against each
+   scorer's own baseline appears not to be published.
+3. **A maintained harness on a current roster.** The closest public artifact declares
+   itself unreproducible. This is engineering value, not a research claim.
+
+**Not new, and not claimed:** the DAT-on-LLMs design, multi-embedder scoring, validity
+filtering, mode-collapse measurement, or any "first" or "largest" — at 21 models and 1800
+runs this is mid-pack against 54 models, 22 models, and one study with 215,542
+observations.
+
 ## Limitations
 
 Beyond the scale caveats above: the `rare` flag is a weak proxy for "specialised
@@ -233,6 +361,8 @@ in the report.
 
 ---
 
-Task from [datcreativity.com](https://www.datcreativity.com/task) (Olson & Martin,
-University of Toronto Mississauga). This repo is an independent benchmark and is not
-affiliated with the authors of the task.
+Task from Olson, Nahas, Chmoulevitch, Cropper & Webb, *Naming unrelated words predicts
+creativity*, PNAS 118(25) e2022340118 (2021) —
+[doi:10.1073/pnas.2022340118](https://doi.org/10.1073/pnas.2022340118). Survey at
+[datcreativity.com](https://www.datcreativity.com/task). This repo is an independent
+benchmark, not affiliated with the authors of the task.

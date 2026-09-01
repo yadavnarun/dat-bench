@@ -10,7 +10,8 @@ embeddings.
 
 ## 1. What the task is
 
-The DAT, from [datcreativity.com](https://www.datcreativity.com/task) (Olson & Martin,
+The DAT, from Olson, Nahas, Chmoulevitch, Cropper & Webb, PNAS 118(25) e2022340118
+(2021), survey at [datcreativity.com](https://www.datcreativity.com/task) (
 University of Toronto Mississauga; published in *PNAS*), asks a participant for
 
 > 10 words that are as different from each other as possible, in all meanings and uses of

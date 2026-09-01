@@ -1263,7 +1263,8 @@ render();
 /* ------------------------------------------------------------------ footnote --- */
 (function footnote() {
   const f = $("#footnote");
-  f.textContent = "Task from datcreativity.com (Olson & Martin). Scored with " +
+  f.textContent = "Task from Olson, Nahas, Chmoulevitch, Cropper & Webb, PNAS 2021 " +
+    "(datcreativity.com). Scored with " +
     (DATA.primary_embedder || "a local model").replace(/^text-embedding-/, "") +
     " under the " + (DATA.primary_policy || "strict") + " rule, running locally via LM Studio — " +
     "not the GloVe vectors the published test uses, so these numbers are on their own scale " +
